@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const FormEditRequest = () => {
-  const [staffId, setStaffId] = useState("");
-  const [staffName, setStaffName] = useState("");
-  const [itemName, setItemName] = useState("");
-  const [requestAt, setRequestAt] = useState("");
+  // const [staffId, setStaffId] = useState("");
+  // const [staffName, setStaffName] = useState("");
+  // const [itemName, setItemName] = useState("");
+  // const [requestAt, setRequestAt] = useState("");
   const [approved, setApproved] = useState("");
-  const [reject, setReject] = useState("");
+  // const [reject, setReject] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
+
+
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const getRequestById = async () => {
@@ -19,12 +22,12 @@ const FormEditRequest = () => {
         const response = await axios.get(
           `http://localhost:5000/request/${id}`
         );
-        setStaffId(response.data.staffId);
-        setStaffName(response.data.staffName);
-        setItemName(response.data.itemName);
-        setRequestAt(response.data.requestAt);
-        setApproved(response.data.approve);
-        setReject(response.data.reject);
+        // setStaffId(response.data.staffId);
+        // setStaffName(response.data.staffName);
+        // setItemName(response.data.itemName);
+        // setRequestAt(response.data.requestAt);
+        setApproved(response.data.approved);
+        // setReject(response.data.reject);
 
     
       } catch (error) {
@@ -40,14 +43,14 @@ const FormEditRequest = () => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/Request/${id}`, {
-        staffId: staffId,
-        staffName: staffName,
-        itemName: itemName,
-        requestAt: requestAt,
+        // staffId: staffId,
+        // staffName: staffName,
+        // itemName: itemName,
+        // requestAt: requestAt,
         approved: approved,
-        reject: reject,
+        // reject: reject,
       });
-      navigate("/request");
+      navigate("/managerRequest");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -104,14 +107,16 @@ const FormEditRequest = () => {
 
 
     <div>
-      <h1 className="title">Request</h1>
-      <h2 className="subtitle">Send New Request</h2>
+      <h1 className="title">Respond To Request</h1>
+      {/* <h2 className="subtitle">Send New Request</h2> */}
       <div className="card is-shadowless">
         <div className="card-content">
           <div className="content">
             <form onSubmit={updateRequest}>
               <p className="has-text-centered">{msg}</p>
-              <div className="field">
+
+
+              {/* <div className="field">
                 <label className="label">Staff ID</label>
                 <div className="control">
                   <input
@@ -158,42 +163,50 @@ const FormEditRequest = () => {
                     placeholder=""
                   />
                 </div>
-              </div>
+              </div> */}
+
+
 
               <div className="field">
-              <label className="label">Approve</label>
+              <label className="label">Manager Action</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    value={approved}
-                    onChange={(e) => setApproved(e.target.value)}
-                    placeholder=""
-                  />
+                  <select
+                      value={approved}
+                      onChange={(e) => setApproved(e.target.value)}
+                    >
+                      <option value="">Select</option>
+                      <option value="Approved">Approve</option>
+                      <option value="Decline">Decline/Reject</option>
+                    </select>
+                </div>
+              </div>
 
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">Reject</label>
+
+              {/* <div className="field">
+                <label className="label">Director Action</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="field"
-                    value={reject}
-                    onChange={(e) => setReject(e.target.value)}
-                    placeholder=""
-                  />
+                  <select
+                      value={reject}
+                      onChange={(e) => setReject(e.target.value)}
+                    >
+                      <option value="">Select</option>
+                      <option value="Approved">Approve</option>
+                      <option value="Decline">Decline/Reject</option>
+                 
+                    </select>
                 </div>
-              </div>
+              </div> */}
+
+
 
               <div className="field">
                 <div className="control">
                   <button type="submit" className="button is-success">
-                    Save
+                    Respond
                   </button>
                 </div>
               </div>
-            </form>
+           </form>
           </div>
         </div>
       </div>

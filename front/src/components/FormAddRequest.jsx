@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 
 const FormAddRequest = () => {
   const [staffId, setStaffId] = useState("");
@@ -11,6 +13,9 @@ const FormAddRequest = () => {
   const [reject, setReject] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
+
+
+  const { user } = useSelector((state) => state.auth);
 
   const saveRequest = async (e) => {
     e.preventDefault();
@@ -44,23 +49,25 @@ const FormAddRequest = () => {
                 <label className="label">Staff ID</label>
                 <div className="control">
                   <input
-                    type="text"
+                    type={user&&staffId}
                     className="input"
                     value={staffId}
                     onChange={(e) => setStaffId(e.target.value)}
-                    placeholder="Product Name"
+                    placeholder="Staff ID"
                   />
                 </div>
               </div>
               <div className="field">
                 <label className="label">Staff Name</label>
                 <div className="control">
+                  
                   <input
-                    type="text"
+                    type='text'
                     className="input"
-                    value={staffName}
+                    value={user && user.name}
+              
                     onChange={(e) => setStaffName(e.target.value)}
-                    placeholder="Product Name"
+                    placeholder="User Name"
                   />
                 </div>
               </div>

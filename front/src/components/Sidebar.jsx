@@ -19,30 +19,119 @@ const Sidebar = () => {
     <div>
       <aside className="menu pl-2 has-shadow">
         <p className="menu-label">General</p>
+
         <ul className="menu-list">
-          <li>
+          {/* <li>
             <NavLink to={"/dashboard"}>
               <IoHome /> Dashboard
             </NavLink>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <NavLink to={"/request"}>
               <IoPricetag /> Request
             </NavLink>
-          </li>
+          </li> */}
         </ul>
+
+
+        {/* Admin/Super Admin Role Start here*/}
         {user && user.role === "admin" && (
           <div>
+            <p className="menu-label">Users</p>
+            <ul className="menu-list">
+
+              <li>
+                <NavLink to={"/users"}>
+                  <IoPricetag /> View Users
+                </NavLink>
+              </li>
+
+            </ul>
             <p className="menu-label">Admin</p>
             <ul className="menu-list">
+
+              <li>
+                <NavLink to={"/request"}>
+                  <IoPricetag /> Request
+                </NavLink>
+              </li>
+
+            </ul>
+          </div>
+        )}
+        {/* Admin/Super Admin  Role End here*/}
+
+
+        {/* Director  Role Start here*/}
+        {user && user.role === "director" && (
+          <div>
+            <p className="menu-label">Director</p>
+            {/* <ul className="menu-list">
               <li>
                 <NavLink to={"/users"}>
                   <IoPerson /> Users
                 </NavLink>
               </li>
+            </ul> */}
+
+
+            <li>
+              <NavLink to={"/directorRequest"}>
+                <IoPerson /> View Request
+              </NavLink>
+            </li>
+          </div>
+        )}
+        {/* Director Role end here*/}
+
+
+        {/* Manager Role  Start here*/}
+        {user && user.role === "manager" && (
+          <div>
+            <p className="menu-label">Manager</p>
+            <ul className="menu-list">
+              <li>
+                <NavLink to={"/managerRequest"}>
+                  <IoPerson /> View Request
+                </NavLink>
+              </li>
             </ul>
           </div>
         )}
+        {/* Manage Role end Here*/}
+
+
+
+
+
+
+
+
+        {/* User Role  Start here*/}
+        {user && user.role === "user" && (
+          <div>
+            <p className="menu-label">Users</p>
+            <ul className="menu-list">
+              <li>
+                <NavLink to={"/userRequest"}>
+                  <IoPerson /> My Request
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        )}
+        {/* User Role End here*/}
+
+
+
+
+
+
+
+
+
+
+
 
         <p className="menu-label">Settings</p>
         <ul className="menu-list">

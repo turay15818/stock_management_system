@@ -1,14 +1,16 @@
+
+
 import React, { useEffect } from "react";
-import Layout from "./Layout";
-import FormAddUser from "../components/FormAddUser";
+import DirectorRequestList from "../directorDashboard/DirectorRequestList";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getMe } from "../features/authSlice";
+import { getMe } from "../../features/authSlice";
+import Layout from "../../pages/Layout"
 
-const AddUser = () => {
+const DirectorRequest = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isError, user } = useSelector((state) => state.auth);
+  const { isError } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getMe());
@@ -18,16 +20,12 @@ const AddUser = () => {
     if (isError) {
       navigate("/");
     }
-    if (user && user.role !== "admin") {
-      navigate("/dashboard");
-    }
-   
-  }, [isError, user, navigate]);
+  }, [isError, navigate]);
   return (
     <Layout>
-      <FormAddUser />
+      <DirectorRequestList />
     </Layout>
   );
 };
 
-export default AddUser;
+export default DirectorRequest;

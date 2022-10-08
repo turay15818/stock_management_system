@@ -1,19 +1,12 @@
+
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const RequestList = () => {
+const UserRequestList = () => {
   const [request, setRequest] = useState([]);
 
-  const [isHover, setIsHover] = useState(false);
-  const handleMouseEnter = () => {
-    setIsHover(true);
- };
-
- const handleMouseLeave = () => {
-  setIsHover(false);
-};
-  
   useEffect(() => {
     getRequest();
   }, []);
@@ -32,20 +25,19 @@ const RequestList = () => {
     <div>
       <h1 className="title">Request</h1>
       <h2 className="subtitle">List of Request</h2>
-      {/* <Link to="/request/add" className="button is-primary mb-2">
+      <Link to="/request/add" className="button is-primary mb-2">
         Add New
-      </Link> */}
+      </Link>
       <table className="table is-striped is-fullwidth">
         <thead>
-          <tr style={{boxShadow: "0px 0px 10px #000000", }}>
-            <th style={{border: "solid 2px", boxShadow: "0px 0px 10px #000000"}}>No</th>
-            <th style={{border: "solid 2px", boxShadow: "0px 0px 10px #000000"}}>Staff ID</th>
-            <th style={{border: "solid 2px", boxShadow: "0px 0px 10px #000000"}}>Staff Name</th>
-            <th style={{border: "solid 2px", boxShadow: "0px 0px 10px #000000"}}>Item Name</th>
-            <th style={{border: "solid 2px", boxShadow: "0px 0px 10px #000000"}}>Requested At</th>
-            <th style={{border: "solid 2px", boxShadow: "0px 0px 10px #000000"}}>Manager Action</th>
-            <th style={{border: "solid 2px", boxShadow: "0px 0px 10px #000000", }}>Director Action</th>
-            {/* <th>Action</th> */}
+          <tr>
+            <th>No</th>
+            <th>Staff ID</th>
+            <th>Staff Name</th>
+            <th>Item Name</th>
+            <th>Requested At</th>
+            <th>Manager Action</th>
+            <th>Director Action</th>
           </tr>
         </thead>
         <tbody>
@@ -56,14 +48,14 @@ const RequestList = () => {
               <td>{request.staffName}</td>
               <td>{request.itemName}</td>
               <td>{request.requestAt}</td>
-              <td  style={{backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.approved}</td>
-              <td  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.reject}</td>
+              <td  style={{backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.approved}</td>
+              <td  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.reject}</td>
               
               <td>
                 {/* <Link
                   to={`/request/edit/${request.uid}`}
                   className="button is-small is-info"
-                  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '10px',}}
+                  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px',}}
                 >
                   Take Action
                 </Link> */}
@@ -82,4 +74,4 @@ const RequestList = () => {
   );
 };
 
-export default RequestList;
+export default UserRequestList;

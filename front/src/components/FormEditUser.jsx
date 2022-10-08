@@ -127,8 +127,8 @@ const FormEditUser = () => {
                     >
                       <option value="">Select</option>
                       <option value="admin">Admin</option>
-                      <option value="director">User</option>
-                      <option value="manager">User</option>
+                      <option value="director">Director</option>
+                      <option value="manager">Manager</option>
                       <option value="user">User</option>
                     </select>
                   </div>
