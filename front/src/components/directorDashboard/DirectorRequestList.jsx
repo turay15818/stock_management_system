@@ -44,7 +44,7 @@ const DirectorRequestList = () => {
           {request.map((request, index) => (
             <tr key={request.uid}>
               <td>{index + 1}</td>
-              <td>{request.staffId}</td>
+              <td>{request.staffid}</td>
               <td>{request.staffName}</td>
               <td>{request.itemName}</td>
               <td>{request.requestAt}</td>

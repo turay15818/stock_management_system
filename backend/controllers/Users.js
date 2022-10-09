@@ -4,7 +4,7 @@ import argon2 from "argon2";
 export const getUsers = async(req, res) =>{
     try {
         const response = await User.findAll({
-            attributes:['uid', 'staffId', 'name','email', 'password','role']
+            attributes:['uid', 'staffid', 'name','email', 'password','role']
         });
         res.status(200).json(response);
     } catch (error) {
@@ -15,7 +15,7 @@ export const getUsers = async(req, res) =>{
 export const getUserById = async(req, res) =>{
     try {
         const response = await User.findOne({
-            attributes:['uid', 'staffId', 'name','email', 'password', 'role'],
+            attributes:['uid', 'staffid', 'name','email', 'password', 'role'],
             where: {
                 uid: req.params.id
             }
@@ -27,12 +27,12 @@ export const getUserById = async(req, res) =>{
 }
 
 export const createUser = async(req, res) =>{
-    const {staffId, name, email, password, confPassword, role} = req.body;
+    const {staffid, name, email, password, confPassword, role} = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
     const hashPassword = await argon2.hash(password);
     try {
         await User.create({
-            staffId: staffId,
+            staffid: staffid,
             name: name,
             email: email,
             password: hashPassword,
@@ -51,7 +51,7 @@ export const updateUser = async(req, res) =>{
         }
     });
     if(!user) return res.status(404).json({msg: "User not found"});
-    const {staffId, name, email, password, confPassword, role} = req.body;
+    const {staffid, name, email, password, confPassword, role} = req.body;
     let hashPassword;
     if(password === "" || password === null){
         hashPassword = user.password
@@ -62,7 +62,7 @@ export const updateUser = async(req, res) =>{
     try {
         await User.update({
             
-            staffId: staffId,
+            staffid: staffid,
             name: name,
             email: email,
             password: hashPassword,

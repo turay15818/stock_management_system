@@ -29,7 +29,7 @@ const FormEditRequest = () => {
         setApproved(response.data.approved);
         // setReject(response.data.reject);
 
-    
+
       } catch (error) {
         if (error.response) {
           setMsg(error.response.data.msg);
@@ -168,16 +168,16 @@ const FormEditRequest = () => {
 
 
               <div className="field">
-              <label className="label">Manager Action</label>
+                <label className="label">Manager Action</label>
                 <div className="control">
                   <select
-                      value={approved}
-                      onChange={(e) => setApproved(e.target.value)}
-                    >
-                      <option value="">Select</option>
-                      <option value="Approved">Approve</option>
-                      <option value="Decline">Decline/Reject</option>
-                    </select>
+                    value={approved}
+                    onChange={(e) => setApproved(e.target.value)}
+                  >
+                    <option value="">Select</option>
+                    <option  value="Your Request Have Been Approved by your Manager">Approve</option>
+                    <option value="Sorry! but your request have been turn down by your Manager"> Decline/Reject</option>
+                  </select>
                 </div>
               </div>
 
@@ -206,7 +206,7 @@ const FormEditRequest = () => {
                   </button>
                 </div>
               </div>
-           </form>
+            </form>
           </div>
         </div>
       </div>

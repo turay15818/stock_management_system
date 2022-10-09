@@ -13,7 +13,7 @@ const Request = db.define('request', {
             notEmpty: true
         }
     },
-    staffId: {
+    staffid: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {

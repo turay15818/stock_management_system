@@ -7,7 +7,7 @@ export const getRequest = async (req, res) => {
         let response;
         if (req.role === "admin", "director", "manager" && req.role !=="user") {
             response = await Request.findAll({
-                attributes: ['uid', 'staffId', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
                 
                 
                 
@@ -20,7 +20,7 @@ export const getRequest = async (req, res) => {
 
         else {
             response = await Request.findAll({
-                attributes: ['uid', 'staffId', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
                 where: {
                     userId: req.userId
                 },
@@ -51,7 +51,7 @@ export const getRequestById = async (req, res) => {
         let response;
         if (req.role === "user") {
             response = await Request.findOne({
-                attributes: ['uid', 'staffId', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
                 where: {
                     id: request.id
                 },
@@ -62,7 +62,7 @@ export const getRequestById = async (req, res) => {
             });
         } else {
             response = await Request.findOne({
-                attributes: ['uid', 'staffId', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
                 where: {
                     [Op.and]: [{ id: request.id }, { userId: req.userId }]
                 },
@@ -79,10 +79,10 @@ export const getRequestById = async (req, res) => {
 }
 
 export const createRequest = async (req, res) => {
-    const { staffId, staffName, itemName, requestAt } = req.body;
+    const { staffid, staffName, itemName, requestAt } = req.body;
     try {
         await Request.create({
-            staffId: staffId,
+            staffid: staffid,
             staffName: staffName,
             itemName: itemName,
             requestAt: requestAt,
@@ -104,9 +104,9 @@ export const updateRequest = async (req, res) => {
             }
         });
         if (!request) return res.status(404).json({ msg: "Data not found" });
-        const { staffId, staffName, itemName, requestAt, approved, reject } = req.body;
+        const { staffid, staffName, itemName, requestAt, approved, reject } = req.body;
         if (req.role === "manager", "director") {
-            await Request.update({ staffId, staffName, itemName, requestAt, approved, reject }, {
+            await Request.update({ staffid, staffName, itemName, requestAt, approved, reject }, {
                 where: {
                     id: request.id
                 }
@@ -114,7 +114,7 @@ export const updateRequest = async (req, res) => {
         }
         else {
             if (req.userId !== request.userId) return res.status(403).json({ msg: "Access forbidden" });
-            await Request.update({ staffId, staffName, itemName, requestAt, approved, reject }, {
+            await Request.update({ staffid, staffName, itemName, requestAt, approved, reject }, {
                 where: {
                     [Op.and]: [{ id: request.id }, { userId: req.userId }]
                 }
@@ -134,9 +134,9 @@ export const deleteRequest = async (req, res) => {
             }
         });
         if (!request) return res.status(404).json({ msg: "Data not found" });
-        const { staffId, staffName, itemName, requestAt, approved, reject } = req.body;
+        const { staffid, staffName, itemName, requestAt, approved, reject } = req.body;
         if (req.role === "admin") {
-            await Request.destroy({ staffId, staffName, itemName, requestAt, approved, reject }, {
+            await Request.destroy({ staffid, staffName, itemName, requestAt, approved, reject }, {
                 where: {
 
                     id: request.id

@@ -13,7 +13,7 @@ const Users = db.define('users', {
         }
     },
 
-    staffId: {
+    staffid: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {

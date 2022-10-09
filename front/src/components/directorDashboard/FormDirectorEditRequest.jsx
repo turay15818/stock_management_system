@@ -67,8 +67,8 @@ const FormDirectorEditRequest = () => {
                       onChange={(e) => setReject(e.target.value)}
                     >
                       <option value="">Select</option>
-                      <option value="Approved">Approve</option>
-                      <option value="Decline">Decline/Reject</option>
+                      <option  value="Your Request Have Been Approved by your Manager">Approve</option>
+                    <option value="Sorry! but your request have been turn down"> Decline/Reject</option>
                  
                     </select>
                 </div>

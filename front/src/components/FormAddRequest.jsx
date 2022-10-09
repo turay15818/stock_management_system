@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 
 const FormAddRequest = () => {
-  const [staffId, setStaffId] = useState("");
+  const [staffid, setStaffid] = useState("");
   const [staffName, setStaffName] = useState("");
   const [itemName, setItemName] = useState("");
   const [requestAt, setRequestAt] = useState("");
@@ -21,7 +21,7 @@ const FormAddRequest = () => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/request", {
-        staffId: staffId,
+        staffid: staffid,
         staffName: staffName,
         itemName: itemName,
         requestAt: requestAt,
@@ -46,26 +46,27 @@ const FormAddRequest = () => {
             <form onSubmit={saveRequest}>
               <p className="has-text-centered">{msg}</p>
               <div className="field">
-                <label className="label">Staff ID</label>
+                <label className="label">{user && user.staffid}</label>
                 <div className="control">
                   <input
-                    type={user&&staffId}
+                 type='submit'
+                 
                     className="input"
-                    value={staffId}
-                    onChange={(e) => setStaffId(e.target.value)}
+                    value={user && user.staffid}
+                    onChange={(e) => setStaffid(e.target.value)}
                     placeholder="Staff ID"
                   />
                 </div>
               </div>
               <div className="field">
-                <label className="label">Staff Name</label>
+                <label className="label">{user && user.name}</label>
                 <div className="control">
-                  
+
                   <input
-                    type='text'
+                    type={user && user.name}
                     className="input"
                     value={user && user.name}
-              
+
                     onChange={(e) => setStaffName(e.target.value)}
                     placeholder="User Name"
                   />
@@ -97,7 +98,7 @@ const FormAddRequest = () => {
               </div>
 
               <div className="field">
-              
+
                 <div className="control">
                   <input
                     type="hidden"

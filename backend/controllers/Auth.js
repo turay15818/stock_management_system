@@ -1,4 +1,5 @@
 import User from "../models/UserModel.js";
+// import User from "../models/RequestModel.js";
 import argon2 from "argon2";
 
 export const Login = async (req, res) =>{
@@ -12,10 +13,11 @@ export const Login = async (req, res) =>{
     if(!match) return res.status(400).json({msg: "Wrong Password"});
     req.session.userId = user.uid;
     const uid = user.uid;
+    const staffid = user.staffid;
     const name = user.name;
     const email = user.email;
     const role = user.role;
-    res.status(200).json({uid, name, email, role});
+    res.status(200).json({uid, staffid, name, email, role});
 }
 
 export const Me = async (req, res) =>{
@@ -23,7 +25,7 @@ export const Me = async (req, res) =>{
         return res.status(401).json({msg: "Please login to your account!"});
     }
     const user = await User.findOne({
-        attributes:['uid','name','email','role'],
+        attributes:['uid', 'staffid', 'name','email','role'],
         where: {
             uid: req.session.userId
         }

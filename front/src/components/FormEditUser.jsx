@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 const FormEditUser = () => {
-  const [staffId, setStaffId] = useState("");
+  const [staffid, setStaffid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ const FormEditUser = () => {
     const getUserById = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/users/${id}`);
-        setStaffId(response.data.staffId);
+        setStaffid(response.data.staffid);
         setName(response.data.name);
         setEmail(response.data.email);
         setRole(response.data.role);
@@ -34,7 +34,7 @@ const FormEditUser = () => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/users/${id}`, {
-        staffId: staffId,
+        staffid: staffid,
         name: name,
         email: email,
         password: password,
@@ -58,7 +58,7 @@ const FormEditUser = () => {
             <form onSubmit={updateUser}>
               <p className="has-text-centered">{msg}</p>
               <div className="field">
-                <label className="label">{user && user.staffId}</label>
+                <label className="label">{user && user.staffid}</label>
                 <div className="control">
                   <input
                     type="hidden"
@@ -101,7 +101,7 @@ const FormEditUser = () => {
                     className="input"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="******"
+                    placeholder="***************"
                   />
                 </div>
               </div>
@@ -113,7 +113,7 @@ const FormEditUser = () => {
                     className="input"
                     value={confPassword}
                     onChange={(e) => setConfPassword(e.target.value)}
-                    placeholder="******"
+                    placeholder="***************"
                   />
                 </div>
               </div>
