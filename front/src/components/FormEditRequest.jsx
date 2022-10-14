@@ -67,7 +67,7 @@ const FormEditRequest = () => {
         <div className="card-content">
           <div className="content">
             <form onSubmit={updateManagerApproved}>
-              <p className="has-text-centered">{msg}</p>
+              <p className="has-text-centered" style={{color: 'red'}}>{msg}</p>
 
               <div className="field">
                 <label className="label">Manager Action</label>

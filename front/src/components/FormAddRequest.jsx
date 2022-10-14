@@ -17,7 +17,7 @@ const FormAddRequest = () => {
   const [itemName, setItemName] = useState("");
   const [requestAt, setRequestAt] = useState(`${today}`);
   const [managerApproved, setManagerApproved] = useState("");
-  const [reject, setReject] = useState("");
+  const [directorApproved, setDirectorApproved] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const FormAddRequest = () => {
         itemName: itemName,
         requestAt: requestAt,
         managerApproved: managerApproved,
-        reject: reject,
+        directorApproved: directorApproved,
       });
       navigate("/request");
     } catch (error) {
@@ -130,8 +130,8 @@ const FormAddRequest = () => {
                   <input
                     type="hidden"
                     className="field"
-                    value={reject}
-                    onChange={(e) => setReject(e.target.value)}
+                    value={directorApproved}
+                    onChange={(e) => setDirectorApproved(e.target.value)}
                     placeholder=""
                   />
                 </div>

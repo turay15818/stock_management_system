@@ -49,7 +49,7 @@ const Request = db.define('request', {
 
         }
     },
-    approved: {
+    managerApproved: {
         type: DataTypes.STRING,
         allowNull: true,
         validate: {
@@ -58,7 +58,7 @@ const Request = db.define('request', {
         }
     },
 
-    reject: {
+    directorApproved: {
         type: DataTypes.STRING,
         allowNull: true,
         validate: {

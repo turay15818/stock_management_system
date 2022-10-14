@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 
 const FormDirectorEditRequest = () => {
-  
+
   const [directorApproved, setDirectorApproved] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const FormDirectorEditRequest = () => {
         );
         setDirectorApproved(response.data.directorApproved);
 
-    
+
       } catch (error) {
         if (error.response) {
           setMsg(error.response.data.msg);
@@ -38,7 +38,7 @@ const FormDirectorEditRequest = () => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/Request/${id}`, {
-      
+
         directorApproved: directorApproved,
       });
       navigate("/directorRequest");
@@ -50,7 +50,7 @@ const FormDirectorEditRequest = () => {
   };
 
   return (
-  
+
     <div>
       <h1 className="title">Respond To Request</h1>
       <div className="card is-shadowless">
@@ -63,14 +63,14 @@ const FormDirectorEditRequest = () => {
                 <label className="label">Director Action</label>
                 <div className="control">
                   <select
-                      value={directorApproved}
-                      onChange={(e) => setDirectorApproved(e.target.value)}
-                    >
-                      <option value="">Select</option>
-                      <option  value="approve">Approved</option>
+                    value={directorApproved}
+                    onChange={(e) => setDirectorApproved(e.target.value)}
+                  >
+                    <option value="">Select</option>
+                    <option value="Approved">Approved</option>
                     <option value="reject"> Decline/Reject</option>
-                 
-                    </select>
+
+                  </select>
                 </div>
               </div>
 
@@ -83,7 +83,7 @@ const FormDirectorEditRequest = () => {
                   </button>
                 </div>
               </div>
-           </form>
+            </form>
           </div>
         </div>
       </div>
