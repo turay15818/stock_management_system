@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const FormDirectorEditRequest = () => {
   
-  const [reject, setReject] = useState("");
+  const [directorApproved, setDirectorApproved] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -22,7 +22,7 @@ const FormDirectorEditRequest = () => {
         const response = await axios.get(
           `http://localhost:5000/request/${id}`
         );
-        setReject(response.data.reject);
+        setDirectorApproved(response.data.directorApproved);
 
     
       } catch (error) {
@@ -39,7 +39,7 @@ const FormDirectorEditRequest = () => {
     try {
       await axios.patch(`http://localhost:5000/Request/${id}`, {
       
-        reject: reject,
+        directorApproved: directorApproved,
       });
       navigate("/directorRequest");
     } catch (error) {
@@ -63,12 +63,12 @@ const FormDirectorEditRequest = () => {
                 <label className="label">Director Action</label>
                 <div className="control">
                   <select
-                      value={reject}
-                      onChange={(e) => setReject(e.target.value)}
+                      value={directorApproved}
+                      onChange={(e) => setDirectorApproved(e.target.value)}
                     >
                       <option value="">Select</option>
-                      <option  value="Your Request Have Been Approved by your Manager">Approve</option>
-                    <option value="Sorry! but your request have been turn down"> Decline/Reject</option>
+                      <option  value="approve">Approved</option>
+                    <option value="reject"> Decline/Reject</option>
                  
                     </select>
                 </div>

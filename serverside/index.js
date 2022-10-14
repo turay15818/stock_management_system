@@ -44,6 +44,6 @@ app.use(AuthRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, (error) => {
-    error ? console.error(error) : console.log(`server running on port ${PORT}`);
+    error ? console.error(error) : console.log(`server running on port \n http://localhost:${PORT}`);
 });
 

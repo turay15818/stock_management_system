@@ -100,13 +100,6 @@ const Sidebar = () => {
         )}
         {/* Manage Role end Here*/}
 
-
-
-
-
-
-
-
         {/* User Role  Start here*/}
         {user && user.role === "user" && (
           <div>

@@ -1,21 +1,34 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import moment from 'moment'
 
 const FormAddRequest = () => {
-  const [staffid, setStaffid] = useState("");
-  const [staffName, setStaffName] = useState("");
+  const { user } = useSelector((state) => state.auth);
+  const currentDate = moment().format('DD-MM-YYYY')
+  const date = new Date();
+  const current_time = date.getHours() + ":" + " " + date.getMinutes();
+  const today = current_time + "  " + currentDate;
+
+
+  const [staffid, setStaffid] = useState(`${user && user.staffid}`);
+  const [staffName, setStaffName] = useState(`${user && user.name}`);
   const [itemName, setItemName] = useState("");
-  const [requestAt, setRequestAt] = useState("");
-  const [approved, setApproved] = useState("");
+  const [requestAt, setRequestAt] = useState(`${today}`);
+  const [managerApproved, setManagerApproved] = useState("");
   const [reject, setReject] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
 
-  const { user } = useSelector((state) => state.auth);
+  // const currentDate = moment().format('DD-MM-YYYY')
+  // const today = new Date();
+  // const date = new Date();
+  // const current_time = date.getHours() + ":" + date.getMinutes();
+
+
+
 
   const saveRequest = async (e) => {
     e.preventDefault();
@@ -25,7 +38,7 @@ const FormAddRequest = () => {
         staffName: staffName,
         itemName: itemName,
         requestAt: requestAt,
-        approved: approved,
+        managerApproved: managerApproved,
         reject: reject,
       });
       navigate("/request");
@@ -46,11 +59,11 @@ const FormAddRequest = () => {
             <form onSubmit={saveRequest}>
               <p className="has-text-centered">{msg}</p>
               <div className="field">
-                <label className="label">{user && user.staffid}</label>
+                {/* <label className="label">Staff ID</label> */}
                 <div className="control">
                   <input
-                 type='submit'
-                 
+                    type='hidden'
+
                     className="input"
                     value={user && user.staffid}
                     onChange={(e) => setStaffid(e.target.value)}
@@ -59,11 +72,11 @@ const FormAddRequest = () => {
                 </div>
               </div>
               <div className="field">
-                <label className="label">{user && user.name}</label>
+                {/* <label className="label">User Name</label> */}
                 <div className="control">
 
                   <input
-                    type={user && user.name}
+                    type='hidden'
                     className="input"
                     value={user && user.name}
 
@@ -85,12 +98,13 @@ const FormAddRequest = () => {
                 </div>
               </div>
               <div className="field">
-                <label className="label">Requested At</label>
+                {/* <label className="label">Requested At</label> */}
                 <div className="control">
                   <input
-                    type="date"
+                    // type="datetime-local"
+                    hidden
                     className="input"
-                    value={requestAt}
+                    value={today}
                     onChange={(e) => setRequestAt(e.target.value)}
                     placeholder=""
                   />
@@ -103,8 +117,8 @@ const FormAddRequest = () => {
                   <input
                     type="hidden"
                     className="input"
-                    value={approved}
-                    onChange={(e) => setApproved(e.target.value)}
+                    value={managerApproved}
+                    onChange={(e) => setManagerApproved(e.target.value)}
                     placeholder=""
                   />
 
@@ -126,7 +140,7 @@ const FormAddRequest = () => {
               <div className="field">
                 <div className="control">
                   <button type="submit" className="button is-success">
-                    Save
+                    Send Request
                   </button>
                 </div>
               </div>

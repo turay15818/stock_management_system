@@ -48,7 +48,7 @@ const ManagerRequestList = () => {
               <td>{request.staffName}</td>
               <td>{request.itemName}</td>
               <td>{request.requestAt}</td>
-              <td  style={{backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.approved}</td>
+              <td  style={{backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.managerApproved}</td>
               {/* <td  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.reject}</td> */}
               
               <td>

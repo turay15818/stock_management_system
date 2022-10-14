@@ -5,12 +5,12 @@ import { Op } from "sequelize";
 export const getRequest = async (req, res) => {
     try {
         let response;
-        if (req.role === "admin", "director", "manager" && req.role !=="user") {
+        if (req.role === "admin", "director", "manager" && req.role !== "user") {
             response = await Request.findAll({
-                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
-                
-                
-                
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+
+
                 include: [{
                     model: User,
                     attributes: ['name', 'email']
@@ -20,7 +20,7 @@ export const getRequest = async (req, res) => {
 
         else {
             response = await Request.findAll({
-                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
                 where: {
                     userId: req.userId
                 },
@@ -51,7 +51,7 @@ export const getRequestById = async (req, res) => {
         let response;
         if (req.role === "user") {
             response = await Request.findOne({
-                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
                 where: {
                     id: request.id
                 },
@@ -62,7 +62,7 @@ export const getRequestById = async (req, res) => {
             });
         } else {
             response = await Request.findOne({
-                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'approved', 'reject'],
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
                 where: {
                     [Op.and]: [{ id: request.id }, { userId: req.userId }]
                 },
@@ -86,11 +86,11 @@ export const createRequest = async (req, res) => {
             staffName: staffName,
             itemName: itemName,
             requestAt: requestAt,
-            requestAt: requestAt,
+
 
             userId: req.userId
         });
-        res.status(201).json({ msg: "Request Created Successfuly" });
+        res.status(201).json({ msg: "Request Created Successfully" });
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
@@ -104,9 +104,9 @@ export const updateRequest = async (req, res) => {
             }
         });
         if (!request) return res.status(404).json({ msg: "Data not found" });
-        const { staffid, staffName, itemName, requestAt, approved, reject } = req.body;
+        const { staffid, staffName, itemName, requestAt, managerApproved, directorApproved } = req.body;
         if (req.role === "manager", "director") {
-            await Request.update({ staffid, staffName, itemName, requestAt, approved, reject }, {
+            await Request.update({ staffid, staffName, itemName, requestAt, managerApproved, directorApproved }, {
                 where: {
                     id: request.id
                 }
@@ -114,13 +114,13 @@ export const updateRequest = async (req, res) => {
         }
         else {
             if (req.userId !== request.userId) return res.status(403).json({ msg: "Access forbidden" });
-            await Request.update({ staffid, staffName, itemName, requestAt, approved, reject }, {
+            await Request.update({ staffid, staffName, itemName, requestAt, managerApproved, directorApproved }, {
                 where: {
                     [Op.and]: [{ id: request.id }, { userId: req.userId }]
                 }
             });
         }
-        res.status(200).json({ msg: "Request updated successfuly" });
+        res.status(200).json({ msg: "Request updated successfully" });
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
@@ -134,9 +134,9 @@ export const deleteRequest = async (req, res) => {
             }
         });
         if (!request) return res.status(404).json({ msg: "Data not found" });
-        const { staffid, staffName, itemName, requestAt, approved, reject } = req.body;
+        const { staffid, staffName, itemName, requestAt, managerApproved, directorApproved } = req.body;
         if (req.role === "admin") {
-            await Request.destroy({ staffid, staffName, itemName, requestAt, approved, reject }, {
+            await Request.destroy({ staffid, staffName, itemName, requestAt, managerApproved, directorApproved }, {
                 where: {
 
                     id: request.id
@@ -151,7 +151,7 @@ export const deleteRequest = async (req, res) => {
                 }
             });
         }
-        res.status(200).json({ msg: " deleted successfuly" });
+        res.status(200).json({ msg: " deleted successfully" });
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
