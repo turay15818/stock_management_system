@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const RequestList = () => {
-  const [request, setRequest] = useState([]);
+  const [request, setRequestByBothApproved] = useState([]);
 
   const [isHover, setIsHover] = useState(false);
   const handleMouseEnter = () => {
@@ -15,17 +15,17 @@ const RequestList = () => {
 };
   
   useEffect(() => {
-    getRequest();
+    getRequestByBothApproved();
   }, []);
 
-  const getRequest = async () => {
-    const response = await axios.get("http://localhost:5000/request");
-    setRequest(response.data);
+  const getRequestByBothApproved = async () => {
+    const response = await axios.get("http://localhost:5000/requestByBothApproved");
+    setRequestByBothApproved(response.data);
   };
 
   const deleteRequest = async (requestId) => {
     await axios.delete(`http://localhost:5000/request/${requestId}`);
-    getRequest();
+    getRequestByBothApproved();
   };
 
   return (
@@ -56,8 +56,8 @@ const RequestList = () => {
               <td>{request.staffName}</td>
               <td>{request.itemName}</td>
               <td>{request.requestAt}</td>
-              <td  style={{backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.approved}</td>
-              <td  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.reject}</td>
+              <td  style={{backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.managerApproved}</td>
+              <td  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.directorApproved}</td>
               
               <td>
                 {/* <Link

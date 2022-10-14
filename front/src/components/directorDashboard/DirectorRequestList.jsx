@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const DirectorRequestList = () => {
-  const [request, setRequest] = useState([]);
+  const [request, setRequestByDirectorApproved] = useState([]);
 
   useEffect(() => {
-    getRequest();
+    getRequestByDirectorApproved();
   }, []);
 
-  const getRequest = async () => {
-    const response = await axios.get("http://localhost:5000/request");
-    setRequest(response.data);
+  const getRequestByDirectorApproved = async () => {
+    const response = await axios.get("http://localhost:5000/requestByDirectorApproved");
+    setRequestByDirectorApproved(response.data);
   };
 
   // const deleteRequest = async (requestId) => {

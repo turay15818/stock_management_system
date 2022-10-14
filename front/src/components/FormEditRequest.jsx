@@ -67,7 +67,7 @@ const FormEditRequest = () => {
         <div className="card-content">
           <div className="content">
             <form onSubmit={updateManagerApproved}>
-              <p className="has-text-centered" style={{color: 'red'}}>{msg}</p>
+              <p className="has-text-centered" style={{ color: 'red' }}>{msg}</p>
 
               <div className="field">
                 <label className="label">Manager Action</label>
@@ -77,8 +77,8 @@ const FormEditRequest = () => {
                     onChange={(e) => setManagerApproved(e.target.value)}
                   >
                     <option value="">Select</option>
-                    <option value="approve">Approved</option>
-                    <option value="reject"> Decline/Reject</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Reject"> Decline/Reject</option>
                   </select>
                 </div>
               </div>

@@ -68,7 +68,7 @@ const FormDirectorEditRequest = () => {
                   >
                     <option value="">Select</option>
                     <option value="Approved">Approved</option>
-                    <option value="reject"> Decline/Reject</option>
+                    <option value="Reject"> Decline/Reject</option>
 
                   </select>
                 </div>

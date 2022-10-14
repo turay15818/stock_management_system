@@ -1,15 +1,51 @@
 import Request from "../models/RequestModel.js";
 import User from "../models/UserModel.js";
 import { Op } from "sequelize";
+import { QueryTypes } from "sequelize";
 
 export const getRequest = async (req, res) => {
     try {
         let response;
-        if (req.role === "admin", "director", "manager" && req.role !== "user") {
+        if (req.role === "director", "manager" && req.role !== "user") {
             response = await Request.findAll({
                 attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
 
 
+export const getRequestByDirectorApproved = async (req, res) => {
+    try {
+
+        let response;
+
+        if (req.role === "admin", "director", "manager") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: {
+                    managerApproved: "approved"
+                },
 
                 include: [{
                     model: User,
@@ -35,6 +71,65 @@ export const getRequest = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 }
+
+
+
+export const getRequestByBothApproved = async (req, res) => {
+    try {
+
+        let response;
+
+        if (req.role === "admin" && req.role !== "user", "director", "manager") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: {
+                    directorApproved: "approved",
+                    managerApproved: "approved"
+                },
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: {
+                    userId: req.userId
+                },
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
