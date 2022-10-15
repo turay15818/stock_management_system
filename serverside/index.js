@@ -17,7 +17,7 @@ const store = new sessionStore({
     db: db
 });
 
-// (async()=>{
+// (async () => {
 //     await db.sync();
 // })();
 
@@ -25,7 +25,7 @@ app.use(session({
     secret: process.env.SESS_SECRET,
     resave: false,
     saveUninitialized: true,
-   store: store,
+    store: store,
     cookie: {
         secure: 'auto'
     }

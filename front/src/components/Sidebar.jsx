@@ -51,7 +51,7 @@ const Sidebar = () => {
             <ul className="menu-list">
 
               <li>
-                <NavLink to={"/request"}>
+                <NavLink to={"/adminRequest"}>
                   <IoPricetag /> Request
                 </NavLink>
               </li>

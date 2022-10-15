@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { NavLink, useNavigate } from "react-router-dom";
 const DirectorRequestList = () => {
   const [request, setRequestByDirectorApproved] = useState([]);
 
@@ -28,6 +28,17 @@ const DirectorRequestList = () => {
       {/* <Link to="/request/add" className="button is-primary mb-2">
         Add New
       </Link> */}
+      <NavLink to={"/request"} className="button is-primary mb-2">
+        Approved Request
+      </NavLink>
+
+      <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
+        Pending Request
+      </NavLink>
+      <NavLink to={"/directorRequestReject"} className="button is-primary mb-2">
+        Rejected Request
+      </NavLink>
+
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>
@@ -36,7 +47,7 @@ const DirectorRequestList = () => {
             <th>Staff Name</th>
             <th>Item Name</th>
             <th>Requested At</th>
-            <th>Director Action</th>
+            <th>Manager Approved</th>
             <th>Approve/Reject</th>
           </tr>
         </thead>
@@ -55,10 +66,9 @@ const DirectorRequestList = () => {
                 <Link
                   to={`/directorRequest/edit/${request.uid}`}
                   className="button is-small is-info"
+                  id="disable"
                   style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px', }}
                 >
-
-
                   Take Action
                 </Link>
 

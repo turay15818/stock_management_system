@@ -1,28 +1,29 @@
+
+
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
-import { NavLink, useNavigate } from "react-router-dom";
-const UserRequestList = () => {
-  const [request, setRequest] = useState([]);
+
+const ManagerRequestPendingList = () => {
+  const [request, setManagerRequestPending] = useState([]);
 
   useEffect(() => {
-    getRequest();
+    getManagerRequestPending();
   }, []);
 
-  const getRequest = async () => {
-    const response = await axios.get("http://localhost:5000/request");
-    setRequest(response.data);
+  const getManagerRequestPending = async () => {
+    const response = await axios.get("http://localhost:5000/managerRequestPending");
+    setManagerRequestPending(response.data);
   };
 
-  const deleteRequest = async (requestId) => {
-    await axios.delete(`http://localhost:5000/request/${requestId}`);
-    getRequest();
-  };
+  // const deleteRequest = async (requestId) => {
+  //   await axios.delete(`http://localhost:5000/request/${requestId}`);
+  //   getRequest();
+  // };
 
   return (
     <div>
-
-      <h1 className="title">Request</h1>
+       <h1 className="title">Request</h1>
       <Link to="/request/add" className="button is-primary mb-2">
         Send New Request
       </Link>
@@ -52,22 +53,6 @@ const UserRequestList = () => {
         </NavLink>
 
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>
@@ -116,4 +101,4 @@ const UserRequestList = () => {
   );
 };
 
-export default UserRequestList;
+export default ManagerRequestPendingList;

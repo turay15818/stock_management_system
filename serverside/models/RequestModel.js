@@ -40,6 +40,15 @@ const Request = db.define('request', {
         }
     },
 
+    descri: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+
+
+        }
+    },
 
     requestAt: {
         type: DataTypes.STRING,
@@ -66,6 +75,7 @@ const Request = db.define('request', {
 
         }
     },
+
 
     userId: {
         type: DataTypes.INTEGER,

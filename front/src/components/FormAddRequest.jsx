@@ -10,14 +10,15 @@ const FormAddRequest = () => {
   const date = new Date();
   const current_time = date.getHours() + ":" + " " + date.getMinutes();
   const today = current_time + "  " + currentDate;
-
+  const pending = ("Pending");
 
   const [staffid, setStaffid] = useState(`${user && user.staffid}`);
   const [staffName, setStaffName] = useState(`${user && user.name}`);
   const [itemName, setItemName] = useState("");
+  const [descri, setDescri] = useState("");
   const [requestAt, setRequestAt] = useState(`${today}`);
-  const [managerApproved, setManagerApproved] = useState("");
-  const [directorApproved, setDirectorApproved] = useState("");
+  const [managerApproved, setManagerApproved] = useState(`${pending}`);
+  const [directorApproved, setDirectorApproved] = useState(`${pending}`);
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -37,6 +38,7 @@ const FormAddRequest = () => {
         staffid: staffid,
         staffName: staffName,
         itemName: itemName,
+        descri: descri,
         requestAt: requestAt,
         managerApproved: managerApproved,
         directorApproved: directorApproved,
@@ -97,6 +99,19 @@ const FormAddRequest = () => {
                   />
                 </div>
               </div>
+
+              <div className="field">
+                <label className="label">Description</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    className="input"
+                    value={descri}
+                    onChange={(e) => setDescri(e.target.value)}
+                    placeholder="Description"
+                  />
+                </div>
+              </div>
               <div className="field">
                 {/* <label className="label">Requested At</label> */}
                 <div className="control">
@@ -117,7 +132,7 @@ const FormAddRequest = () => {
                   <input
                     type="hidden"
                     className="input"
-                    value={managerApproved}
+                    value={pending}
                     onChange={(e) => setManagerApproved(e.target.value)}
                     placeholder=""
                   />
@@ -130,7 +145,7 @@ const FormAddRequest = () => {
                   <input
                     type="hidden"
                     className="field"
-                    value={directorApproved}
+                    value={pending}
                     onChange={(e) => setDirectorApproved(e.target.value)}
                     placeholder=""
                   />
