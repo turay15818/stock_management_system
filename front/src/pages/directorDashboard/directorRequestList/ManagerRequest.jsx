@@ -1,7 +1,5 @@
-
-
 import React, { useEffect } from "react";
-import ManagerRequestList from "../managerDashboard/ManagerRequestList";
+import ManagerRequestList from "../../components/managerDashboard/ManagerRequestList";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../../features/authSlice";

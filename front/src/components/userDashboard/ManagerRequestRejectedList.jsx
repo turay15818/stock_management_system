@@ -29,7 +29,7 @@ const ManagerRequestRejectedList = () => {
       </Link>
       <h2 className="subtitle">List of Request</h2>
 
-      <div style={{ width: "100%",  padding: '25px'}} className="button is-primary mb-2">
+      <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
 
 
         <NavLink to={"/request"} className="button is-primary mb-2">
@@ -48,7 +48,7 @@ const ManagerRequestRejectedList = () => {
           Manager Decline
         </NavLink>
 
-        <NavLink to={"/directorRequestRejected"} className="button is-primary mb-2">
+        <NavLink to={"/directorRequestRejectedForUser"} className="button is-primary mb-2">
           Director Decline
         </NavLink>
 

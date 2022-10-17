@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import ManagerPendingRequestList from "../../components/managerDashboard/ManagerPendingRequestList";
+import ManagerReqPendingList from "../../components/managerDashboard/ManagerReqPendingList";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../../features/authSlice";
 import Layout from "../Layout"
 
-const ManagerPendingRequest = () => {
+const ManagerReqPending = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError } = useSelector((state) => state.auth);
@@ -21,9 +21,9 @@ const ManagerPendingRequest = () => {
   }, [isError, navigate]);
   return (
     <Layout>
-      <ManagerPendingRequestList />
+      <ManagerReqPendingList />
     </Layout>
   );
 };
 
-export default ManagerPendingRequest;
+export default ManagerReqPending;

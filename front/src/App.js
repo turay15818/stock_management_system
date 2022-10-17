@@ -9,20 +9,41 @@ import AddRequest from "./pages/AddRequest";
 import EditRequest from "./pages/EditRequest";
 import UserDashboard from "./pages/userDashboard/UserDashboard";
 import UserRequest from "./pages/userDashboard/UserRequest";
-import ManagerRequest from "./components/managerDashboard/ManagerRequest";
-import DirectorRequest from "./components/directorDashboard/DirectorRequest";
-import DirectorEditRequest from "./pages/directorDashboard/DirectorEditRequest";
-import UserPendingRequest from "./pages/userPendingDashboard/UserPendingRequest";
-import RequestReject from "./pages/userRequestReject/RequestReject";
-import DirectorRequestReject from "./pages/directorDashboard/DirectorRequestReject";
-import DirectorPendingRequest from "./pages/directorDashboard/DirectorPendingRequest";
-import ManagerRequestReject from "./pages/managerDashboard/ManagerRequestReject";
-import DirectorRequestRejected from "./pages/userDashboard/DirectorRequestRejected";
-import AdminRequest from "./pages/AdminRequest";
 
+import DirectorRequestRejectAll from "./pages/directorDashboard/DirectorRequestRejectAll";
+import DirectorPendingRequest from "./pages/directorDashboard/DirectorPendingRequest";
+import DirectorAppRequest from "./pages/directorDashboard/DirectorAppRequest";
+
+
+
+import ManagerRequest from "./pages/managerDashboard/ManagerRequest";
 import ManagerRequestPending from "./pages/userDashboard/ManagerRequestPending";
 import DirectorRequestPending from "./pages/userDashboard/DirectorRequestPending";
 import ManagerRequestRejected from "./pages/userDashboard/ManagerRequestRejected";
+import ManagerApprovedRequest from "./pages/managerDashboard/ManagerApprovedRequest";
+
+
+import DirectorRequest from "./pages/directorDashboard/DirectorRequest";
+import DirectorEditRequest from "./pages/directorDashboard/DirectorEditRequest";
+import UserPendingRequest from "./pages/userPendingDashboard/UserPendingRequest";
+import RequestReject from "./pages/userRequestReject/RequestReject";
+import DirectorRequestReject from "./pages/directorDashboard/DirectorRequestRejectAll";
+import ManagerReqRejected from "./pages/managerDashboard/ManagerReqRejected";
+
+
+import ManagerRequestReject from "./pages/managerDashboard/ManagerRequestReject";
+import DirectorRequestRejectedUser from "./pages/userDashboard/DirectorRequestRejectedUser";
+import AdminRequest from "./pages/AdminRequest";
+
+
+
+// import ManagerRequestPending from "./pages/userDashboard/ManagerRequestPending";
+import DirectorRequestRejectedForUser from "./pages/userDashboard/DirectorRequestRejectedForUser";
+import DirRequestPending from "./pages/managerDashboard/DirRequestPending"
+import DirRequestRejected from "./pages/managerDashboard/DirRequestRejected"
+import ManagerReqPending from "./pages/managerDashboard/ManagerReqPending";
+// import DirRequestPending from "./pages/managerDashboard/DirRequestPending"
+// import DirRequestPending from "./pages/managerDashboard/DirRequestPending"
 // import DirectorRequestRejected from "./pages/directorDashboard/DirectorRequestRejected";
 
 
@@ -41,17 +62,37 @@ function App() {
           <Route path="/request/edit/:id" element={<EditRequest />} />
           <Route path="/userDashboard" element={<UserDashboard />} />
           <Route path="/userRequest" element={<UserRequest />} />
-          <Route path="/managerRequest" element={<ManagerRequest />} />
+
           <Route path="/directorRequest" element={<DirectorRequest />} />
+          <Route path="/directorAppRequest" element={<DirectorAppRequest />} />
+          <Route path="/directorPendingRequest" element={<DirectorPendingRequest />} />
+          <Route path="/directorRequestRejectAll" element={<DirectorRequestRejectAll />} />
+          <Route path="/DirectorRequestRejectedForUser" element={<DirectorRequestRejectedForUser />} />
+
+
+          <Route path="/managerRequest" element={<ManagerRequest />} />
+          <Route path="/managerReqPending" element={<ManagerReqPending />} />
+          <Route path="/dirRequestPending" element={<DirRequestPending />} />
+          <Route path="/dirRequestRejected" element={<DirRequestRejected />} />
+          <Route path="/managerApprovedRequest" element={<ManagerApprovedRequest />} />
+          {/* <Route path="/managerRequestRejected" element={<ManagerRequestRejected />} /> */}
+
+
+
+
+
           <Route path="/directorEditRequest" element={<DirectorEditRequest />} />
           <Route path="/directorRequest/edit/:id" element={<DirectorEditRequest />} />
           <Route path="/userPendingRequest" element={<UserPendingRequest />} />
           <Route path="/requestReject" element={<RequestReject />} />
           <Route path="/directorRequestReject" element={<DirectorRequestReject />} />
-          <Route path="/directorPendingRequest" element={<DirectorPendingRequest />} />
+
+
+
           <Route path="/managerRequestReject" element={<ManagerRequestReject />} />
+          <Route path="/managerReqRejected" element={<ManagerReqRejected />} />
           <Route path="/adminRequest" element={<AdminRequest />} />
-         
+
 
 
 
@@ -61,7 +102,7 @@ function App() {
           <Route path="/managerRequestPending" element={<ManagerRequestPending />} />
           <Route path="/managerRequestRejected" element={<ManagerRequestRejected />} />
           <Route path="/directorRequestPending" element={<DirectorRequestPending />} />
-          <Route path="directorRequestRejected" element={<DirectorRequestRejected />} />
+          <Route path="directorRequestRejectedUser" element={<DirectorRequestRejectedUser />} />
         </Routes>
       </BrowserRouter>
     </div>

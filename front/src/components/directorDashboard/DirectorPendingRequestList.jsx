@@ -1,19 +1,19 @@
 
 
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
 
 const DirectorPendingRequestList = () => {
-  const [request, setDirectorPendingRequest] = useState([]);
+  const [request, setDirectorRequestPendingAll] = useState([]);
 
   useEffect(() => {
-    getDirectorPendingRequest();
+    getDirectorRequestPendingAll();
   }, []);
 
-  const getDirectorPendingRequest = async () => {
-    const response = await axios.get("http://localhost:5000/directorPendingRequest");
-    setDirectorPendingRequest(response.data);
+  const getDirectorRequestPendingAll = async () => {
+    const response = await axios.get("http://localhost:5000/directorRequestPendingAll");
+    setDirectorRequestPendingAll(response.data);
   };
 
   // const deleteRequest = async (requestId) => {
@@ -25,16 +25,25 @@ const DirectorPendingRequestList = () => {
     <div>
       <h1 className="title">Request</h1>
       <h2 className="subtitle">List of Request</h2>
-      <NavLink to={"/request"} className="button is-primary mb-2">
-        Approved Request
-      </NavLink>
+      <div style={{ width: "100%", padding: '25px', }} className="button is-primary mb-2">
 
-      <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
-        Pending Request
-      </NavLink>
-      <NavLink to={"/directorRequestReject"} className="button is-primary mb-2">
-        Rejected Request
-      </NavLink>
+
+        <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
+          Pending
+        </NavLink>
+
+
+        <NavLink to={"/directorRequestRejectAll"} className="button is-primary mb-2">
+          Director Decline
+        </NavLink>
+
+
+
+        <NavLink to={"/directorAppRequest"} className="button is-primary mb-2">
+          Approved Request
+        </NavLink>
+
+      </div>
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>
@@ -61,13 +70,13 @@ const DirectorPendingRequestList = () => {
               <td style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.directorApproved}</td>
 
               <td>
-                {/* <Link
+                <Link
                   to={`/request/edit/${request.uid}`}
                   className="button is-small is-info"
-                  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px',}}
+                  style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px', }}
                 >
                   Take Action
-                </Link> */}
+                </Link>
                 {/* <button
                   onClick={() => deleteRequest(request.uid)}
                   className="button is-small is-danger"

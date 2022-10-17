@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import DirectorRejectList from "../../components/directorDashboard/DirectorRejectList";
+import DirRequestPendingList from "../../components/managerDashboard/DirRequestPendingList";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../../features/authSlice";
-import Layout from "../Layout"
+import Layout from "../../pages/Layout"
 
-const DirectorRequestReject = () => {
+const DirRequestPending = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError } = useSelector((state) => state.auth);
@@ -21,9 +21,9 @@ const DirectorRequestReject = () => {
   }, [isError, navigate]);
   return (
     <Layout>
-      <DirectorRejectList />
+      <DirRequestPendingList />
     </Layout>
   );
 };
 
-export default DirectorRequestReject;
+export default DirRequestPending;

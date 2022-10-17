@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 const DirectorRequestList = () => {
-  const [request, setRequestByDirectorApproved] = useState([]);
+  const [request, setDirectorRequestAll] = useState([]);
 
   useEffect(() => {
-    getRequestByDirectorApproved();
+    getDirectorRequestAll();
   }, []);
 
-  const getRequestByDirectorApproved = async () => {
-    const response = await axios.get("http://localhost:5000/requestByDirectorApproved");
-    setRequestByDirectorApproved(response.data);
+  const getDirectorRequestAll = async () => {
+    const response = await axios.get("http://localhost:5000/directorRequestAll");
+    setDirectorRequestAll(response.data);
   };
 
   // const deleteRequest = async (requestId) => {
@@ -25,19 +25,25 @@ const DirectorRequestList = () => {
     <div>
       <h1 className="title">Request</h1>
       <h2 className="subtitle">List of Request</h2>
-      {/* <Link to="/request/add" className="button is-primary mb-2">
-        Add New
-      </Link> */}
-      <NavLink to={"/request"} className="button is-primary mb-2">
-        Approved Request
-      </NavLink>
+      <div style={{ width: "100%", padding: '25px', }} className="button is-primary mb-2">
 
-      <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
-        Pending Request
-      </NavLink>
-      <NavLink to={"/directorRequestReject"} className="button is-primary mb-2">
-        Rejected Request
-      </NavLink>
+
+        <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
+          Pending
+        </NavLink>
+
+
+        <NavLink to={"/directorRequestRejectAll"} className="button is-primary mb-2">
+          Director Decline
+        </NavLink>
+
+
+
+        <NavLink to={"/directorAppRequest"} className="button is-primary mb-2">
+          Approved Request
+        </NavLink>
+
+      </div>
 
       <table className="table is-striped is-fullwidth">
         <thead>
@@ -62,7 +68,7 @@ const DirectorRequestList = () => {
               <td style={{ backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.managerApproved}</td>
               <td style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.directorApproved}</td>
 
-              <td>
+              {/* <td>
                 <Link
                   to={`/directorRequest/edit/${request.uid}`}
                   className="button is-small is-info"
@@ -72,7 +78,7 @@ const DirectorRequestList = () => {
                   Take Action
                 </Link>
 
-              </td>
+              </td> */}
 
 
             </tr>

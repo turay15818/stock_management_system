@@ -17,9 +17,10 @@ const Sidebar = () => {
 
   return (
     <div>
-      <aside className="menu pl-2 has-shadow">
+      <aside className="menu pl-2 has-shadow" style={{ position: 'fixed' }}>
         <p className="menu-label">General</p>
 
+        <div>
         <ul className="menu-list">
           {/* <li>
             <NavLink to={"/dashboard"}>
@@ -114,18 +115,6 @@ const Sidebar = () => {
           </div>
         )}
         {/* User Role End here*/}
-
-
-
-
-
-
-
-
-
-
-
-
         <p className="menu-label">Settings</p>
         <ul className="menu-list">
           <li>
@@ -134,6 +123,9 @@ const Sidebar = () => {
             </button>
           </li>
         </ul>
+        </div>
+
+
       </aside>
     </div>
   );

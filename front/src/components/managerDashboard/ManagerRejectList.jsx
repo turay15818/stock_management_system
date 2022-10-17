@@ -25,17 +25,45 @@ const ManagerRejectList = () => {
     <div>
       <h1 className="title">Request</h1>
       <h2 className="subtitle">List of Request</h2>
-      <NavLink to={"/request"} className="button is-primary mb-2">
+
+      {/* <NavLink to={"/request"} className="button is-primary mb-2">
         Approved Request
       </NavLink>
-
       <NavLink to={"/managerPendingRequest"} className="button is-primary mb-2">
         View Pending
       </NavLink>
-
       <NavLink to={"/requestReject"} className="button is-primary mb-2">
         Request Reject
-      </NavLink>
+      </NavLink> */}
+
+      <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
+
+
+        <NavLink to={"/request"} className="button is-primary mb-2">
+          Approved Request
+        </NavLink>
+
+        <NavLink to={"/ManagerRequestPending"} className="button is-primary mb-2">
+          Manager Pending
+        </NavLink>
+
+        <NavLink to={"/directorRequestPending"} className="button is-primary mb-2">
+          Director Pending
+        </NavLink>
+
+        <NavLink to={"/managerRequestRejected"} className="button is-primary mb-2">
+          Manager Decline
+        </NavLink>
+
+        <NavLink to={"/directorRequestRejected"} className="button is-primary mb-2">
+          Director Decline
+        </NavLink>
+
+      </div>
+
+
+
+
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>

@@ -6,8 +6,8 @@ import {
     getPendingRequest,
     getRejectedRequest,
     getManagerRequest,
-    getRequestByDirectorReject,
-    getDirectorPendingRequest,
+    getRequestDirectorPending,
+    // getDirectorPendingRequest,
     getAdminRequest,
     getRequestById,
     createRequest,
@@ -21,12 +21,29 @@ import {
     getManagerRequestPending,
     getManagerRequestRejected,
     getDirectorRequestPending,
-    getDirectorRequestRejected,
+    getRequestByDirector,
     // User Routing End Here
 
 
 
+    // Director Request Router Start Here
+    getDirectorRequestAll,
+    getDirectorRequestPendingAll,
+    getDirectorRequestRejectAll,
+    // Director Request Router End Here
 
+
+
+
+
+    // Manager Route Setting Start here
+    getRequestByManagerReqApproved,
+    getRequestByManagerReqPending,
+    getRequestByManageRejected,
+    getRequestDirectorReqPending,
+    getRequestDirectorReqRejected,
+    getManagerRequestAll
+    // Manager Routing End Here
 
 
 
@@ -43,8 +60,8 @@ router.get('/managerRequest', verifyUser, getManagerRequest);
 router.get('/adminRequest', verifyUser, getAdminRequest);
 router.get('/request/:id', verifyUser, getRequestById);
 router.get('/pendingRequest', verifyUser, getPendingRequest);
-router.get('/requestByDirectorReject', verifyUser, getRequestByDirectorReject);
-router.get('/directorPendingRequest', verifyUser, getDirectorPendingRequest);
+router.get('/requestDirectorPending', verifyUser, getRequestDirectorPending);
+// router.get('/directorPendingRequest', verifyUser, getDirectorPendingRequest);
 router.post('/request', verifyUser, createRequest);
 router.patch('/request/:id', verifyUser, updateRequest);
 router.delete('/request/:id', verifyUser, deleteRequest);
@@ -54,10 +71,28 @@ router.delete('/request/:id', verifyUser, deleteRequest);
 router.get('/managerRequestApproved', verifyUser, getManagerRequestApproved);
 router.get('/managerRequestPending', verifyUser, getManagerRequestPending);
 router.get('/managerRequestRejected', verifyUser, getManagerRequestRejected);
-router.get('/DirectorRequestPending', verifyUser, getDirectorRequestPending);
-router.get('/directorRequestRejected', verifyUser, getDirectorRequestRejected);
+router.get('/directorRequestPending', verifyUser, getDirectorRequestPending);
+router.get('/requestByDirector', verifyUser, getRequestByDirector);
 // For User End Here
 
+
+
+// Director Request Router Start Here
+router.get('/directorRequestAll', verifyUser, getDirectorRequestAll);
+router.get('/directorRequestPendingAll', verifyUser, getDirectorRequestPendingAll);
+router.get('/directorRequestRejectAll', verifyUser, getDirectorRequestRejectAll);
+// Director Request Router End Here
+
+
+
+// For user Start Here
+router.get('/requestByManagerReqApproved', verifyUser, getRequestByManagerReqApproved);
+router.get('/requestByManagerReqPending', verifyUser, getRequestByManagerReqPending);
+router.get('/requestByManageRejected', verifyUser, getRequestByManageRejected);
+router.get('/requestDirectorReqPending', verifyUser, getRequestDirectorReqPending);
+router.get('/requestDirectorReqRejected', verifyUser, getRequestDirectorReqRejected);
+router.get('/managerRequestAll', verifyUser, getManagerRequestAll);
+// For User End Here
 
 
 

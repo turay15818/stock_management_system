@@ -4,16 +4,16 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-const DirectorRejectList = () => {
-  const [request, setRequestByDirectorReject] = useState([]);
+const DirectorRequestRejectAllList = () => {
+  const [request, setDirectorRequestRejectAll] = useState([]);
 
   useEffect(() => {
-    getRequestByDirectorReject();
+    getDirectorRequestRejectAll();
   }, []);
 
-  const getRequestByDirectorReject = async () => {
-    const response = await axios.get("http://localhost:5000/RequestByDirectorReject");
-    setRequestByDirectorReject(response.data);
+  const getDirectorRequestRejectAll = async () => {
+    const response = await axios.get("http://localhost:5000/directorRequestRejectAll");
+    setDirectorRequestRejectAll(response.data);
   };
 
   // const deleteRequest = async (requestId) => {
@@ -25,16 +25,25 @@ const DirectorRejectList = () => {
     <div>
       {/* <h1 className="title">Request</h1> */}
       <h2 className="title">List of Request Rejected Request</h2>
-      <NavLink to={"/request"} className="button is-primary mb-2">
-        Approved Request
-      </NavLink>
+      <div style={{ width: "100%", padding: '25px', }} className="button is-primary mb-2">
 
-      <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
-        Pending Request
-      </NavLink>
-      <NavLink to={"/directorRequestReject"} className="button is-primary mb-2">
-        Rejected Request
-      </NavLink>
+
+        <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
+          Pending
+        </NavLink>
+
+
+        <NavLink to={"/directorRequestRejectAll"} className="button is-primary mb-2">
+          Director Decline
+        </NavLink>
+
+
+
+        <NavLink to={"/directorAppRequest"} className="button is-primary mb-2">
+          Approved Request
+        </NavLink>
+
+      </div>
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>
@@ -81,4 +90,4 @@ const DirectorRejectList = () => {
   );
 };
 
-export default DirectorRejectList;
+export default DirectorRequestRejectAllList;

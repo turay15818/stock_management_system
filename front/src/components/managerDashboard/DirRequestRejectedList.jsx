@@ -4,16 +4,16 @@ import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
 
-const DirectorRequestRejectedList = () => {
-    const [request, setDirectorRequestRejected] = useState([]);
+const DirRequestRejectedList = () => {
+    const [request, setRequestDirectorReqRejected] = useState([]);
 
     useEffect(() => {
-        getDirectorRequestRejected();
+        getRequestDirectorReqRejected();
     }, []);
 
-    const getDirectorRequestRejected = async () => {
-        const response = await axios.get("http://localhost:5000/directorRequestRejected");
-        setDirectorRequestRejected(response.data);
+    const getRequestDirectorReqRejected = async () => {
+        const response = await axios.get("http://localhost:5000/requestDirectorReqRejected");
+        setRequestDirectorReqRejected(response.data);
     };
 
     // const deleteRequest = async (requestId) => {
@@ -23,32 +23,26 @@ const DirectorRequestRejectedList = () => {
 
     return (
         <div>
-            <h1 className="title">Request</h1>
-            <Link to="/request/add" className="button is-primary mb-2">
-                Send New Request
-            </Link>
-            <h2 className="subtitle">List of Request</h2>
-
             <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
 
 
-                <NavLink to={"/request"} className="button is-primary mb-2">
+                <NavLink to={"/managerApprovedRequest"} className="button is-primary mb-2">
                     Approved Request
                 </NavLink>
 
-                <NavLink to={"/managerRequestPending"} className="button is-primary mb-2">
+                <NavLink to={"/managerReqPending"} className="button is-primary mb-2">
                     Manager Pending
                 </NavLink>
 
-                <NavLink to={"/directorRequestPending"} className="button is-primary mb-2">
+                <NavLink to={"/dirRequestPending"} className="button is-primary mb-2">
                     Director Pending
                 </NavLink>
 
-                <NavLink to={"/managerRequestRejected"} className="button is-primary mb-2">
+                <NavLink to={"/managerReqRejected"} className="button is-primary mb-2">
                     Manager Decline
                 </NavLink>
 
-                <NavLink to={"/directorRequestRejected"} className="button is-primary mb-2">
+                <NavLink to={"/dirRequestRejected"} className="button is-primary mb-2">
                     Director Decline
                 </NavLink>
 
@@ -101,4 +95,4 @@ const DirectorRequestRejectedList = () => {
     );
 };
 
-export default DirectorRequestRejectedList;
+export default DirRequestRejectedList;

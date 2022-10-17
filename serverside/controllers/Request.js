@@ -87,11 +87,11 @@ export const getRequestByDirectorReject = async (req, res) => {
 
         let response;
 
-        if (req.role === "admin", "director", "manager") {
+        if (req.role === "user" && req.role !== "admin", "director", "manager") {
             response = await Request.findAll({
                 attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
                 where: {
-                    DirectorApproved: "Reject"
+                    DirectorApproved: "Rejected"
                 },
 
                 include: [{
@@ -119,7 +119,7 @@ export const getRequestByDirectorReject = async (req, res) => {
     }
 }
 
-export const getDirectorPendingRequest = async (req, res) => {
+export const getRequestDirectorPending = async (req, res) => {
     try {
 
         let response;
@@ -130,6 +130,7 @@ export const getDirectorPendingRequest = async (req, res) => {
                 where: {
                     managerApproved: "Approved",
                     directorApproved: 'Pending',
+                    userId: req.userId
                 },
 
                 include: [{
@@ -156,12 +157,6 @@ export const getDirectorPendingRequest = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 }
-
-
-
-
-
-
 
 export const getRequestByBothApproved = async (req, res) => {
     try {
@@ -522,7 +517,7 @@ export const getDirectorRequestPending = async (req, res) => {
     }
 }
 
-export const getDirectorRequestRejected = async (req, res) => {
+export const getRequestByDirector = async (req, res) => {
     try {
         let response;
         if (req.role === "user" && req.role !== "admin", "director", "manager") {
@@ -563,6 +558,509 @@ export const getDirectorRequestRejected = async (req, res) => {
 }
 
 // User Route Setting End Here
+
+
+
+
+// User Route Setting Start Here
+export const getManagerRequestAll = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "user" && req.role !== "admin", "director", "manager") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    // directorApproved: "Reject",
+                    // managerApproved: 'Approved',
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+export const getRequestByManagerReqPending = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "manager" && req.role !== "admin", "director", "user") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    // directorApproved: "Approved",
+                    managerApproved: 'pending',
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+export const getRequestByManagerReqApproved = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "manager" && req.role !== "admin", "director", "user") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    directorApproved: "Approved",
+                    managerApproved: 'Approved',
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+
+export const getRequestByManageRejected = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "manager" && req.role !== "admin", "director", "user") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    // directorApproved: "Reject",
+                    managerApproved: 'Reject',
+
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+export const getRequestDirectorReqPending = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "manager" && req.role !== "admin", "director", "user") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    managerApproved: "Approved",
+                    directorApproved: 'Pending',
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+
+export const getRequestDirectorReqRejected = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "manager" && req.role !== "admin", "director", "user") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    managerApproved: 'Approved',
+                    directorApproved: "Rejected",
+
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+// User Route Setting End Here
+
+
+
+
+
+
+
+// Director Route Setting Start Here
+export const getDirectorRequestAll = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "director" && req.role !== "admin", "user", "manager") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    // directorApproved: "Reject",
+                    managerApproved: 'Approved',
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+export const getDirectorRequestPendingAll = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "director" && req.role !== "admin", "manager", "user") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    directorApproved: "Pending",
+                    managerApproved: 'Approved'
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+export const getDirectorRequestRejectAll = async (req, res) => {
+    try {
+        let response;
+        if (req.role === "director" && req.role !== "admin", "manager", "user") {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+                where: {
+                    directorApproved: "Rejected",
+                    managerApproved: 'Approved'
+                    // userId: req.userId,
+                },
+
+
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        else {
+            response = await Request.findAll({
+                attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+                where: [{
+                    userId: req.userId,
+
+                }],
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+
+// export const getRequestByManageRejected = async (req, res) => {
+//     try {
+//         let response;
+//         if (req.role === "manager" && req.role !== "admin", "director", "user") {
+//             response = await Request.findAll({
+//                 attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+//                 where: {
+//                     // directorApproved: "Reject",
+//                     managerApproved: 'Reject',
+
+//                     // userId: req.userId,
+//                 },
+
+
+//                 include: [{
+//                     model: User,
+//                     attributes: ['name', 'email']
+//                 }]
+//             });
+//         }
+//         else {
+//             response = await Request.findAll({
+//                 attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+//                 where: [{
+//                     userId: req.userId,
+
+//                 }],
+//                 include: [{
+//                     model: User,
+//                     attributes: ['name', 'email']
+//                 }]
+//             });
+//         }
+//         res.status(200).json(response);
+//     } catch (error) {
+//         res.status(500).json({ msg: error.message });
+//     }
+// }
+
+// export const getRequestDirectorReqPending = async (req, res) => {
+//     try {
+//         let response;
+//         if (req.role === "manager" && req.role !== "admin", "director", "user") {
+//             response = await Request.findAll({
+//                 attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+//                 where: {
+//                     managerApproved: "Approved",
+//                     directorApproved: 'Pending',
+//                     // userId: req.userId,
+//                 },
+
+
+//                 include: [{
+//                     model: User,
+//                     attributes: ['name', 'email']
+//                 }]
+//             });
+//         }
+//         else {
+//             response = await Request.findAll({
+//                 attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+//                 where: [{
+//                     userId: req.userId,
+
+//                 }],
+//                 include: [{
+//                     model: User,
+//                     attributes: ['name', 'email']
+//                 }]
+//             });
+//         }
+//         res.status(200).json(response);
+//     } catch (error) {
+//         res.status(500).json({ msg: error.message });
+//     }
+// }
+
+
+// export const getRequestDirectorReqRejected = async (req, res) => {
+//     try {
+//         let response;
+//         if (req.role === "manager" && req.role !== "admin", "director", "user") {
+//             response = await Request.findAll({
+//                 attributes: ['uid', 'staffid', 'staffName', 'descri', 'itemName', 'requestAt', 'managerApproved', 'directorApproved'],
+
+//                 where: {
+//                     managerApproved: 'Approved',
+//                     directorApproved: "Rejected",
+
+//                     // userId: req.userId,
+//                 },
+
+
+//                 include: [{
+//                     model: User,
+//                     attributes: ['name', 'email']
+//                 }]
+//             });
+//         }
+//         else {
+//             response = await Request.findAll({
+//                 attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
+//                 where: [{
+//                     userId: req.userId,
+
+//                 }],
+//                 include: [{
+//                     model: User,
+//                     attributes: ['name', 'email']
+//                 }]
+//             });
+//         }
+//         res.status(200).json(response);
+//     } catch (error) {
+//         res.status(500).json({ msg: error.message });
+//     }
+// }
+
+// Director Route Setting End Here
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
