@@ -47,6 +47,20 @@ import ManagerReqPending from "./pages/managerDashboard/ManagerReqPending";
 // import DirectorRequestRejected from "./pages/directorDashboard/DirectorRequestRejected";
 
 
+import StockIn from "./pages/inventory/StockIn";
+import StockApprovedView from "./pages/inventory/StockApprovedView";
+import StockByDetails from "./pages/inventory/StockByDetails";
+import StockInUse from "./pages/inventory/StockInUse";
+import AllStock from "./pages/inventory/AllStock";
+import StockInCreate from "./pages/inventory/StockInCreate";
+import StockInCreateView from "./pages/inventory/StockInCreateView";
+import StockEdit from "./pages/inventory/StockEdit";
+import ViewSingleStock from "./pages/inventory/ViewSingleStock";
+
+
+
+
+
 function App() {
   return (
     <div>
@@ -81,6 +95,22 @@ function App() {
 
 
 
+          <Route path="/stockIn" element={<StockIn />} />
+          <Route path="/stockApprovedView" element={<StockApprovedView />} />
+          <Route path="/stockInUse" element={<StockInUse />} />
+          <Route path="/stock/get/:id" element={<StockByDetails />} />
+          <Route path="/allStock" element={<AllStock />} />
+          <Route path="/stockInCreate" element={<StockInCreate />} />
+          <Route path="/stockInCreateView" element={<StockInCreateView />} />
+          <Route path="/stock/edit/:id" element={<StockEdit />} />
+          <Route path="/viewSingleStock/:id" element={<ViewSingleStock />} />
+
+
+
+
+
+
+
           <Route path="/directorEditRequest" element={<DirectorEditRequest />} />
           <Route path="/directorRequest/edit/:id" element={<DirectorEditRequest />} />
           <Route path="/userPendingRequest" element={<UserPendingRequest />} />
@@ -94,7 +124,7 @@ function App() {
           <Route path="/adminRequest" element={<AdminRequest />} />
 
 
-
+          
 
 
 
@@ -103,6 +133,12 @@ function App() {
           <Route path="/managerRequestRejected" element={<ManagerRequestRejected />} />
           <Route path="/directorRequestPending" element={<DirectorRequestPending />} />
           <Route path="directorRequestRejectedUser" element={<DirectorRequestRejectedUser />} />
+
+
+
+
+         
+
         </Routes>
       </BrowserRouter>
     </div>

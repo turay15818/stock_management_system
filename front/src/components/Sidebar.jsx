@@ -21,53 +21,65 @@ const Sidebar = () => {
         <p className="menu-label">General</p>
 
         <div>
-        <ul className="menu-list">
-          {/* <li>
+          <ul className="menu-list">
+            {/* <li>
             <NavLink to={"/dashboard"}>
               <IoHome /> Dashboard
             </NavLink>
           </li> */}
-          {/* <li>
+            {/* <li>
             <NavLink to={"/request"}>
               <IoPricetag /> Request
             </NavLink>
           </li> */}
-        </ul>
+          </ul>
 
 
-        {/* Admin/Super Admin Role Start here*/}
-        {user && user.role === "admin" && (
-          <div>
-            <p className="menu-label">Users</p>
-            <ul className="menu-list">
+          {/* Admin/Super Admin Role Start here*/}
+          {user && user.role === "admin" && (
+            <div>
+              <p className="menu-label">Users</p>
+              <ul className="menu-list">
 
-              <li>
-                <NavLink to={"/users"}>
-                  <IoPricetag /> View Users
-                </NavLink>
-              </li>
+                <li>
+                  <NavLink to={"/users"}>
+                    <IoPricetag /> View Users
+                  </NavLink>
+                </li>
 
-            </ul>
-            <p className="menu-label">Admin</p>
-            <ul className="menu-list">
+              </ul>
+              <p className="menu-label">Admin</p>
+              <ul className="menu-list">
 
-              <li>
-                <NavLink to={"/adminRequest"}>
-                  <IoPricetag /> Request
-                </NavLink>
-              </li>
+                <li>
+                  <NavLink to={"/adminRequest"}>
+                    <IoPricetag /> Request
+                  </NavLink>
+                </li>
 
-            </ul>
-          </div>
-        )}
-        {/* Admin/Super Admin  Role End here*/}
+                <li>
+                  <NavLink to={"/allStock"}>
+                    <IoPricetag /> Stock
+                  </NavLink>
+                </li>
+             
+                <li>
+                  <NavLink to={"/stockInCreate"}>
+                    <IoPricetag /> Add Stock
+                  </NavLink>
+                </li>
+
+              </ul>
+            </div>
+          )}
+          {/* Admin/Super Admin  Role End here*/}
 
 
-        {/* Director  Role Start here*/}
-        {user && user.role === "director" && (
-          <div>
-            <p className="menu-label">Director</p>
-            {/* <ul className="menu-list">
+          {/* Director  Role Start here*/}
+          {user && user.role === "director" && (
+            <div>
+              <p className="menu-label">Director</p>
+              {/* <ul className="menu-list">
               <li>
                 <NavLink to={"/users"}>
                   <IoPerson /> Users
@@ -76,53 +88,53 @@ const Sidebar = () => {
             </ul> */}
 
 
-            <li>
-              <NavLink to={"/directorRequest"}>
-                <IoPerson /> View Request
-              </NavLink>
-            </li>
-          </div>
-        )}
-        {/* Director Role end here*/}
-
-
-        {/* Manager Role  Start here*/}
-        {user && user.role === "manager" && (
-          <div>
-            <p className="menu-label">Manager</p>
-            <ul className="menu-list">
               <li>
-                <NavLink to={"/managerRequest"}>
+                <NavLink to={"/directorRequest"}>
                   <IoPerson /> View Request
                 </NavLink>
               </li>
-            </ul>
-          </div>
-        )}
-        {/* Manage Role end Here*/}
+            </div>
+          )}
+          {/* Director Role end here*/}
 
-        {/* User Role  Start here*/}
-        {user && user.role === "user" && (
-          <div>
-            <p className="menu-label">Users</p>
-            <ul className="menu-list">
-              <li>
-                <NavLink to={"/userRequest"}>
-                  <IoPerson /> My Request
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-        )}
-        {/* User Role End here*/}
-        <p className="menu-label">Settings</p>
-        <ul className="menu-list">
-          <li>
-            <button onClick={logout} className="button is-white">
-              <IoLogOut /> Logout
-            </button>
-          </li>
-        </ul>
+
+          {/* Manager Role  Start here*/}
+          {user && user.role === "manager" && (
+            <div>
+              <p className="menu-label">Manager</p>
+              <ul className="menu-list">
+                <li>
+                  <NavLink to={"/managerRequest"}>
+                    <IoPerson /> View Request
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+          )}
+          {/* Manage Role end Here*/}
+
+          {/* User Role  Start here*/}
+          {user && user.role === "user" && (
+            <div>
+              <p className="menu-label">Users</p>
+              <ul className="menu-list">
+                <li>
+                  <NavLink to={"/userRequest"}>
+                    <IoPerson /> My Request
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+          )}
+          {/* User Role End here*/}
+          <p className="menu-label">Settings</p>
+          <ul className="menu-list">
+            <li>
+              <button onClick={logout} className="button is-white">
+                <IoLogOut /> Logout
+              </button>
+            </li>
+          </ul>
         </div>
 
 

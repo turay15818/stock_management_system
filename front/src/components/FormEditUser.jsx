@@ -10,9 +10,11 @@ const FormEditUser = () => {
   const [confPassword, setConfPassword] = useState("");
   const [role, setRole] = useState("");
   const [msg, setMsg] = useState("");
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const { user } = useSelector((state) => state.auth);
+  
   useEffect(() => {
     const getUserById = async () => {
       try {
