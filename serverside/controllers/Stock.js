@@ -19,7 +19,7 @@ export const getStock = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url',
 
 
                 ],
@@ -53,7 +53,7 @@ export const getStock = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
 
                 ],
                 where: [{
@@ -87,7 +87,7 @@ export const getAllStock = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
 
 
                 ],
@@ -121,7 +121,7 @@ export const getAllStock = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
 
                 ],
                 where: [{
@@ -157,7 +157,7 @@ export const getStockInUse = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
 
 
                 ],
@@ -191,7 +191,7 @@ export const getStockInUse = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
 
                 ],
                 where: [{
@@ -224,7 +224,7 @@ export const getStockNotInUse = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
 
 
                 ],
@@ -258,7 +258,7 @@ export const getStockNotInUse = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
 
                 ],
                 where: [{
@@ -299,7 +299,7 @@ export const getStockId = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
                 ],
                 where: {
                     id: stock.id
@@ -317,7 +317,7 @@ export const getStockId = async (req, res) => {
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image',
+                    'name', 'status', 'image', 'url'
                 ],
                 where: {
                     [Op.and]: [{ id: stock.id }, { userId: req.userId }]

@@ -34,7 +34,7 @@ const StockInCreateViewList = () => {
                                     <p className="title is-5" style={{ marginTop: "18px", backgroundColor: "black", padding: "10px", color: "white" }}>Stock ID:  <span style={{ color: "orange" }}>{"  " + "  " + stock.id}</span> </p>
                                     <div className="card-image" >
                                         <figure className="image is-4by3">
-                                            <img require src="http://localhost:5000/images/1a9cfdffff56ab3796f25b7cd4993bf5.jpg" alt="Image" />
+                                            <img require src={stock.url} alt="Image" />
                                         </figure>
                                     </div>
 

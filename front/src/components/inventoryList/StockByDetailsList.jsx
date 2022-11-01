@@ -17,6 +17,7 @@ const StockByDetailsList = () => {
     const [department, setDepartment] = useState([]);
     const [giver, setGiver] = useState([]);
     const [url, setUrl] = useState([]);
+    const [dateGiven, setDateGiven] = useState([]);
 
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
@@ -40,6 +41,7 @@ const StockByDetailsList = () => {
                 setDepartment(response.data.department);
                 setGiver(response.data.giver);
                 setUrl(response.data.url);
+                setDateGiven(response.data.dateGiven);
 
 
             } catch (error) {
@@ -59,7 +61,7 @@ const StockByDetailsList = () => {
     }
 
     const headingFour = {
-        fontSize: 18,
+        fontSize: 15,
         paddingRight: 20,
         fontWeight: 900,
 
@@ -71,6 +73,11 @@ const StockByDetailsList = () => {
         margin: 8,
         borderRadius: 18
     }
+    const flex = {
+        display: "flex",
+        alignItems: "center",
+    }
+
     return (
         <div>
             <div><p className="has-text-centered" style={{ color: "red", fontSize: "40px" }}>{msg}</p></div>
@@ -90,65 +97,71 @@ const StockByDetailsList = () => {
 
                             <div className="card-image" style={div}>
                                 <figure className="image is-4by3">
-                                    <img src={url} alt="http://localhost:5000/images/1a9cfdffff56ab3796f25b7cd4993bf5.jpg" />
-                                    {/* <img src={url} alt="Image" /> */}
+                                    {/* <img src="http://localhost:5000/images/1a9cfdffff56ab3796f25b7cd4993bf5.jpg" alt="There is Image here" /> */}
+                                    <img src={url} alt="Image" />
                                     {/* "http://localhost:5000/images/1a9cfdffff56ab3796f25b7cd4993bf5.jpg" */}
                                 </figure>
                             </div>
 
 
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Stock Code:</span> {" " + " " + stockCode}</h4>
-                            </div>
-                            <hr />
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Stock Name:</span> {" " + " " + stockName}</h4>
+                            <div style={flex}>
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Stock Code:</span> {" " + " " + stockCode}</h4>
+                                </div>
+                                <hr />
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Stock Name:</span> {" " + " " + stockName}</h4>
+                                </div>
+
+
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Stock Name:</span> {" " + " " + stockName}</h4>
+                                </div>
                             </div>
 
 
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Stock Name:</span> {" " + " " + stockName}</h4>
+
+                            <div style={flex}>
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Stock Description:</span> {" " + " " + description}</h4>
+                                </div>
+
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Stock Stock Brand:</span> {" " + " " + stockBrand}</h4>
+                                </div>
+
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Stock Color:</span> {" " + " " + stockColor}</h4>
+                                </div>
                             </div>
 
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Stock Description:</span> {" " + " " + description}</h4>
+
+                            <div style={flex}>
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Purchase Date:</span> {" " + " " + purchaseDate}</h4>
+                                </div>
+
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Purchase From:</span> {" " + " " + purchaseFrom}</h4>
+                                </div>
+
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Purchase Date:</span> {" " + " " + purchaseDate}</h4>
+                                </div>
                             </div>
 
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Stock Stock Brand:</span> {" " + " " + stockBrand}</h4>
+
+                            <div style={flex}>
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Assigner:</span> {" " + " " + giver}</h4>
+                                </div>
+                                <div style={div}>
+                                    <h4 style={headingFour}><span>Assign Date:</span> {" " + " " + dateGiven}</h4>
+                                </div>
                             </div>
 
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Stock Color:</span> {" " + " " + stockColor}</h4>
-                            </div>
 
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Purchase Date:</span> {" " + " " + purchaseDate}</h4>
-                            </div>
 
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Purchase From:</span> {" " + " " + purchaseFrom}</h4>
-                            </div>
-
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Purchase Date:</span> {" " + " " + purchaseDate}</h4>
-                            </div>
-
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Attached To:</span> {" " + " " + assignedTo}</h4>
-                            </div>
-
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Staff Id:</span> {" " + " " + staffId}</h4>
-                            </div>
-
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Department:</span> {" " + " " + department}</h4>
-                            </div>
-
-                            <div style={div}>
-                                <h4 style={headingFour}><span>Assigner:</span> {" " + " " + giver}</h4>
-                            </div>
 
                         </div>
 

@@ -146,19 +146,6 @@ const Stock = db.define('stock', {
     },
 
 
-    // assignedTo:assignedTo,
-    // staffId:staffId,
-    // department:department,
-    // giver:giver,
-    // dateGiven:dateGiven,
-
-
-
-
-
-
-
-
     status: {
        type: DataTypes.STRING,
         allowNull: true,

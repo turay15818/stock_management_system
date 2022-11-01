@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { IoPerson, IoPricetag, IoHome, IoLogOut } from "react-icons/io5";
+import { IoPerson, IoPricetag, IoHome, IoLogOut, IoMan, IoPeopleCircle, IoGitBranchSharp, IoAddCircleOutline, IoAccessibilityOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { LogOut, reset } from "../features/authSlice";
 
@@ -15,57 +15,78 @@ const Sidebar = () => {
     navigate("/");
   };
 
+  const sidebarr = {
+    marginLeft: 12,
+    fontSize: 18,
+
+  }
+  const sidebaar = {
+    marginLeft: 12,
+    marginTop: 18,
+    fontSize: 18,
+    color: "white",
+  }
+
+
+  const list = {
+    listStyle: "none",
+    fontSize: 16,
+    fontWeight: 600,
+    textDecoration: "none"
+  }
+  const stylee = {
+    listStyle: "none",
+    fontSize: 16,
+    fontWeight: 600,
+    color: "orange",
+    textDecoration: "none"
+  }
+
+  const sidebad = {
+    position: 'fixed',
+    backgroundColor: "#001253",
+    height: "100vh",
+    boxShadow: "0px 0px 15px 0px #000000",
+    borderRadius: "0px 80px 0px 0px"
+  }
+
   return (
     <div>
-      <aside className="menu pl-2 has-shadow" style={{ position: 'fixed' }}>
-        <p className="menu-label">General</p>
+      <aside className="menu pl-2 has-shadow" style={sidebad}>
+        <p className="menu-label" style={sidebaar}>General</p>
 
         <div>
-          <ul className="menu-list">
-            {/* <li>
-            <NavLink to={"/dashboard"}>
-              <IoHome /> Dashboard
-            </NavLink>
-          </li> */}
-            {/* <li>
-            <NavLink to={"/request"}>
-              <IoPricetag /> Request
-            </NavLink>
-          </li> */}
-          </ul>
-
-
           {/* Admin/Super Admin Role Start here*/}
           {user && user.role === "admin" && (
             <div>
-              <p className="menu-label">Users</p>
+              <p className="menu-label" style={sidebaar}>Users</p>
               <ul className="menu-list">
 
-                <li>
-                  <NavLink to={"/users"}>
-                    <IoPricetag /> View Users
+                <li style={list}>
+                  <NavLink to={"/users"} style={stylee}>
+                    <IoPeopleCircle style={{ fontSize: "30px" }} /> View Users
                   </NavLink>
                 </li>
 
               </ul>
-              <p className="menu-label">Admin</p>
+              <p className="menu-label" style={sidebaar}>Admin</p>
               <ul className="menu-list">
 
                 <li>
-                  <NavLink to={"/adminRequest"}>
-                    <IoPricetag /> Request
+                  <NavLink to={"/adminRequest"} style={stylee}>
+                    <IoPricetag style={{ fontSize: "30px" }} /> Request
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink to={"/allStock"}>
-                    <IoPricetag /> Stock
+                  <NavLink to={"/allStock"} style={stylee}>
+                    <IoGitBranchSharp style={{ fontSize: "30px" }} /> Stock
                   </NavLink>
                 </li>
-             
+
                 <li>
-                  <NavLink to={"/stockInCreate"}>
-                    <IoPricetag /> Add Stock
+                  <NavLink to={"/stockInCreate"} style={stylee}>
+                    <IoAddCircleOutline style={{ fontSize: "30px" }} /> Add Stock
                   </NavLink>
                 </li>
 
@@ -79,18 +100,12 @@ const Sidebar = () => {
           {user && user.role === "director" && (
             <div>
               <p className="menu-label">Director</p>
-              {/* <ul className="menu-list">
-              <li>
-                <NavLink to={"/users"}>
-                  <IoPerson /> Users
-                </NavLink>
-              </li>
-            </ul> */}
+
 
 
               <li>
-                <NavLink to={"/directorRequest"}>
-                  <IoPerson /> View Request
+                <NavLink to={"/directorRequest"} style={stylee}>
+                  <IoAccessibilityOutline style={{ fontSize: "30px" }} /> View Request
                 </NavLink>
               </li>
             </div>
@@ -104,8 +119,8 @@ const Sidebar = () => {
               <p className="menu-label">Manager</p>
               <ul className="menu-list">
                 <li>
-                  <NavLink to={"/managerRequest"}>
-                    <IoPerson /> View Request
+                  <NavLink to={"/managerRequest"} style={stylee}>
+                    <IoPerson style={{ fontSize: "30px" }} /> View Request
                   </NavLink>
                 </li>
               </ul>
@@ -119,19 +134,19 @@ const Sidebar = () => {
               <p className="menu-label">Users</p>
               <ul className="menu-list">
                 <li>
-                  <NavLink to={"/userRequest"}>
-                    <IoPerson /> My Request
+                  <NavLink to={"/userRequest"} style={stylee}>
+                    <IoPerson style={{ fontSize: "30px" }} /> My Request
                   </NavLink>
                 </li>
               </ul>
             </div>
           )}
           {/* User Role End here*/}
-          <p className="menu-label">Settings</p>
+          <p className="menu-label" style={sidebaar}>Settings</p>
           <ul className="menu-list">
             <li>
               <button onClick={logout} className="button is-white">
-                <IoLogOut /> Logout
+                <IoLogOut style={{ fontSize: "30px" }} /> Logout
               </button>
             </li>
           </ul>

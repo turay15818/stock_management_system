@@ -18,10 +18,7 @@ const AllStockList = () => {
         setAllStock(response.data);
     };
 
-    // const deleteStock = async (stockUId) => {
-    //     await axios.delete(`http://localhost:5000/stock/${stockUId}`);
-    //     getStock();
-    // };
+  
 
     return (
         <div>
@@ -88,29 +85,14 @@ const AllStockList = () => {
 
 
 
-                                    {/* <td>
-                                        <Link
-                                            to={`/stock/edit/${stock.stockUId}`}
-                                            className="button is-small is-info"
-                                            style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '10px', }}
-                                        >
-                                            Update
-                                        </Link>
-                                    </td> */}
-                                    {/* <td>
-                                        <Link
-                                            to={`/viewSingleStock/:id${stock.stockUId}`}
-                                            className="button is-small is-info"
-                                            style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '10px', }}
-                                        >
-                                            View
-                                        </Link>
-                                    </td> */}
+                                  
                                 </tr>
+                                  
                             ))}
                         </tbody>
+                        
                     </table>
-
+                   
                 </div>
 
                 {/* 
@@ -129,8 +111,6 @@ const AllStockList = () => {
                 </Scrollbars> */}
 
             </div>
-
-
         </div>
     );
 };
