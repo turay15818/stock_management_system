@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 const DirectorRequestList = () => {
-  const [request, setDirectorRequestAll] = useState([]);
+  const [requestDirectorAll, setDirectorRequestAll] = useState([]);
 
   useEffect(() => {
     getDirectorRequestAll();
@@ -58,7 +58,7 @@ const DirectorRequestList = () => {
           </tr>
         </thead>
         <tbody>
-          {request.map((request, index) => (
+          {requestDirectorAll.map((request, index) => (
             <tr key={request.uid}>
               <td>{index + 1}</td>
               <td>{request.staffid}</td>

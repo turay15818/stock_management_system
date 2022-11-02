@@ -109,7 +109,7 @@ const StockInList = () => {
 
 
                 <Scrollbars
-                    style={{ width: 500, height: 500, marginRight: 40 }}
+                    style={{ width: 270, height: 500, marginLeft: 40}}
                     autoHide
                     autoHideTimeout={1000}
                     autoHideDuration={200}

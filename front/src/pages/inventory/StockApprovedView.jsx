@@ -20,9 +20,9 @@ const StockApprovedView = () => {
         }
     }, [isError, navigate]);
     return (
-        <Layout>
+       
             <StockApprovedViewList />
-        </Layout>
+      
     );
 };
 

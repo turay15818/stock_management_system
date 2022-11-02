@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
 
 const RequestList = () => {
-  const [request, setRequestByBothApproved] = useState([]);
+  const [requestA, setRequestByBothApproved] = useState([]);
 
   const [isHover, setIsHover] = useState(false);
   const handleMouseEnter = () => {
@@ -81,7 +81,7 @@ const RequestList = () => {
           </tr>
         </thead>
         <tbody>
-          {request.map((request, index) => (
+          {requestA.map((request, index) => (
             <tr key={request.uid}>
               <td>{index + 1}</td>
               <td>{request.staffid}</td>

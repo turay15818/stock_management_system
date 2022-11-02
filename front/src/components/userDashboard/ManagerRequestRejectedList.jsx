@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 
 const ManagerRequestRejectedList = () => {
-  const [request, setManagerRequestRejected] = useState([]);
+  const [requestM, setManagerRequestRejected] = useState([]);
 
   useEffect(() => {
     getManagerRequestRejected();
@@ -67,7 +67,7 @@ const ManagerRequestRejectedList = () => {
           </tr>
         </thead>
         <tbody>
-          {request.map((request, index) => (
+          {requestM.map((request, index) => (
             <tr key={request.uid}>
               <td>{index + 1}</td>
               <td>{request.staffid}</td>

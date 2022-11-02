@@ -16,10 +16,6 @@ const ManagerRequestPendingList = () => {
     setManagerRequestPending(response.data);
   };
 
-  // const deleteRequest = async (requestId) => {
-  //   await axios.delete(`http://localhost:5000/request/${requestId}`);
-  //   getRequest();
-  // };
 
   return (
     <div>

@@ -26,7 +26,9 @@ const Navbar = () => {
           <NavLink to="/dashboard" className="navbar-item">
             <img src={logo} width="112" height="28" alt="logo" />
           </NavLink>
-
+          <h2 className="subtitle">
+            Welcome Back <strong>{user && user.name}</strong>
+          </h2>
           <a
             href="!#"
             role="button"

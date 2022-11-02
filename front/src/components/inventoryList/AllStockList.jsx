@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import {  useSelector } from "react-redux";
+import { NavLink} from "react-router-dom";
 import axios from "axios";
-import StockInCreateView from "../../pages/inventory/StockInCreateView";
-import { Scrollbars } from 'react-custom-scrollbars';
-
+import Welcome from "../Welcome";
 
 const AllStockList = () => {
     const { user } = useSelector((state) => state.auth);
@@ -94,21 +92,6 @@ const AllStockList = () => {
                     </table>
                    
                 </div>
-
-                {/* 
-                <Scrollbars
-                    style={{ width: 500, height: 500, marginRight: 40 }}
-                    autoHide
-                    autoHideTimeout={1000}
-                    autoHideDuration={200}
-                    autoHeight
-                    autoHeightMin={0}
-                    autoHeightMax={500}
-                    thumbMinSize={30}
-                    universal={true}
-                >
-                    <div><StockInCreateView /></div>
-                </Scrollbars> */}
 
             </div>
         </div>

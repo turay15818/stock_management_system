@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 
 const DirRequestPendingList = () => {
-    const [request, setRequestDirectorReqPending] = useState([]);
+    const [requestDirectorPending, setRequestDirectorReqPending] = useState([]);
 
     useEffect(() => {
         getRequestDirectorReqPending();
@@ -61,7 +61,7 @@ const DirRequestPendingList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {request.map((request, index) => (
+                    {requestDirectorPending.map((request, index) => (
                         <tr key={request.uid}>
                             <td>{index + 1}</td>
                             <td>{request.staffid}</td>

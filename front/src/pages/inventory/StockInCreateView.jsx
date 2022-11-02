@@ -20,9 +20,9 @@ const StockInCreateView = () => {
         }
     }, [isError, navigate]);
     return (
-        <Layout>
+       
             <StockInCreateViewList />
-        </Layout>
+       
     );
 };
 

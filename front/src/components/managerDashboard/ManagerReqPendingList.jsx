@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
 
 const ManagerReqPendingList = () => {
-  const [request, setRequestByManagerReqPending] = useState([]);
+  const [requestPending, setRequestByManagerReqPending] = useState([]);
 
   const [isHover, setIsHover] = useState(false);
   const handleMouseEnter = () => {
@@ -75,7 +75,7 @@ const ManagerReqPendingList = () => {
           </tr>
         </thead>
         <tbody>
-          {request.map((request, index) => (
+          {requestPending.map((request, index) => (
             <tr key={request.uid}>
               <td>{index + 1}</td>
               <td>{request.staffid}</td>

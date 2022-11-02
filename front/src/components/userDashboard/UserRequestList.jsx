@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 const UserRequestList = () => {
-  const [request, setRequest] = useState([]);
-
+  const [requests, setRequest] = useState([]);
   useEffect(() => {
     getRequest();
   }, []);
@@ -82,7 +81,7 @@ const UserRequestList = () => {
           </tr>
         </thead>
         <tbody>
-          {request.map((request, index) => (
+          {requests.map((request, index) => (
             <tr key={request.uid}>
               <td>{index + 1}</td>
               <td>{request.staffid}</td>

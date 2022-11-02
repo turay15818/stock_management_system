@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 
 const ManagerRequestList = () => {
-  const [request, setManagerRequestAll] = useState([]);
+  const [requestManager, setManagerRequestAll] = useState([]);
 
   useEffect(() => {
     getManagerRequestAll();
@@ -77,7 +77,7 @@ const ManagerRequestList = () => {
           </tr>
         </thead>
         <tbody>
-          {request.map((request, index) => (
+          {requestManager.map((request, index) => (
             <tr key={request.uid}>
               <td>{index + 1}</td>
               <td>{request.staffid}</td>
