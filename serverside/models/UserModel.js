@@ -38,6 +38,28 @@ const Users = db.define('users', {
             isEmail: true
         }
     },
+
+
+    staffStatus: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    },
+
+    department: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    },
+
+
+
+
+
     password: {
         type: DataTypes.STRING,
         allowNull: false,

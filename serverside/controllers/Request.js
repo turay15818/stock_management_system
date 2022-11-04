@@ -19,7 +19,7 @@ export const getRequest = async (req, res) => {
 
                 include: [{
                     model: User,
-                    attributes: ['name', 'email']
+                    attributes: ['name', 'email', 'staffid']
                 }]
             });
         }
@@ -91,7 +91,8 @@ export const getRequestByDirectorReject = async (req, res) => {
             response = await Request.findAll({
                 attributes: ['uid', 'staffid', 'staffName', 'itemName', 'descri', 'requestAt', 'managerApproved', 'directorApproved'],
                 where: {
-                    DirectorApproved: "Rejected"
+                    DirectorApproved: "Reject",
+                    userId: req.userId
                 },
 
                 include: [{
@@ -1007,6 +1008,9 @@ export const createRequest = async (req, res) => {
     }
 }
 
+
+
+
 export const updateRequest = async (req, res) => {
     try {
         const request = await Request.findOne({
@@ -1036,6 +1040,11 @@ export const updateRequest = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 }
+
+
+
+
+
 
 export const deleteRequest = async (req, res) => {
     try {

@@ -1,11 +1,18 @@
 import User from "../models/UserModel.js";
+import Request from "../models/RequestModel.js";
 import argon2 from "argon2";
 
 export const getUsers = async(req, res) =>{
     try {
         const response = await User.findAll({
-            attributes:['uid', 'staffid', 'name','email', 'password','role']
+            attributes:['uid', 'staffid', 'name','email', 'department', 'staffStatus', 'password','role'],
+
+            include: [{
+                model: Request,
+                attributes: ['staffId', 'staffName', 'itemName',]
+            }]
         });
+
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({msg: error.message});
@@ -15,7 +22,7 @@ export const getUsers = async(req, res) =>{
 export const getUserById = async(req, res) =>{
     try {
         const response = await User.findOne({
-            attributes:['uid', 'staffid', 'name','email', 'password', 'role'],
+            attributes:['uid', 'staffid', 'name','email', 'department', 'staffStatus', 'password', 'role'],
             where: {
                 uid: req.params.id
             }
@@ -27,7 +34,7 @@ export const getUserById = async(req, res) =>{
 }
 
 export const createUser = async(req, res) =>{
-    const {staffid, name, email, password, confPassword, role} = req.body;
+    const {staffid, name, email, department, staffStatus, password, confPassword, role} = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
     const hashPassword = await argon2.hash(password);
     try {
@@ -35,6 +42,8 @@ export const createUser = async(req, res) =>{
             staffid: staffid,
             name: name,
             email: email,
+            department: department,
+            staffStatus: staffStatus,
             password: hashPassword,
             role: role
         });
@@ -51,7 +60,7 @@ export const updateUser = async(req, res) =>{
         }
     });
     if(!user) return res.status(404).json({msg: "User not found"});
-    const {staffid, name, email, password, confPassword, role} = req.body;
+    const {staffid, name, email, department, staffStatus, password, confPassword, role} = req.body;
     let hashPassword;
     if(password === "" || password === null){
         hashPassword = user.password
@@ -65,6 +74,8 @@ export const updateUser = async(req, res) =>{
             staffid: staffid,
             name: name,
             email: email,
+            department: department,
+            staffStatus: staffStatus,
             password: hashPassword,
             role: role
         },{
@@ -85,12 +96,14 @@ export const deleteUser = async(req, res) =>{
         }
     });
     if(!user) return res.status(404).json({msg: "User not found"});
+   
     try {
         await User.destroy({
             where:{
                 id: user.id
             }
         });
+        if(user) return res.status(200).json({alert: "Are Sure Do you want to delete this user"});
         res.status(200).json({msg: "User Deleted"});
     } catch (error) {
         res.status(400).json({msg: error.message});
