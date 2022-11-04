@@ -6,6 +6,8 @@ const FormAddUser = () => {
   const [staffid, setStaffid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [department, setDepartment] = useState("");
+  const [staffStatus, setStaffStatus] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [role, setRole] = useState("");
@@ -19,6 +21,8 @@ const FormAddUser = () => {
         staffid: staffid,
         name: name,
         email: email,
+        department: department,
+        staffStatus: staffStatus,
         password: password,
         confPassword: confPassword,
         role: role,
@@ -73,6 +77,45 @@ const FormAddUser = () => {
                   />
                 </div>
               </div>
+
+
+
+
+              <div className="field">
+                <label className="label">Staff Department</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    className="input"
+                    value={department}
+                    onChange={(e) => setDepartment(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+              <div className="field">
+                <label className="label">Staff Status</label>
+                <select
+                  value={staffStatus}
+                  onChange={(e) => setStaffStatus(e.target.value)}
+                >
+                  <option value="">Select</option>
+                  <option value="Active">Active</option>
+                  <option value="Not Active">Not Active</option>
+
+                </select>
+              </div>
+
+
+
+
+
+
+
+
               <div className="field">
                 <label className="label">Password</label>
                 <div className="control">
@@ -109,7 +152,7 @@ const FormAddUser = () => {
                       <option value="admin">Admin</option>
                       <option value="director">Director</option>
                       <option value="manager">Manager</option>
-                      <option value="users">Users</option>
+                      <option value="user">Users</option>
                     </select>
                   </div>
                 </div>

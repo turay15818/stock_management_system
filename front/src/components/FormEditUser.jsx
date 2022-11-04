@@ -6,6 +6,8 @@ const FormEditUser = () => {
   const [staffid, setStaffid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [staffStatus, setStaffStatus] = useState("");
+  const [department, setDepartment] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [role, setRole] = useState("");
@@ -14,7 +16,7 @@ const FormEditUser = () => {
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
-  
+
   useEffect(() => {
     const getUserById = async () => {
       try {
@@ -22,6 +24,8 @@ const FormEditUser = () => {
         setStaffid(response.data.staffid);
         setName(response.data.name);
         setEmail(response.data.email);
+        setStaffStatus(response.data.staffStatus);
+        setDepartment(response.data.department);
         setRole(response.data.role);
       } catch (error) {
         if (error.response) {
@@ -39,6 +43,8 @@ const FormEditUser = () => {
         staffid: staffid,
         name: name,
         email: email,
+        department: department,
+        staffStatus: staffStatus,
         password: password,
         confPassword: confPassword,
         role: role,
@@ -82,6 +88,37 @@ const FormEditUser = () => {
                     placeholder="Name"
                   />
                 </div>
+
+
+              </div>
+              <div className="field">
+                <label className="label">Staff Department</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    className="input"
+                    value={department}
+                    onChange={(e) => setDepartment(e.target.value)}
+                    placeholder="Email"
+                  />
+                </div>
+
+
+              </div>
+              <div className="field">
+                <label className="label">Staff Status</label>
+                <select
+                  value={staffStatus}
+                  onChange={(e) => setStaffStatus(e.target.value)}
+                >
+                  <option value="">Select</option>
+                  <option value="Active">Active</option>
+                  <option value="Not Active">Not Active</option>
+
+                </select>
+
+
+
               </div>
               <div className="field">
                 <label className="label">Email</label>

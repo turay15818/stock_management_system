@@ -33,19 +33,19 @@ const DirectorAppRequestList = () => {
         <div style={{ width: "100%", padding: '25px', }} className="button is-primary mb-2">
 
 
-<NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
+<NavLink to={"/directorPendingRequest"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
   Pending
 </NavLink>
 
 
-<NavLink to={"/directorRequestRejectAll"} className="button is-primary mb-2">
+<NavLink to={"/directorRequestRejectAll"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
   Director Decline
 </NavLink>
 
 
 
-<NavLink to={"/directorAppRequest"} className="button is-primary mb-2">
-  Approved Request
+<NavLink to={"/directorAppRequest"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
+  Approved Request 
 </NavLink>
 
 </div>
@@ -81,25 +81,13 @@ const DirectorAppRequestList = () => {
               <td style={{ backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.managerApproved}</td>
               <td style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.directorApproved}</td>
 
-              <td>
-                {/* <Link
-                  to={`/request/edit/${request.uid}`}
-                  className="button is-small is-info"
-                  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '10px',}}
-                >
-                  Take Action
-                </Link> */}
-                {/* <button
-                  onClick={() => deleteRequest(request.uid)}
-                  className="button is-small is-danger"
-                >
-                  Delete
-                </button> */}
-              </td>
+            
             </tr>
           ))}
         </tbody>
       </table>
+
+      <h2></h2>
     </div>
   );
 };

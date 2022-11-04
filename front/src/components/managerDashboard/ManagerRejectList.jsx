@@ -39,23 +39,23 @@ const ManagerRejectList = () => {
       <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
 
 
-        <NavLink to={"/request"} className="button is-primary mb-2">
+        <NavLink to={"/request"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Approved Request
         </NavLink>
 
-        <NavLink to={"/ManagerRequestPending"} className="button is-primary mb-2">
+        <NavLink to={"/ManagerRequestPending"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Manager Pending
         </NavLink>
 
-        <NavLink to={"/directorRequestPending"} className="button is-primary mb-2">
+        <NavLink to={"/directorRequestPending"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Director Pending
         </NavLink>
 
-        <NavLink to={"/managerRequestRejected"} className="button is-primary mb-2">
+        <NavLink to={"/managerRequestRejected"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Manager Decline
         </NavLink>
 
-        <NavLink to={"/directorRequestRejected"} className="button is-primary mb-2">
+        <NavLink to={"/directorRequestRejected"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Director Decline
         </NavLink>
 
@@ -88,19 +88,7 @@ const ManagerRejectList = () => {
               <td style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px', }}>{request.directorApproved}</td>
 
               <td>
-                {/* <Link
-                  to={`/request/edit/${request.uid}`}
-                  className="button is-small is-info"
-                  style={{backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px',}}
-                >
-                  Take Action
-                </Link> */}
-                {/* <button
-                  onClick={() => deleteRequest(request.uid)}
-                  className="button is-small is-danger"
-                >
-                  Delete
-                </button> */}
+                
               </td>
             </tr>
           ))}

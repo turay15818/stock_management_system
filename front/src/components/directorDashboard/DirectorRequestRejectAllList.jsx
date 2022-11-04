@@ -28,18 +28,18 @@ const DirectorRequestRejectAllList = () => {
       <div style={{ width: "100%", padding: '25px', }} className="button is-primary mb-2">
 
 
-        <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2">
+        <NavLink to={"/directorPendingRequest"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Pending
         </NavLink>
 
 
-        <NavLink to={"/directorRequestRejectAll"} className="button is-primary mb-2">
+        <NavLink to={"/directorRequestRejectAll"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Director Decline
         </NavLink>
 
 
 
-        <NavLink to={"/directorAppRequest"} className="button is-primary mb-2">
+        <NavLink to={"/directorAppRequest"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Approved Request
         </NavLink>
 

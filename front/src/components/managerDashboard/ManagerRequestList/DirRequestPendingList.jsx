@@ -29,26 +29,26 @@ const DirectorRequestPendingList = () => {
             </Link>
             <h2 className="subtitle">List of Request</h2>
 
-            <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
+            <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2" >
 
 
-                <NavLink to={"/request"} className="button is-primary mb-2">
+                <NavLink to={"/request"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Approved Request
                 </NavLink>
 
-                <NavLink to={"/managerRequestPending"} className="button is-primary mb-2">
+                <NavLink to={"/managerRequestPending"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Manager Pending
                 </NavLink>
 
-                <NavLink to={"/directorRequestPending"} className="button is-primary mb-2">
+                <NavLink to={"/directorRequestPending"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Director Pending
                 </NavLink>
 
-                <NavLink to={"/managerRequestRejected"} className="button is-primary mb-2">
+                <NavLink to={"/managerRequestRejected"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Manager Decline
                 </NavLink>
 
-                <NavLink to={"/directorRequestRejected"} className="button is-primary mb-2">
+                <NavLink to={"/directorRequestRejected"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Director Decline
                 </NavLink>
 

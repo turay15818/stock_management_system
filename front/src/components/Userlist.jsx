@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Userlist = (props) => {
   const [users, setUsers] = useState([]);
+ 
 
   useEffect(() => {
     getUsers();
@@ -12,11 +13,13 @@ const Userlist = (props) => {
   const getUsers = async () => {
     const response = await axios.get("http://localhost:5000/users");
     setUsers(response.data);
+
   };
 
   const deleteUser = async (userId) => {
     await axios.delete(`http://localhost:5000/users/${userId}`);
     getUsers();
+
   };
 
   return (
@@ -28,12 +31,15 @@ const Userlist = (props) => {
         Add New New User
       </Link>
       <table className="table is-striped is-fullwidth">
+        <h1>{alert}</h1>
         <thead>
           <tr>
             <th>No</th>
             <th>Staff ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Staff Dept</th>
+            <th>Staff Status</th>
             <th>Role</th>
             <th>Actions</th>
           </tr>
@@ -45,6 +51,8 @@ const Userlist = (props) => {
               <td>{user.staffid}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
+              <td>{user.department}</td>
+              <td>{user.staffStatus}</td>
               <td>{user.role}</td>
               <td>
                 <Link

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import AllStock from "../pages/inventory/AllStock"
-import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { Doughnut, Bar } from 'react-chartjs-2';
+// import Card from 'react-bootstrap/Card';
+// import ListGroup from 'react-bootstrap/ListGroup';
+import { Bar } from 'react-chartjs-2';
 import Chart from "react-apexcharts";
+import Badge from 'react-bootstrap/Badge';
+import AdminChart from "../pages/inventory/AdminChart";
 import {
   MDBCard,
   MDBCardBody,
@@ -21,10 +21,10 @@ import "./Welcome.css"
 
 
 const Welcome = () => {
-
-  
   const { user } = useSelector((state) => state.auth);
-  const [allStock, setAllStock,] = useState([]);
+
+
+  const [allStock, setAllStock] = useState([]);
   useEffect(() => {
     getAllStock();
   }, []);
@@ -201,39 +201,28 @@ const Welcome = () => {
   };
 
 
+  // User
+  const [requesting, setRequestDirectorPending] = useState([]);
 
+  useEffect(() => {
+    getRequestDirectorPending();
+  }, []);
 
-  const [state, setState] = useState({
+  const getRequestDirectorPending = async () => {
+    const response = await axios.get("http://localhost:5000/requestDirectorPending");
+    setRequestDirectorPending(response.data);
+  };
 
-    options: {
-      chart: {
-        id: "basic-bar"
-      },
-      xaxis: {
-        categories: [`${allStock.length}`, "Stock Not in Use", "Stock In Use", "Approved Stock"]
-      }
-    },
-    series: [
-      {
-        // {allStock.length}
-        // {stock.length}
-        // {stockInUse.length}
-        // {request.length}
-        name: "series-1",
-        data: [10, 20, 30, 40]
-      }
-    ]
-  })
+  const [requestDirectorRejectedForUser, setRequestByDirectorApproved] = useState([]);
 
+  useEffect(() => {
+    getRequestByDirectorApproved();
+  }, []);
 
-
-
-
-
-
-
-
-
+  const getRequestByDirectorApproved = async () => {
+    const response = await axios.get("http://localhost:5000/directorRequestRej");
+    setRequestByDirectorApproved(response.data);
+  };
 
 
 
@@ -244,19 +233,55 @@ const Welcome = () => {
   }
 
 
+  const [ip, setIP] = useState('');
+
+  //creating function to load ip address from the API
+  const getData = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    console.log(res.data);
+    setIP(res.data.IPv4)
+  }
+  useEffect(() => {
+    //passing getData method to the lifecycle method
+    getData()
+
+  }, [])
+
+
+
+  const [state] = useState({
+    options: { chart: { id: "basic-bar" }, xaxis: { categories: ["All Stock", "Stock Not in Use", "Stock In Use", "Approved Stock"] } },
+    series: [
+      {
+        // {allStock.length}
+        // {stock.length}
+        // {stockInUse.length}
+        // {request.length}
+        name: "series-1",
+        data: [`${allStock.length}`, 2, 2, 1]
+        // data: [`${allStock.length}`, `${allStock.length}`, `${allStock.length}`, `${allStock.length}`]
+      }
+    ]
+  })
+
+
   return (
     <div style={welcome}>
-
+      <h1>{user && user.email}</h1>
       {user && user.role === "admin" && (
         <div>
           <div style={{ display: "flex" }}>
 
             <div class="adminStockDetails">
+
               <MDBCard alignment='center'>
                 <MDBCardHeader alignment='center'>Stock Details</MDBCardHeader>
                 <MDBCardBody>
                   <MDBCardTitle>Total Number of All Stock</MDBCardTitle>
-                  <MDBCardText class="length">{" " + " " + allStock.length}</MDBCardText>
+                  <h3>
+                    <Badge bg="secondary">{" " + " " + allStock.length}</Badge>
+                  </h3>
+                  {/* <MDBCardText class="length">{" " + " " + allStock.length}</MDBCardText> */}
                   <MDBBtn href={"/allStock"}>View Stock</MDBBtn>
                 </MDBCardBody>
                 <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
@@ -269,7 +294,9 @@ const Welcome = () => {
                 <MDBCardHeader>Stock Details</MDBCardHeader>
                 <MDBCardBody>
                   <MDBCardTitle>Total Number of All Stock Not In Use</MDBCardTitle>
-                  <MDBCardText class="length">{" " + " " + stock.length}</MDBCardText>
+                  <h3>
+                    <Badge bg="secondary">{" " + " " + stock.length}</Badge>
+                  </h3>
                   <MDBBtn href={"/stockIn"}>View</MDBBtn>
                 </MDBCardBody>
                 <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
@@ -281,7 +308,9 @@ const Welcome = () => {
                 <MDBCardHeader>Stock Details</MDBCardHeader>
                 <MDBCardBody>
                   <MDBCardTitle>Total Number of All Stock In Use</MDBCardTitle>
-                  <MDBCardText class="length">{" " + " " + stockInUse.length}</MDBCardText>
+                  <h3>
+                    <Badge bg="secondary">{" " + " " + stockInUse.length}</Badge>
+                  </h3>
                   <MDBBtn href={"/stockInUse"}> View</MDBBtn>
                 </MDBCardBody>
                 <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
@@ -293,8 +322,10 @@ const Welcome = () => {
               <MDBCard alignment='center'>
                 <MDBCardHeader>Stock Details</MDBCardHeader>
                 <MDBCardBody>
-                  <MDBCardTitle>Total Number of All of Approved Stock</MDBCardTitle>
-                  <MDBCardText class="length">{" " + " " + request.length}</MDBCardText>
+                  <MDBCardTitle>Total Number of All of Approved Request</MDBCardTitle>
+                  <h3>
+                    <Badge bg="secondary">{" " + " " + request.length}</Badge>
+                  </h3>
                   <MDBBtn href={"/adminRequest"}> View</MDBBtn>
                 </MDBCardBody>
                 <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
@@ -308,7 +339,9 @@ const Welcome = () => {
                   <MDBCardHeader>Users Details</MDBCardHeader>
                   <MDBCardBody>
                     <MDBCardTitle>Total Number of All of Users</MDBCardTitle>
-                    <MDBCardText class="length">{" " + " " + users.length}</MDBCardText>
+                    <h3>
+                      <Badge bg="secondary">{" " + " " + users.length}</Badge>
+                    </h3>
                     <MDBBtn href={"/users"}> View Users</MDBBtn>
                   </MDBCardBody>
                   <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
@@ -324,6 +357,12 @@ const Welcome = () => {
             width="500"
           />
 
+          <div className="App">
+            <h2>Your IP Address is</h2>
+            <h4>{ip}</h4>
+          </div>
+
+
         </div>
       )}
 
@@ -331,13 +370,15 @@ const Welcome = () => {
       {user && user.role === "user" && (
         <div style={{ display: "flex" }}>
 
+
           <div class="adminStockDetails">
             <MDBCard alignment='center'>
               <MDBCardHeader>Users Request Details</MDBCardHeader>
               <MDBCardBody>
-                <MDBCardTitle>Total Number of All Request Sent</MDBCardTitle>
-                <MDBCardText>{" " + " " + requests.length}</MDBCardText>
-                <MDBBtn href={"/userRequest"}> View All Request</MDBBtn>
+                <MDBCardTitle class="">Total Number of All Request Sent</MDBCardTitle>
+
+                <MDBCardText class="length">{" " + " " + requests.length}</MDBCardText>
+                <MDBBtn class="mdbtn" href={"/userRequest"}> View All Request</MDBBtn>
               </MDBCardBody>
               <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
             </MDBCard>
@@ -349,8 +390,8 @@ const Welcome = () => {
               <MDBCardHeader>Users Request Details</MDBCardHeader>
               <MDBCardBody>
                 <MDBCardTitle>View All Request Rejected By Manager</MDBCardTitle>
-                <MDBCardText>{" " + " " + requestM.length}</MDBCardText>
-                <MDBBtn href={"/managerRequestRejected"}>View All</MDBBtn>
+                <MDBCardText class="length">{" " + " " + requestM.length}</MDBCardText>
+                <MDBBtn class="mdbtn" href={"/managerRequestRejected"}>View All</MDBBtn>
               </MDBCardBody>
               <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
             </MDBCard>
@@ -361,8 +402,32 @@ const Welcome = () => {
               <MDBCardHeader>Approved Request</MDBCardHeader>
               <MDBCardBody>
                 <MDBCardTitle>Total Number of All Approved Request</MDBCardTitle>
-                <MDBCardText>{" " + " " + requestA.length}</MDBCardText>
-                <MDBBtn href={"/request"}> View Approved Request</MDBBtn>
+                <MDBCardText class="length">{" " + " " + requestA.length}</MDBCardText>
+                <MDBBtn class="mdbtn" href={"/request"}> View Approved Request</MDBBtn>
+              </MDBCardBody>
+              <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
+            </MDBCard>
+          </div>
+
+          <div class="adminStockDetails">
+            <MDBCard alignment='center'>
+              <MDBCardHeader >Pending Request By Director</MDBCardHeader>
+              <MDBCardBody>
+                <MDBCardTitle>View All Request Pending By Director</MDBCardTitle>
+                <MDBCardText class="length">{" " + " " + requesting.length}</MDBCardText>
+                <MDBBtn class="mdbtn" href={"/directorRequestPending"}>View Details</MDBBtn>
+              </MDBCardBody>
+              <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
+            </MDBCard>
+          </div>
+
+          <div class="adminStockDetails">
+            <MDBCard alignment='center'>
+              <MDBCardHeader >Director Request Rejected</MDBCardHeader>
+              <MDBCardBody>
+                <MDBCardTitle>View All Rejected Request By Director</MDBCardTitle>
+                <MDBCardText class="length">{" " + " " + requestDirectorRejectedForUser.length}</MDBCardText>
+                <MDBBtn class="mdbtn" href={"/directorRequestRejectedForUser"}>View Details</MDBBtn>
               </MDBCardBody>
               <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
             </MDBCard>

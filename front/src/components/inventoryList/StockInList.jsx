@@ -29,11 +29,11 @@ const StockInList = () => {
             <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
 
 
-                <NavLink to={"/stockIn"} className="button is-primary mb-2">
+                <NavLink to={"/stockIn"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Stock Not In Use
                 </NavLink>
 
-                <NavLink to={"/stockInUse"} className="button is-primary mb-2">
+                <NavLink to={"/stockInUse"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Stock In Use
                 </NavLink>
 

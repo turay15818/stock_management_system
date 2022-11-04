@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginUser, reset } from "../features/authSlice";
+import { Link } from "react-router-dom";
 import "./Login.css"
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -80,6 +81,10 @@ const Login = () => {
                   >
                     {isLoading ? "Loading..." : "Login"}
                   </button>
+
+                  <Link to="/emailLink" className="button is-primary mb-2">
+                    Forgot Password
+                  </Link>
                 </div>
               </form>
             </div>

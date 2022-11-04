@@ -5,15 +5,15 @@ import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 
 const DirectorRequestRejectedForUserList = () => {
-    const [request, setRequestByDirector] = useState([]);
+    const [request, setRequestByDirectorReject] = useState([]);
 
     useEffect(() => {
-        getRequestByDirector();
+        getRequestByDirectorReject();
     }, []);
 
-    const getRequestByDirector = async () => {
-        const response = await axios.get("http://localhost:5000/requestByDirector");
-        setRequestByDirector(response.data);
+    const getRequestByDirectorReject = async () => {
+        const response = await axios.get("http://localhost:5000/requestByDirectorReject");
+        setRequestByDirectorReject(response.data);
     };
 
     // const deleteRequest = async (requestId) => {
@@ -32,23 +32,23 @@ const DirectorRequestRejectedForUserList = () => {
       <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
 
 
-        <NavLink to={"/request"} className="button is-primary mb-2">
+        <NavLink to={"/request"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Approved Request
         </NavLink>
 
-        <NavLink to={"/managerRequestPending"} className="button is-primary mb-2">
+        <NavLink to={"/managerRequestPending"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Manager Pending
         </NavLink>
 
-        <NavLink to={"/directorRequestPending"} className="button is-primary mb-2">
+        <NavLink to={"/directorRequestPending"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Director Pending
         </NavLink>
 
-        <NavLink to={"/managerRequestRejected"} className="button is-primary mb-2">
+        <NavLink to={"/managerRequestRejected"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Manager Decline
         </NavLink>
 
-        <NavLink to={"/directorRequestRejectedForUser"} className="button is-primary mb-2">
+        <NavLink to={"/directorRequestRejectedForUser"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
           Director Decline
         </NavLink>
 

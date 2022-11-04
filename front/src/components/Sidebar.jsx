@@ -77,6 +77,11 @@ const Sidebar = () => {
                     <IoPricetag style={{ fontSize: "30px" }} /> Request
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to={"/adminChart"} style={stylee}>
+                    <IoPricetag style={{ fontSize: "30px" }} /> Chart
+                  </NavLink>
+                </li>
 
                 <li>
                   <NavLink to={"/allStock"} style={stylee}>

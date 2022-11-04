@@ -3,12 +3,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 const FormEditRequest = () => {
-  // const [staffId, setStaffId] = useState("");
-  // const [staffName, setStaffName] = useState("");
-  // const [itemName, setItemName] = useState("");
-  // const [requestAt, setRequestAt] = useState("");
+
   const [managerApproved, setManagerApproved] = useState("");
-  // const [reject, setReject] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -22,12 +18,9 @@ const FormEditRequest = () => {
         const response = await axios.get(
           `http://localhost:5000/request/${id}`
         );
-        // setStaffId(response.data.staffId);
-        // setStaffName(response.data.staffName);
-        // setItemName(response.data.itemName);
-        // setRequestAt(response.data.requestAt);
+    
         setManagerApproved(response.data.managerApproved);
-        // setReject(response.data.reject);
+
 
 
       } catch (error) {
@@ -43,10 +36,7 @@ const FormEditRequest = () => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/Request/${id}`, {
-        // staffId: staffId,
-        // staffName: staffName,
-        // itemName: itemName,
-        // requestAt: requestAt,
+ 
         managerApproved: managerApproved,
         // reject: reject,
       });

@@ -26,23 +26,23 @@ const DirRequestRejectedList = () => {
             <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
 
 
-                <NavLink to={"/managerApprovedRequest"} className="button is-primary mb-2">
+                <NavLink to={"/managerApprovedRequest"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Approved Request
                 </NavLink>
 
-                <NavLink to={"/managerReqPending"} className="button is-primary mb-2">
+                <NavLink to={"/managerReqPending"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Manager Pending
                 </NavLink>
 
-                <NavLink to={"/dirRequestPending"} className="button is-primary mb-2">
+                <NavLink to={"/dirRequestPending"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Director Pending
                 </NavLink>
 
-                <NavLink to={"/managerReqRejected"} className="button is-primary mb-2">
+                <NavLink to={"/managerReqRejected"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Manager Decline
                 </NavLink>
 
-                <NavLink to={"/dirRequestRejected"} className="button is-primary mb-2">
+                <NavLink to={"/dirRequestRejected"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
                     Director Decline
                 </NavLink>
 
