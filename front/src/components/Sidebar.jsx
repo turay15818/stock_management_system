@@ -54,7 +54,11 @@ const Sidebar = () => {
     <div>
       <aside className="menu pl-2 has-shadow" style={sidebad}>
         <p className="menu-label" style={sidebaar}>General</p>
-
+        {/* <li>
+                  <NavLink to={"/randomQuoteGenerator"} style={stylee}>
+                    <IoPricetag style={{ fontSize: "30px" }} /> Chart
+                  </NavLink>
+                </li> */}
         <div>
           {/* Admin/Super Admin Role Start here*/}
           {user && user.role === "admin" && (
@@ -77,11 +81,11 @@ const Sidebar = () => {
                     <IoPricetag style={{ fontSize: "30px" }} /> Request
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to={"/randomQuoteGenerator"} style={stylee}>
                     <IoPricetag style={{ fontSize: "30px" }} /> Chart
                   </NavLink>
-                </li>
+                </li> */}
 
                 <li>
                   <NavLink to={"/allStock"} style={stylee}>
