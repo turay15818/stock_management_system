@@ -1,22 +1,52 @@
 import React, { useState, useEffect } from "react";
-import {  useSelector } from "react-redux";
-import { NavLink} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
-import Welcome from "../Welcome";
+
+const URL = "https://ip.nf./me.json";
+
 
 const AllStockList = () => {
-    const { user } = useSelector((state) => state.auth);
+    const [ipInfo, setIpInfo] = useState({ ip: "" });
+    useEffect(() => {
+        fetch(URL, { method: "get" })
+            .then((response) => response.json())
+            .then((data) => {
+                setIpInfo({ ...data });
+            })
+    }, []);
+
+
+
+
+
+
+
+
+
+
+    // const { user } = useSelector((state) => state.auth);
     const [allStock, setAllStock,] = useState([]);
     useEffect(() => {
         getAllStock();
     }, []);
+
 
     const getAllStock = async () => {
         const response = await axios.get("http://localhost:5000/allStock");
         setAllStock(response.data);
     };
 
-  
+
+
+
+
+
+
+
+
+
+
 
     return (
         <div>
@@ -24,11 +54,11 @@ const AllStockList = () => {
             <div style={{ width: "100%", padding: '25px' }} className="button is-primary mb-2">
 
 
-                <NavLink to={"/stockIn"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
+                <NavLink to={"/stockIn"} className="button is-primary mb-2" style={{ textDecoration: "none" }}>
                     Stock Not In Use
                 </NavLink>
 
-                <NavLink to={"/stockInUse"} className="button is-primary mb-2" style={{textDecoration: "none"}}>
+                <NavLink to={"/stockInUse"} className="button is-primary mb-2" style={{ textDecoration: "none" }}>
                     Stock In Use
                 </NavLink>
 
@@ -40,6 +70,13 @@ const AllStockList = () => {
 
             <div style={{ display: "flex" }}>
                 <div>
+                    <h2>Your IP Address is</h2>
+                    <h4>IP Address is: {ipInfo.ip.ip}</h4>
+                    <h4>Country is: {ipInfo.ip.country}</h4>
+                    <h4>Country Code is: {ipInfo.ip.country_code}</h4>
+                    {/* <h4>Current City is: {ipInfo.ip.city}</h4>
+                    <h4>IP Address is: {ipInfo.ip.ip}</h4> */}
+                    <h4>TURAYMATHIC</h4>
                     <table className="table is-striped is-fullwidth">
                         <thead>
                             <tr style={{ boxShadow: "0px 0px 10px #000000", }}>
@@ -83,14 +120,14 @@ const AllStockList = () => {
 
 
 
-                                  
+
                                 </tr>
-                                  
+
                             ))}
                         </tbody>
-                        
+
                     </table>
-                   
+
                 </div>
 
             </div>

@@ -1,15 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import moment from 'moment'
 // "react-redux": "^8.0.2",
-const StockInCreateList = ({ history }) => {
+const StockInCreateList = () => {
+
+    console.log(create_random_string(8))
+
+    function create_random_string(string_length) {
+        var random_string = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+        for (var  i = 0; i < string_length; i++) {
+            random_string += characters.charAt(Math.floor(Math.random() * characters.length))
+        }
+        return random_string
+    }
+
+
+
     const { user } = useSelector((state) => state.auth);
     const currentDate = moment().format('DD-MM-YYYY')
     const date = new Date();
     const current_time = date.getHours() + ":" + " " + date.getMinutes();
     const today = current_time + "  " + currentDate;
+    const stockAdded = "Stock Added"
+  
+    const URL = "https://ip.nf./me.json";
+    const [ipInfo, setIpInfo] = useState({ ip: "" });
+    useEffect(() => {
+        fetch(URL, { method: "get" })
+            .then((response) => response.json())
+            .then((data) => {
+                setIpInfo({ ...data });
+            })
+    }, []);
     const sts = ("Not In Use");
     const assignToo = ("Not Assign");
     const staffIdd = ("Not Assign");
@@ -17,7 +42,7 @@ const StockInCreateList = ({ history }) => {
     const giv = ("Not Assign");
     const dateGiv = ("Not Assign");
 
-    const [stockCode, setStockCode] = useState("");
+    const [stockCode, setStockCode] = useState(`${create_random_string(8)}`);
     const [stockName, setStockName] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
@@ -33,6 +58,13 @@ const StockInCreateList = ({ history }) => {
     const [dateGiven, setDateGiven] = useState(`${dateGiv}`);
     const [status, setStatus] = useState(`${sts}`);
     // const [title, setTitle] = useState("");
+    var [recoderIp, setRecoderIp] = useState(`${ipInfo.ip.ip}`);
+    var [recoderLocation, setRecoderLocation] = useState(`${ipInfo.ip.country}`);
+    var [stockRecoder, setStockRecoder] = useState(`${user && user.name}`);
+    var [recoderAction, setRecoderAction] = useState(`${stockAdded}`);
+    
+  
+
     const [file, setFile] = useState("");
     const [preview, setPreview] = useState("");
 
@@ -68,6 +100,10 @@ const StockInCreateList = ({ history }) => {
         formData.append('giver', giver)
         formData.append('dateGiven,', dateGiven)
         formData.append('status', status)
+        formData.append('recoderLocation', ipInfo.ip.country)
+        formData.append('recoderIp', ipInfo.ip.ip)
+        formData.append('stockRecoder', stockRecoder)
+        formData.append('recoderAction', recoderAction)
 
         formData.append("file", file);
         // formData.append("title", title);
@@ -110,7 +146,7 @@ const StockInCreateList = ({ history }) => {
                                             type='text'
                                             style={{ width: "300px" }}
                                             className="input"
-                                            value={stockCode}
+                                            value={create_random_string(8)}
                                             onChange={(e) => setStockCode(e.target.value)}
                                             placeholder="Stock Code"
                                         />
@@ -273,109 +309,8 @@ const StockInCreateList = ({ history }) => {
                                     </div>
                                 </div>
 
-                                {/* <div className="field" style={{ maxWidth: "300px", marginLeft: "25px" }}>
-                                    <label className="label">Assigned To</label>
-                                    <div className="control">
-                                        <div className="control">
-
-                                            <input
-                                                style={{ width: "300px" }}
-                                                type='text'
-                                                className="input"
-                                                value={assignedTo}
-
-                                                onChange={(e) => setAssignedTo(e.target.value)}
-                                                placeholder="Cost Le"
-                                            />
-                                        </div>
-                                    </div>
-                                </div> */}
                             </div>
-                            {/* cost and assigned to */}
-
-
-
-
-                            {/* staff Id and Department */}
-
-
-                            <div style={{ display: "flex" }}>
-
-                                {/* <div className="field">
-                                    <label className="label">Staff Id</label>
-                                    <div className="control">
-                                        <input
-                                            style={{ width: "300px" }}
-                                            type="text"
-                                            className="input"
-                                            value={staffId}
-                                            onChange={(e) => setStaffId(e.target.value)}
-                                            placeholder="Staff Id"
-                                        />
-                                    </div>
-                                </div>
-
-
-                                <div className="field" style={{ maxWidth: "300px", marginLeft: "25px" }}>
-                                    <label className="label">Department</label>
-                                    <div className="control">
-                                        <input
-                                            style={{ width: "300px" }}
-                                            type="text"
-                                            className="input"
-                                            value={department}
-                                            onChange={(e) => setDepartment(e.target.value)}
-                                            placeholder="Purchase Date"
-                                        />
-                                    </div>
-                                </div> */}
-
-                            </div>
-
-                            {/* staff Id and Department */}
-
-
-
-
-
-                            {/* Giver and Date Given */}
-                            <div style={{ display: "flex" }}>
-                                {/* <div className="field">
-                                    <label className="label">Giver</label>
-                                    <div className="control">
-                                        <input
-                                            style={{ width: "300px" }}
-                                            type="text"
-
-                                            className="input"
-                                            value={giver}
-                                            onChange={(e) => setGiver(e.target.value)}
-                                            placeholder="Giver Name"
-                                        />
-                                    </div>
-                                </div> */}
-
-
-
-                                {/* <div className="field" style={{ maxWidth: "300px", marginLeft: "25px" }}>
-                                    <label className="label">Date Given</label>
-                                    <div className="control">
-                                        <input
-                                            type='datetime-local'
-                                            style={{ width: "300px" }}
-                                            className="input"
-                                            value={dateGiven}
-                                            onChange={(e) => setDateGiven(e.target.value)}
-                                            placeholder="Purchase Date"
-                                        />
-                                    </div>
-                                </div> */}
-
-                            </div>
-
-                            {/* Giver and Date Given */}
-
-
+                           
 
                             {/* Status  */}
                             <div style={{ display: "flex" }}>
@@ -417,7 +352,7 @@ const StockInCreateList = ({ history }) => {
                                                 className="input"
                                                 value={staffIdd}
                                                 onChange={(e) => setStaffId(e.target.value)}
-                                               
+
                                             />
                                         </div>
                                     </div>
@@ -429,7 +364,7 @@ const StockInCreateList = ({ history }) => {
                                                 className="input"
                                                 value={deptM}
                                                 onChange={(e) => setDepartment(e.target.value)}
-                                               
+
                                             />
                                         </div>
                                     </div>
@@ -461,10 +396,10 @@ const StockInCreateList = ({ history }) => {
 
 
 
-                               
 
 
- 
+
+
 
 
                                     <div className="field">
@@ -487,11 +422,91 @@ const StockInCreateList = ({ history }) => {
 
                                     {preview ? (
                                         <figure className="image is-128x128">
-                                            <img src={preview} alt="Preview Image" />
+                                            <img src={preview} alt="Img" />
                                         </figure>
                                     ) : (
                                         ""
                                     )}
+
+
+<div className="field">
+                <label className="label">creator </label>
+                <div className="control">
+                  <input
+                //   hidden
+                    type="text"
+                    className="input"
+                    value={user && user.name}
+                    onChange={(e) => setStockRecoder(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+
+              <div className="field">
+                <label className="label">IP Address</label>
+                <div className="control">
+                  <input
+                //   hidden
+                    type="text"
+                    className="input"
+                    value={ipInfo.ip.ip}
+                    onChange={(e) => setRecoderIp(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+              <div className="field">
+                <label className="label">Location</label>
+                <div className="control">
+                  <input
+                //   hidden
+                    type="text"
+                    className="input"
+                    value={ipInfo.ip.country}
+                    onChange={(e) => setRecoderLocation(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label">Action Performed</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    // hidden
+                    className="input"
+                    value={stockAdded}
+                    onChange={(e) => setRecoderAction(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                                     <div className="field" style={{ marginTop: "30px", marginLeft: "25px" }}>

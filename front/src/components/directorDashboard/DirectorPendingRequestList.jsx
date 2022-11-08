@@ -71,7 +71,7 @@ const DirectorPendingRequestList = () => {
 
               <td>
                 <Link
-                  to={`/request/edit/${request.uid}`}
+                  to={`/directorRequest/edit/${request.uid}`}
                   className="button is-small is-info"
                   style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '20px', }}
                 >

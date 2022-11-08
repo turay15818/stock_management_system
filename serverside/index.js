@@ -1,4 +1,5 @@
 import express from "express";
+// import jwt from "jsonwebtoken"
 import cors from "cors";
 import session from "express-session";
 import dotenv from "dotenv";
@@ -11,6 +12,8 @@ import StockRoute from "./routes/StockRoute.js";
 import StockInRoute from "./routes/StockInRoute.js";
 import bodyParser from "body-parser";
 import AuthRoute from "./routes/AuthRoute.js";
+import ListRoute from "./routes/ListRoute.js";
+import LoginIpAddressRoute from "./routes/LoginIpAddressRoute.js"
 import multer from "multer";
 dotenv.config();
 const app = express();
@@ -44,6 +47,25 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
+
+// app.get ('/forgot-password', (req, res, next) => {})
+
+
+// app.post ('/forgot-password', (req, res, next) => {})
+// app.post ('/reset-password', (req, res, next) => {})
+// app.get ('/reset-password', (req, res, next) => {})
+
+
+
+
+
+
+
+
+
+
+
+
 app.use(express.json());
 app.use(UserRoute);
 app.use(RequestRoute);
@@ -54,6 +76,8 @@ app.use(FileUpload());
 app.use(express.static("public"));
 // app.use('/Images', express.static('./Images'))
 app.use(StockRoute);
+app.use(ListRoute);
+app.use(LoginIpAddressRoute);
 // store.sync();
 
 const PORT = process.env.PORT || 5000;

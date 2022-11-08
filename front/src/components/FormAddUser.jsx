@@ -1,8 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import moment from 'moment';
+
+
 
 const FormAddUser = () => {
+  const { user } = useSelector((state) => state.auth);
+  const currentDate = moment().format('DD-MM-YYYY')
+  const date = new Date();
+  const current_time = date.getHours() + ":" + " " + date.getMinutes();
+  const today = current_time + "  " + currentDate;
+  const userAdded = "User Added"
+
+  const URL = "https://ip.nf./me.json";
+  const [ipInfo, setIpInfo] = useState({ ip: "" });
+  useEffect(() => {
+      fetch(URL, { method: "get" })
+          .then((response) => response.json())
+          .then((data) => {
+              setIpInfo({ ...data });
+          })
+  }, []);
+
+
+
+
+
   const [staffid, setStaffid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,6 +36,11 @@ const FormAddUser = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [role, setRole] = useState("");
+  const [creator, setCreator] = useState(`${user && user.name}`);
+  var [ipAddress, setIpAddress] = useState("");
+  var [location, setLocation] = useState("");
+  var [actionPerformed, setActionPerformed] = useState(`${userAdded}`);
+  const [createdTime, setCreatedTime] = useState(`${today}`);
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -26,6 +56,11 @@ const FormAddUser = () => {
         password: password,
         confPassword: confPassword,
         role: role,
+        creator: creator,
+        ipAddress: ipAddress = (`${ipInfo.ip.ip}`),
+        location: location = (`${ipInfo.ip.country}`), //= ipInfo.ip.country + ipInfo.ip.country_code,
+        createdTime: createdTime,
+        actionPerformed: actionPerformed,
       });
       navigate("/users");
     } catch (error) {
@@ -157,6 +192,93 @@ const FormAddUser = () => {
                   </div>
                 </div>
               </div>
+
+
+
+              <div className="field">
+                {/* <label className="label">creator </label> */}
+                <div className="control">
+                  <input
+                  hidden
+                    type="text"
+                    className="input"
+                    value={user && user.name}
+                    onChange={(e) => setCreator(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+
+              <div className="field">
+                {/* <label className="label">IP Address</label> */}
+                <div className="control">
+                  <input
+                  hidden
+                    type="text"
+                    className="input"
+                    value={ipInfo.ip.ip}
+                    onChange={(e) => setIpAddress(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+              <div className="field">
+                {/* <label className="label">Location</label> */}
+                <div className="control">
+                  <input
+                  hidden
+                    type="text"
+                    className="input"
+                    value={ipInfo.ip.country}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+              <div className="field">
+                {/* <label className="label">created Time</label> */}
+                <div className="control">
+                  <input
+                  hidden
+                    type="text"
+                    className="input"
+                    value={today}
+                    onChange={(e) => setCreatedTime(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+              <div className="field">
+                {/* <label className="label">Action Performed</label> */}
+                <div className="control">
+                  <input
+                    type="text"
+                    hidden
+                    className="input"
+                    value={userAdded}
+                    onChange={(e) => setActionPerformed(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+
+
+
+
               <div className="field">
                 <div className="control">
                   <button type="submit" className="button is-success">

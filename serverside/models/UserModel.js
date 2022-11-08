@@ -73,7 +73,107 @@ const Users = db.define('users', {
         validate: {
             notEmpty: true
         }
-    }
+    },
+
+
+    ipAddress: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+           
+        }
+    },
+
+
+    location: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            
+        }
+    },
+
+
+    creator: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            
+        }
+    },
+
+    createdTime: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            
+        }
+    },
+    actionPerformed: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            
+        }
+    },
+
+
+    updatorIpAddress: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            notEmpty: false,
+           
+        }
+    },
+
+
+    updatorLocation: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            notEmpty: false,
+            
+        }
+    },
+
+
+    updator: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            notEmpty: false,
+            
+        }
+    },
+
+    updatedTime: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            notEmpty: false,
+            
+        }
+    },
+    updatePerformed: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            notEmpty: false,
+            
+        }
+    },
+
+
+
+
+
+
 }, {
     freezeTableName: true
 });

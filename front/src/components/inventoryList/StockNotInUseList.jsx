@@ -1,22 +1,45 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const StockNotInUseList = () => {
+    const { user } = useSelector((state) => state.auth);
     const currentDate = moment().format('DD-MM-YYYY')
     const date = new Date();
     const current_time = date.getHours() + ":" + " " + date.getMinutes();
     const today = current_time + "  " + currentDate;
+    const stockAssigned = "Stock Assigner To User"
     const inUsed = "In Use";
+
+
+    const URL = "https://ip.nf./me.json";
+    const [ipInfo, setIpInfo] = useState({ ip: "" });
+
+
+    useEffect(() => {
+        fetch(URL, { method: "get" })
+            .then((response) => response.json())
+            .then((data) => {
+                setIpInfo({ ...data });
+            })
+    }, []);
+
+
+
 
     const [assignedTo, setAssignedTo] = useState([]);
     const [staffId, setStaffId] = useState([]);
     const [department, setDepartment] = useState([]);
-    const [giver, setGiver] = useState([]);
+    const [giver, setGiver] = useState(`${user && user.name}`);
     const [dateGiven, setDateGiven] = useState(`${today}`);
-    console.log(today)
     const [status, setStatus] = useState(`${inUsed}`);
+    var [assignerIp, setAssignerIp] = useState("");
+    var [assignerLocation, setAssignerLocation] = useState("");
+    var [assignerAction, setAssignerAction] = useState(`${stockAssigned}`);
+
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
     const { id } = useParams();
@@ -24,14 +47,16 @@ const StockNotInUseList = () => {
     useEffect(() => {
         const getStockById = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/stock/${id}`);
+                var response = await axios.get(`http://localhost:5000/stock/${id}`);
                 setAssignedTo(response.data.assignedTo);
                 setStaffId(response.data.staffId);
                 setDepartment(response.data.department);
                 setGiver(response.data.giver);
                 setDateGiven(response.data`${today}`);
                 setStatus(response.data`${inUsed}`);
-                console.log(status);
+                setAssignerLocation(response.data`${ipInfo.ip.country}`);
+                setAssignerIp(response.data`${ipInfo.ip.ip}`);
+                setAssignerAction(response.data`${stockAssigned}`);
             } catch (error) {
                 if (error.response) {
                     setMsg(error.response.data.msg);
@@ -41,7 +66,7 @@ const StockNotInUseList = () => {
         getStockById();
     }, [id]);
 
-    const updateStock = async (e) => {
+    var updateStock = async (e) => {
         e.preventDefault();
         try {
             await axios.patch(`http://localhost:5000/stock/${id}`, {
@@ -51,6 +76,9 @@ const StockNotInUseList = () => {
                 giver: giver,
                 dateGiven: dateGiven,
                 status: status,
+                assignerAction: assignerAction,
+                assignerIp: assignerIp= (`${ipInfo.ip.ip}`),
+                assignerLocation: assignerLocation= (`${ipInfo.ip.country}`),
             });
             navigate("/stockIn");
         } catch (error) {
@@ -148,7 +176,7 @@ const StockNotInUseList = () => {
                                             type="text"
 
                                             className="input"
-                                            value={giver}
+                                            value={user && user.name}
                                             onChange={(e) => setGiver(e.target.value)}
                                             placeholder="Giver Name"
                                         />
@@ -171,10 +199,12 @@ const StockNotInUseList = () => {
                                         />
                                     </div>
                                 </div>
+
+
                                 <div className="field" style={{ maxWidth: "300px", marginLeft: "25px" }}>
                                     {/* <label className="label">Date Given</label> */}
                                     <div className="control">
-                                    <input
+                                        <input
                                             style={{ width: "300px" }}
                                             // type="text"
                                             hidden
@@ -188,6 +218,50 @@ const StockNotInUseList = () => {
 
                             </div>
                             {/* Giver and Date Given */}
+
+                            <div className="field">
+                                <label className="label">IP Address</label>
+                                <div className="control">
+                                    <input
+                                        //   hidden
+                                        type="text"
+                                        className="input"
+                                        value={ipInfo.ip.ip}
+                                        onChange={(e) => setAssignerIp(e.target.value)}
+                                        placeholder="Staff Department"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="field">
+                                <label className="label">Location</label>
+                                <div className="control">
+                                    <input
+                                        //   hidden
+                                        type="text"
+                                        className="input"
+                                        value={ipInfo.ip.country}
+                                        onChange={(e) => setAssignerLocation(e.target.value)}
+                                        placeholder="Staff Department"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="field">
+                                <label className="label">Action Performed</label>
+                                <div className="control">
+                                    <input
+                                        type="text"
+                                        // hidden
+                                        className="input"
+                                        value={stockAssigned}
+                                        onChange={(e) => setAssignerAction(e.target.value)}
+                                        placeholder="Staff Department"
+                                    />
+                                </div>
+                            </div>
+
+
 
 
 

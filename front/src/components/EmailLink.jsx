@@ -35,19 +35,21 @@ const EmailLink = () => {
                         <div className="column is-4">
                             <form onSubmit={Auth} className="box" class="formOne">
                                 {isError && <p className="has-text-centered">{message}</p>}
-                                <h1 className="title is-2">Sign In</h1>
+                                <h1 className="title is-2 font-italic"><em>Forgot Password</em></h1>
                                 <div className="field">
                                     <label className="label">Enter Your Staff ID</label>
                                     <div className="control">
-                                        <input
+                                        <em>
+                                            <input
 
-                                            type="text"
-                                            className="input"
-                                            value={staffid}
-                                            onChange={(e) => setStaffid(e.target.value)}
-                                            placeholder="Email"
-                                            class="inputField"
-                                        />
+                                                type="text"
+                                                className="input"
+                                                value={staffid}
+                                                onChange={(e) => setStaffid(e.target.value)}
+                                                placeholder="Staff Id"
+                                                class="inputField"
+                                            />
+                                        </em>
                                     </div>
                                 </div>
 
@@ -70,3 +72,6 @@ const EmailLink = () => {
 };
 
 export default EmailLink;
+
+
+

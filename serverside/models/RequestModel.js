@@ -83,7 +83,123 @@ const Request = db.define('request', {
         validate: {
             notEmpty: true
         }
+    },
+
+// user Setting
+
+    senderIp: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+
+        }
+    },
+
+    senderLocation: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+
+        }
+    },
+
+
+    senderAction: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+
+        }
+    },
+
+
+
+// Manager Setting
+
+managerName: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+        notEmpty: false,
+
     }
+},
+
+managerIp: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+        notEmpty: false,
+
+    }
+},
+
+
+managerLocation: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+        notEmpty: false,
+
+    }
+},
+
+
+managerTime: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+        notEmpty: false,
+
+    }
+},
+
+
+// Director Action
+directorName: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+        notEmpty: false,
+
+    }
+},
+
+
+directorIp: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+        notEmpty: false,
+
+    }
+},
+
+
+directorLocation: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+        notEmpty: false,
+
+    }
+},
+
+
+directorTime: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+        notEmpty: false,
+
+    }
+},
+
+// Director, Manager and User Setting End Here.
+
 },
 
 

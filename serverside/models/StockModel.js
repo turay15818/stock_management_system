@@ -195,6 +195,83 @@ const Stock = db.define('stock', {
             notEmpty: true
         }
     },
+
+
+
+
+
+    stockRecoder: {
+        type: DataTypes.STRING,
+         allowNull: false,
+         validate: {
+             notEmpty: true,
+ 
+         }
+     },
+
+
+     recoderIp: {
+        type: DataTypes.STRING,
+         allowNull: false,
+         validate: {
+             notEmpty: true,
+ 
+         }
+     },
+    //  recoderAction, recoderLocation, recoderIp, stockRecoder,
+
+     recoderLocation: {
+        type: DataTypes.STRING,
+         allowNull: false,
+         validate: {
+             notEmpty: true,
+ 
+         }
+     },
+
+     recoderAction: {
+        type: DataTypes.STRING,
+         allowNull: false,
+         validate: {
+             notEmpty: true,
+ 
+         }
+     },
+
+
+
+     assignerIp: {
+        type: DataTypes.STRING,
+         allowNull: true,
+         validate: {
+             notEmpty: false,
+ 
+         }
+     },
+
+
+     assignerLocation: {
+        type: DataTypes.STRING,
+         allowNull: true,
+         validate: {
+             notEmpty: false,
+ 
+         }
+     },
+
+     
+
+     assignerAction: {
+        type: DataTypes.STRING,
+         allowNull: true,
+         validate: {
+             notEmpty: false,
+ 
+         }
+     },
+
+
+
 },
 
 

@@ -12,6 +12,7 @@ import {
     getRequestById,
     createRequest,
     updateRequest,
+    updateDirectorRequest,
     deleteRequest,
 
 
@@ -64,6 +65,7 @@ router.get('/requestDirectorPending', verifyUser, getRequestDirectorPending);
 // router.get('/directorPendingRequest', verifyUser, getDirectorPendingRequest);
 router.post('/request', verifyUser, createRequest);
 router.patch('/request/:id', verifyUser, updateRequest);
+router.patch('/directorRequest/:id', verifyUser, updateDirectorRequest);
 router.delete('/request/:id', verifyUser, deleteRequest);
 
 

@@ -9,7 +9,7 @@ import AddRequest from "./pages/AddRequest";
 import EditRequest from "./pages/EditRequest";
 import UserDashboard from "./pages/userDashboard/UserDashboard";
 import UserRequest from "./pages/userDashboard/UserRequest";
-
+import RandomQuoteGenerator from "./components/RandomQuoteGenerator";
 import DirectorRequestRejectAll from "./pages/directorDashboard/DirectorRequestRejectAll";
 import DirectorPendingRequest from "./pages/directorDashboard/DirectorPendingRequest";
 import DirectorAppRequest from "./pages/directorDashboard/DirectorAppRequest";
@@ -80,6 +80,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="emailLink" element={<EmailLink />} />
           <Route path="passwordLink" element={<PasswordLink />} />
+          <Route path="randomQuoteGenerator" element={<RandomQuoteGenerator />} />
 
 
 

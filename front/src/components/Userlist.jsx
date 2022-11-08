@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Userlist = (props) => {
+const Userlist = () => {
   const [users, setUsers] = useState([]);
  
 
@@ -24,7 +24,7 @@ const Userlist = (props) => {
 
   return (
     <div>
-         <h2>Turaymathic{props.totalStock}</h2>
+         <h2>Turaymathic</h2>
       <h1 className="title">Users</h1>
       <h2 className="subtitle">List of Users</h2>
       <Link to="/users/add" className="button is-primary mb-2">
@@ -41,6 +41,7 @@ const Userlist = (props) => {
             <th>Staff Dept</th>
             <th>Staff Status</th>
             <th>Role</th>
+            <th>Created At</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -54,6 +55,7 @@ const Userlist = (props) => {
               <td>{user.department}</td>
               <td>{user.staffStatus}</td>
               <td>{user.role}</td>
+              <td>{user.createdAt}</td>
               <td>
                 <Link
                   to={`/users/edit/${user.uid}`}

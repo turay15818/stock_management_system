@@ -19,15 +19,6 @@ const Login = () => {
     }
 
 
-    // if (user && user.role === "users" || isSuccess) {
-    //   navigate("/userDashboard");
-    // }
-    // if (user && user.role === "admin" || isSuccess) {
-    //   navigate("/dashboard");
-    // }
-
-
-
     dispatch(reset());
   }, [user, isSuccess, dispatch, navigate]);
 

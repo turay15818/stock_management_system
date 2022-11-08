@@ -5,7 +5,7 @@ import argon2 from "argon2";
 export const getUsers = async(req, res) =>{
     try {
         const response = await User.findAll({
-            attributes:['uid', 'staffid', 'name','email', 'department', 'staffStatus', 'password','role'],
+            attributes:['uid', 'staffid', 'name','email', 'department', 'staffStatus', 'password','role', 'creator', 'ipAddress', 'location', 'createdTime', 'actionPerformed', 'updator', 'updatorIpAddress', 'updatorLocation', 'updatedTime', 'updatePerformed'],
 
             include: [{
                 model: Request,
@@ -22,7 +22,7 @@ export const getUsers = async(req, res) =>{
 export const getUserById = async(req, res) =>{
     try {
         const response = await User.findOne({
-            attributes:['uid', 'staffid', 'name','email', 'department', 'staffStatus', 'password', 'role'],
+            attributes:['uid', 'staffid', 'name','email', 'department', 'staffStatus', 'password', 'role', 'creator', 'ipAddress', 'location', 'createdTime', 'actionPerformed','updator', 'updatorIpAddress', 'updatorLocation', 'updatedTime', 'updatePerformed'],
             where: {
                 uid: req.params.id
             }
@@ -34,7 +34,7 @@ export const getUserById = async(req, res) =>{
 }
 
 export const createUser = async(req, res) =>{
-    const {staffid, name, email, department, staffStatus, password, confPassword, role} = req.body;
+    const {staffid, name, email, department, staffStatus, password, confPassword, role, creator, ipAddress, location, createdTime, actionPerformed} = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
     const hashPassword = await argon2.hash(password);
     try {
@@ -45,7 +45,16 @@ export const createUser = async(req, res) =>{
             department: department,
             staffStatus: staffStatus,
             password: hashPassword,
-            role: role
+            role: role,
+            creator: creator, 
+            ipAddress: ipAddress, 
+            location: location, 
+            createdTime: createdTime, 
+            actionPerformed: actionPerformed, 
+            // updator: updator, 
+            // updatorIpAddress: updatorIpAddress, 
+            // updatorLocation: updatorLocation, 
+            // updatedTime: updatedTime
         });
         res.status(201).json({msg: "Register Successful"});
     } catch (error) {
@@ -60,7 +69,7 @@ export const updateUser = async(req, res) =>{
         }
     });
     if(!user) return res.status(404).json({msg: "User not found"});
-    const {staffid, name, email, department, staffStatus, password, confPassword, role} = req.body;
+    const {staffid, name, email, department, staffStatus, password, confPassword, role, updator, updatorIpAddress, updatorLocation, updatedTime, updatePerformed} = req.body;
     let hashPassword;
     if(password === "" || password === null){
         hashPassword = user.password
@@ -77,7 +86,12 @@ export const updateUser = async(req, res) =>{
             department: department,
             staffStatus: staffStatus,
             password: hashPassword,
-            role: role
+            role: role,
+            updator: updator, 
+            updatorIpAddress: updatorIpAddress, 
+            updatorLocation: updatorLocation, 
+            updatedTime: updatedTime,
+            updatePerformed: updatePerformed,
         },{
             where:{
                 id: user.id

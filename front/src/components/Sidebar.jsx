@@ -78,7 +78,7 @@ const Sidebar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/adminChart"} style={stylee}>
+                  <NavLink to={"/randomQuoteGenerator"} style={stylee}>
                     <IoPricetag style={{ fontSize: "30px" }} /> Chart
                   </NavLink>
                 </li>

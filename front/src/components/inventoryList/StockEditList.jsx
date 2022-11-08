@@ -4,13 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import { useSelector } from "react-redux";
 const StockEditList = () => {
-    const { user } = useSelector((state) => state.auth);
-    const currentDate = moment().format('DD-MM-YYYY')
-    const date = new Date();
-    const current_time = date.getHours() + ":" + " " + date.getMinutes();
-    const today = current_time + "  " + currentDate;
-    const pending = ("Pending");
-
+    
+   
     const [stockCode, setStockCode] = useState("");
     const [stockName, setStockName] = useState("");
     const [description, setDescription] = useState("");
@@ -24,6 +19,8 @@ const StockEditList = () => {
     const [staffId, setStaffId] = useState("");
     const [department, setDepartment] = useState("");
     const [giver, setGiver] = useState("");
+
+
     const [dateGiven, setDateGiven] = useState("");
     const [status, setStatus] = useState("");
     const [title, setTitle] = useState("");
@@ -57,6 +54,12 @@ const StockEditList = () => {
                 setStatus(response.data.status);
                 setTitle(response.data.name);
                 setFile(response.data.image);
+
+               
+               
+        
+
+
                 setPreview(response.data.url)
             };
 

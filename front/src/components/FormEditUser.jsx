@@ -2,7 +2,33 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+
+
+
+
+
+
 const FormEditUser = () => {
+  const { user } = useSelector((state) => state.auth);
+  const currentDate = moment().format('DD-MM-YYYY')
+  const date = new Date();
+  const current_time = date.getHours() + ":" + " " + date.getMinutes();
+  const today = current_time + "  " + currentDate;
+  const userUpdated = "User Updated"
+
+  const URL = "https://ip.nf./me.json";
+  const [ipInfo, setIpInfo] = useState({ ip: "" });
+  useEffect(() => {
+      fetch(URL, { method: "get" })
+          .then((response) => response.json())
+          .then((data) => {
+              setIpInfo({ ...data });
+          })
+  }, []);
+
+
+
   const [staffid, setStaffid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,14 +37,18 @@ const FormEditUser = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [role, setRole] = useState("");
+  var [updator, setUpdator] = useState(`${user && user.name}`);
+  var [updatorIpAddress, setUpdatorIpAddress] = useState("");
+  var [updatorLocation, setUpdatorLocation] = useState("");
+  var [updatePerformed, setUpdatePerformed] = useState(`${userUpdated}`);
+  var [updatedTime, setUpdatedTime] = useState(`${today}`);
   const [msg, setMsg] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    const getUserById = async () => {
+    var getUserById = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/users/${id}`);
         setStaffid(response.data.staffid);
@@ -27,6 +57,11 @@ const FormEditUser = () => {
         setStaffStatus(response.data.staffStatus);
         setDepartment(response.data.department);
         setRole(response.data.role);
+        setUpdator(response.data.updator);
+        setUpdatorIpAddress(response.data.updatorIpAddress);
+        setUpdatorLocation(response.data.updatorLocation);
+        setUpdatedTime(response.data.updatedTime);
+        setUpdatePerformed(response.data.updatePerformed);
       } catch (error) {
         if (error.response) {
           setMsg(error.response.data.msg);
@@ -36,7 +71,7 @@ const FormEditUser = () => {
     getUserById();
   }, [id]);
 
-  const updateUser = async (e) => {
+  var updateUser = async (e) => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/users/${id}`, {
@@ -48,6 +83,11 @@ const FormEditUser = () => {
         password: password,
         confPassword: confPassword,
         role: role,
+        updator: updator= (`${user && user.name}`),
+        updatorIpAddress: updatorIpAddress = (`${ipInfo.ip.ip}`),
+        updatorLocation: updatorLocation = (`${ipInfo.ip.country}`), //= ipInfo.ip.country + ipInfo.ip.country_code,
+        updatedTime: updatedTime= (`${today}`),
+        updatePerformed:updatePerformed= (`${userUpdated}`),
       });
       navigate("/users");
     } catch (error) {
@@ -173,6 +213,95 @@ const FormEditUser = () => {
                   </div>
                 </div>
               </div>
+              
+              
+              <div className="field">
+                <label className="label">creator </label>
+                <div className="control">
+                  <input
+                  // hidden
+                    type="text"
+                    className="input"
+                    value={user && user.name}
+                    onChange={(e) => setUpdator(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+
+              <div className="field">
+                <label className="label">IP Address</label>
+                <div className="control">
+                  <input
+                  // hidden
+                    type="text"
+                    className="input"
+                    value={ipInfo.ip.ip}
+                    onChange={(e) => setUpdatorIpAddress(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+              <div className="field">
+                <label className="label">Location</label>
+                <div className="control">
+                  <input
+                  // hidden
+                    type="text"
+                    className="input"
+                    value={ipInfo.ip.country}
+                    onChange={(e) => setUpdatorLocation(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+
+              <div className="field">
+                <label className="label">created Time</label>
+                <div className="control">
+                  <input
+                  // hidden
+                    type="text"
+                    className="input"
+                    value={today}
+                    onChange={(e) => setUpdatedTime(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+
+
+              <div className="field">
+                <label className="label">Action Performed</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    // hidden
+                    className="input"
+                    value={userUpdated}
+                    onChange={(e) => setUpdatePerformed(e.target.value)}
+                    placeholder="Staff Department"
+                  />
+                </div>
+              </div>
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
               <div className="field">
                 <div className="control">
                   <button type="submit" className="button is-success">

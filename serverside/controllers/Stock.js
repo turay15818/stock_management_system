@@ -20,7 +20,8 @@ export const getStock = async (req, res) => {
 
                     'department', 'giver', 'dateGiven',
                     'name', 'status', 'image', 'url',
-
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
 
                 ],
 
@@ -53,7 +54,10 @@ export const getStock = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
 
                 ],
                 where: [{
@@ -87,7 +91,10 @@ export const getAllStock = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
 
 
                 ],
@@ -121,7 +128,10 @@ export const getAllStock = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
 
                 ],
                 where: [{
@@ -148,7 +158,7 @@ export const getAllStock = async (req, res) => {
 export const getStockInUse = async (req, res) => {
     try {
         let response;
-        if (req.role ==="admin", "director", "manager" && req.role !==  "user") {
+        if (req.role === "admin", "director", "manager" && req.role !== "user") {
             response = await Stock.findAll({
                 attributes: [
                     'id', 'stockUId', 'stockCode', 'stockName',
@@ -157,7 +167,10 @@ export const getStockInUse = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
 
 
                 ],
@@ -191,7 +204,10 @@ export const getStockInUse = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
 
                 ],
                 where: [{
@@ -224,7 +240,10 @@ export const getStockNotInUse = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
 
 
                 ],
@@ -258,7 +277,10 @@ export const getStockNotInUse = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
 
                 ],
                 where: [{
@@ -299,7 +321,10 @@ export const getStockId = async (req, res) => {
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
                 ],
                 where: {
                     id: stock.id
@@ -317,7 +342,10 @@ export const getStockId = async (req, res) => {
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url'
+                    'name', 'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
                 ],
                 where: {
                     [Op.and]: [{ id: stock.id }, { userId: req.userId }]
@@ -354,6 +382,10 @@ export const saveStock = (req, res) => {
     const giver = req.body.giver;
     const dateGiven = req.body.dateGiven;
     const status = req.body.status;
+    const recoderAction = req.body.recoderAction;
+    const recoderLocation = req.body.recoderLocation
+    const recoderIp = req.body.recoderIp;
+    const stockRecoder = req.body.stockRecoder;
     // const name = req.body.title;
     const file = req.files.file;
     const fileSize = file.data.length;
@@ -385,6 +417,10 @@ export const saveStock = (req, res) => {
                 assignedTo: assignedTo,
                 giver: giver,
                 dateGiven: dateGiven,
+                recoderAction: recoderAction,
+                recoderLocation: recoderLocation,
+                recoderIp: recoderIp,
+                stockRecoder: stockRecoder,
                 // name: name,
                 status: status,
                 image: fileName,
@@ -413,9 +449,9 @@ export const updateStock = async (req, res) => {
             }
         });
         if (!stock) return res.status(404).json({ msg: "Data not found" });
-        const { assignedTo, staffId, giver, department, dateGiven, status } = req.body;
+        const { assignedTo, staffId, giver, department, dateGiven, status, assignerAction, assignerLocation, assignerIp, } = req.body;
         if (req.role === "admin", "manager", "director") {
-            await Stock.update({ assignedTo, staffId, giver, department, dateGiven, status }, {
+            await Stock.update({ assignedTo, staffId, giver, department, dateGiven, status, assignerAction, assignerLocation, assignerIp, }, {
                 where: {
                     id: stock.id
                 }
@@ -423,7 +459,7 @@ export const updateStock = async (req, res) => {
         }
         else {
             if (req.userId !== stock.userId) return res.status(403).json({ msg: "Access forbidden" });
-            await Stock.update({ assignedTo, staffId, giver, department, dateGiven, status }, {
+            await Stock.update({ assignedTo, staffId, giver, department, dateGiven, status, assignerAction, assignerLocation, assignerIp, }, {
                 where: {
                     [Op.and]: [{ id: stock.id }, { userId: req.userId }]
                 }

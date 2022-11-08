@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
 import { useSelector } from "react-redux";
 import axios from "axios";
-// import Card from 'react-bootstrap/Card';
+import { FaQuoteRight, FaQuoteLeft, FaCopy, FaTwitter } from 'react-icons/fa';
+import { BsFillVolumeUpFill } from 'react-icons/bs';
 // import ListGroup from 'react-bootstrap/ListGroup';
 import { Bar } from 'react-chartjs-2';
 import Chart from "react-apexcharts";
@@ -265,14 +268,161 @@ const Welcome = () => {
   })
 
 
+  console.log(create_random_string(8))
+
+  function create_random_string(string_length) {
+    var random_string = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz'
+    for (var i, i = 0; i < string_length; i++) {
+      random_string += characters.charAt(Math.floor(Math.random() * characters.length))
+    }
+    return random_string
+  };
+
+
+
+
+
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
+
+  useEffect(() => {
+    getQuote()
+  }, []);
+
+  const getQuote = () => {
+    let url = `https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json`;
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        let dataQuotes = data.quotes;
+        let randomNum = Math.floor(Math.random() * dataQuotes.length);
+        let randomQuote = dataQuotes[randomNum];
+
+        setQuote(randomQuote.quote);
+        setAuthor(randomQuote.author);
+      })
+  }
+
+  const handleClick = () => {
+    getQuote();
+
+
+  }
+
+
+
+
+  const [details, setDetails] = useState(null);
+
+  const getUserGeolocationDetails = () => {
+    fetch(
+      "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572"
+    )
+      .then(response => response.json())
+      .then(data => setDetails(data));
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div style={welcome}>
       <h1>{user && user.email}</h1>
       {user && user.role === "admin" && (
         <div>
+
+
+
+          {/* <Header title="Get user IP and location in ReactJS" />
+
+          <ExternalInfo page="geoLocation" /> */}
+
+          <div className="row">
+            <div className="col text-center">
+              <h2>Find my IP and Location</h2>
+              <p className="mt-3">
+                <button
+                  className="btn btn-primary"
+                  onClick={getUserGeolocationDetails}
+                >
+                  Find my details
+                </button>
+
+                <div className="row justify-content-center mt-3">
+                  <div className="col-lg-6 text-center text-dark">
+                    {details && (
+                      <ul className="list-group">
+                        <li className="list-group-item">
+                          Location :{" "}
+                          {`${details.city}, ${details.country_name}(${details.country_code})`}
+                        </li>
+                        <li className="list-group-item">
+                          IP: {details.IPv4}
+                        </li>
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              </p>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div id="quote-box">
+            <div id="text"><p>{quote}</p></div>
+            <div id="author"><p>{author}</p></div>
+
+            <div id="buttons">
+              <div className="social-media">
+                <a href="#" id="twet-quote">
+                  <span><FaTwitter /> </span>
+                </a>
+                <a href="#" id="tumlr-quote">
+                  {/* <span><img src={tumblrIcon} alt="" /></span> */}
+                </a>
+              </div>
+              <button onClick={handleClick} id="new-quote">New Quote</button>
+            </div>
+          </div>
+
           <div style={{ display: "flex" }}>
 
             <div class="adminStockDetails">
+
 
               <MDBCard alignment='center'>
                 <MDBCardHeader alignment='center'>Stock Details</MDBCardHeader>
@@ -362,7 +512,7 @@ const Welcome = () => {
             <h4>{ip}</h4>
           </div>
 
-
+          {create_random_string(8)}
         </div>
       )}
 
@@ -573,6 +723,31 @@ const Welcome = () => {
           </div>
         </div>
       )}
+
+
+
+
+
+
+
+      <div className="content">
+        <header>Quote of the Day</header>
+        <div className="quote-area">
+          <i className="fas fa-quote-left" ></i>
+          <p className="quote">Never give up because you never know if the next day is going to be the one that works</p>
+          <i class="fa fa-quote-right" aria-hidden="true"></i>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
     </div>
   );
 };
