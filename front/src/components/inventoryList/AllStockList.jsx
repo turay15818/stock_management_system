@@ -3,28 +3,8 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-const URL = "https://ip.nf./me.json";
-
 
 const AllStockList = () => {
-    const [ipInfo, setIpInfo] = useState({ ip: "" });
-    useEffect(() => {
-        fetch(URL, { method: "get" })
-            .then((response) => response.json())
-            .then((data) => {
-                setIpInfo({ ...data });
-            })
-    }, []);
-
-
-
-
-
-
-
-
-
-
     // const { user } = useSelector((state) => state.auth);
     const [allStock, setAllStock,] = useState([]);
     useEffect(() => {
@@ -36,17 +16,6 @@ const AllStockList = () => {
         const response = await axios.get("http://localhost:5000/allStock");
         setAllStock(response.data);
     };
-
-
-
-
-
-
-
-
-
-
-
 
     return (
         <div>
@@ -70,13 +39,6 @@ const AllStockList = () => {
 
             <div style={{ display: "flex" }}>
                 <div>
-                    <h2>Your IP Address is</h2>
-                    <h4>IP Address is: {ipInfo.ip.ip}</h4>
-                    <h4>Country is: {ipInfo.ip.country}</h4>
-                    <h4>Country Code is: {ipInfo.ip.country_code}</h4>
-                    {/* <h4>Current City is: {ipInfo.ip.city}</h4>
-                    <h4>IP Address is: {ipInfo.ip.ip}</h4> */}
-                    <h4>TURAYMATHIC</h4>
                     <table className="table is-striped is-fullwidth">
                         <thead>
                             <tr style={{ boxShadow: "0px 0px 10px #000000", }}>
@@ -101,7 +63,7 @@ const AllStockList = () => {
 
                             {allStock.map((stock, index) => (
                                 <tr key={stock.uId} >
-                                    <td className="shadow-inner">{index + 1}</td>
+                                    <td className="shadow-inner">OSL_{index + 1}</td>
                                     <td>{stock.stockCode}</td>
                                     <td>{stock.stockName}</td>
                                     <td>{stock.description}</td>

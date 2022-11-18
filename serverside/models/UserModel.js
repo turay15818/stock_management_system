@@ -81,7 +81,7 @@ const Users = db.define('users', {
         allowNull: false,
         validate: {
             notEmpty: true,
-           
+
         }
     },
 
@@ -91,7 +91,7 @@ const Users = db.define('users', {
         allowNull: false,
         validate: {
             notEmpty: true,
-            
+
         }
     },
 
@@ -101,7 +101,7 @@ const Users = db.define('users', {
         allowNull: false,
         validate: {
             notEmpty: true,
-            
+
         }
     },
 
@@ -110,7 +110,7 @@ const Users = db.define('users', {
         allowNull: false,
         validate: {
             notEmpty: true,
-            
+
         }
     },
     actionPerformed: {
@@ -118,7 +118,7 @@ const Users = db.define('users', {
         allowNull: false,
         validate: {
             notEmpty: true,
-            
+
         }
     },
 
@@ -128,7 +128,7 @@ const Users = db.define('users', {
         allowNull: true,
         validate: {
             notEmpty: false,
-           
+
         }
     },
 
@@ -138,7 +138,7 @@ const Users = db.define('users', {
         allowNull: true,
         validate: {
             notEmpty: false,
-            
+
         }
     },
 
@@ -148,7 +148,7 @@ const Users = db.define('users', {
         allowNull: true,
         validate: {
             notEmpty: false,
-            
+
         }
     },
 
@@ -157,7 +157,7 @@ const Users = db.define('users', {
         allowNull: true,
         validate: {
             notEmpty: false,
-            
+
         }
     },
     updatePerformed: {
@@ -165,12 +165,22 @@ const Users = db.define('users', {
         allowNull: true,
         validate: {
             notEmpty: false,
-            
+
         }
     },
 
 
-
+    verifytoken: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    },
+    
+    passwordResetExpireTime: {
+        type: DataTypes.DATE
+    }
 
 
 

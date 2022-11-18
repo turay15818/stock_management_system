@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     secret: process.env.SESS_SECRET,
+    secret: process.env.JWT_SECRET,
     resave: false,
     saveUninitialized: true,
     store: store,
@@ -47,25 +48,6 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
-
-// app.get ('/forgot-password', (req, res, next) => {})
-
-
-// app.post ('/forgot-password', (req, res, next) => {})
-// app.post ('/reset-password', (req, res, next) => {})
-// app.get ('/reset-password', (req, res, next) => {})
-
-
-
-
-
-
-
-
-
-
-
-
 app.use(express.json());
 app.use(UserRoute);
 app.use(RequestRoute);
@@ -78,6 +60,7 @@ app.use(express.static("public"));
 app.use(StockRoute);
 app.use(ListRoute);
 app.use(LoginIpAddressRoute);
+// app.use('/api/users', UserRoute);
 // store.sync();
 
 const PORT = process.env.PORT || 5000;

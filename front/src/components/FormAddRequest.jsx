@@ -166,11 +166,11 @@ const FormAddRequest = () => {
               </div>
 
 
-              <div className="field">
+              {/* <div className="field">
                 <label className="label">IP Address</label>
                 <div className="control">
                   <input
-                //   hidden
+                  hidden
                     type="text"
                     className="input"
                     value={ipInfo.ip.ip}
@@ -178,15 +178,39 @@ const FormAddRequest = () => {
                     placeholder="Staff Department"
                   />
                 </div>
-              </div>
+              </div> */}
+
+
+
+{ 
+    user && user?.role === 'admin' ? (
+      <div className="field">
+        <label className="label">IP Address</label>
+        <div className="control">
+          <input
+            hidden
+            type="text"
+            className="input"
+            value={ipInfo.ip.ip}
+            onChange={(e) => setSenderIp(e.target.value)}
+            placeholder="Staff Department"
+          />
+        </div>
+      </div>
+    ) : ('')
+  
+  }
+
+
+
 
 
 
               <div className="field">
-                <label className="label">Location</label>
+                {/* <label className="label">Location</label> */}
                 <div className="control">
                   <input
-                //   hidden
+                  hidden
                     type="text"
                     className="input"
                     value={ipInfo.ip.country}
@@ -201,7 +225,7 @@ const FormAddRequest = () => {
                 <div className="control">
                   <input
                     type="text"
-                    // hidden
+                    hidden
                     className="input"
                     value={requestSent}
                     onChange={(e) => setSenderAction(e.target.value)}

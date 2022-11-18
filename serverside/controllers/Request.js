@@ -1022,9 +1022,9 @@ export const updateRequest = async (req, res) => {
             }
         });
         if (!request) return res.status(404).json({ msg: "Data not found" });
-        const { staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved, managerName, managerIp, managerLocation, managerTime } = req.body;
+        const { staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved, managerName, managerIp, managerLocation, managerTime, reason } = req.body;
         if (req.role === "manager", "director") {
-            await Request.update({ staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved,  managerName, managerIp, managerLocation, managerTime }, {
+            await Request.update({ staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved, managerName, managerIp, managerLocation, managerTime, reason }, {
                 where: {
                     id: request.id
                 }
@@ -1032,7 +1032,7 @@ export const updateRequest = async (req, res) => {
         }
         else {
             if (req.userId !== request.userId) return res.status(403).json({ msg: "Access forbidden" });
-            await Request.update({ staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved,  managerName, managerIp, managerLocation, managerTime}, {
+            await Request.update({ staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved, managerName, managerIp, managerLocation, managerTime, reason }, {
                 where: {
                     [Op.and]: [{ id: request.id }, { userId: req.userId }]
                 }
@@ -1053,9 +1053,9 @@ export const updateDirectorRequest = async (req, res) => {
             }
         });
         if (!request) return res.status(404).json({ msg: "Data not found" });
-        const { staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved, directorName, directorIp, directorLocation, directorTime } = req.body;
+        const { staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved, directorName, directorIp, directorLocation, directorTime, reason } = req.body;
         if (req.role === "manager", "director") {
-            await Request.update({ staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved,  directorName, directorIp, directorLocation, directorTime}, {
+            await Request.update({ staffid, staffName, itemName, descri, requestAt, directorApproved, directorApproved, directorName, directorIp, directorLocation, directorTime, reason }, {
                 where: {
                     id: request.id
                 }
@@ -1063,7 +1063,7 @@ export const updateDirectorRequest = async (req, res) => {
         }
         else {
             if (req.userId !== request.userId) return res.status(403).json({ msg: "Access forbidden" });
-            await Request.update({ staffid, staffName, itemName, descri, requestAt, managerApproved, directorApproved,  directorName, directorIp, directorLocation, directorTime}, {
+            await Request.update({ staffid, staffName, itemName, descri, requestAt, directorApproved, directorApproved, directorName, directorIp, directorLocation, directorTime, reason }, {
                 where: {
                     [Op.and]: [{ id: request.id }, { userId: req.userId }]
                 }
