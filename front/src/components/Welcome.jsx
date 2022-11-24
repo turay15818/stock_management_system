@@ -319,11 +319,8 @@ const Welcome = () => {
 
 
 
-          {/* <Header title="Get user IP and location in ReactJS" />
+          <h1>{allStock.length - stockInUse.length} Musa</h1>
 
-          <ExternalInfo page="geoLocation" /> */}
-
-         
 
 
 

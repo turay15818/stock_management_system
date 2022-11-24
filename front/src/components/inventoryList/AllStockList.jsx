@@ -62,7 +62,7 @@ const AllStockList = () => {
                         <tbody>
 
                             {allStock.map((stock, index) => (
-                                <tr key={stock.uId} >
+                                <tr key={stock.id} >
                                     <td className="shadow-inner">OSL_{index + 1}</td>
                                     <td>{stock.stockCode}</td>
                                     <td>{stock.stockName}</td>

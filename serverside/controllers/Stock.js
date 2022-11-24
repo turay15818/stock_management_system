@@ -13,13 +13,13 @@ export const getStock = async (req, res) => {
         if (req.role === "user" && req.role !== "admin", "director", "manager") {
             response = await Stock.findAll({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id',  'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                  'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -27,14 +27,9 @@ export const getStock = async (req, res) => {
 
                 where: {
                     status: "Not in Use",
+                   
                     // managerApproved: 'Approved',
                     userId: req.userId,
-
-
-
-                    userId: req.userId
-
-
 
                 },
 
@@ -48,13 +43,13 @@ export const getStock = async (req, res) => {
         else {
             response = await Stock.findAll({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id', 'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                     'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -85,13 +80,13 @@ export const getAllStock = async (req, res) => {
         if (req.role === "user" && req.role !== "admin", "director", "manager") {
             response = await Stock.findAll({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id',  'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                     'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -102,14 +97,8 @@ export const getAllStock = async (req, res) => {
                 where: {
                     // status: "Not in Use",
                     // managerApproved: 'Approved',
-                    userId: req.userId,
-
-
-
-                    userId: req.userId
-
-
-
+                    // userId: req.userId,
+                    // userId: req.userId
                 },
 
 
@@ -122,13 +111,13 @@ export const getAllStock = async (req, res) => {
         else {
             response = await Stock.findAll({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id',  'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                     'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -161,13 +150,13 @@ export const getStockInUse = async (req, res) => {
         if (req.role === "admin", "director", "manager" && req.role !== "user") {
             response = await Stock.findAll({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id', 'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                     'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -177,15 +166,7 @@ export const getStockInUse = async (req, res) => {
 
                 where: {
                     status: "In Use",
-                    // managerApproved: 'Approved',
                     userId: req.userId,
-
-
-
-                    userId: req.userId
-
-
-
                 },
 
 
@@ -198,13 +179,13 @@ export const getStockInUse = async (req, res) => {
         else {
             response = await Stock.findAll({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id', 'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                    'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -227,6 +208,82 @@ export const getStockInUse = async (req, res) => {
 }
 // Get All stock  in use end here
 
+
+
+// Get stock by Id start here
+export const getStockInUseId = async (req, res) => {
+    try {
+        const stock = await Stock.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+
+        if (!stock) return res.status(404).json({ msg: "Data not found" });
+        let response;
+        if (req.role === "director", "manager", "admin") {
+            response = await Stock.findOne({
+                attributes: [
+                    'id',
+                     'stockCode', 'stockName',
+                    'description', 'category', 'stockBrand', 'stockColor',
+                    'purchaseDate', 'purchaseFrom', 'cost',
+                    'assignedTo', 'staffId',
+
+                    'department', 'giver', 'dateGiven',
+                    'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
+                ],
+                where: {
+                    id: stock.id
+                },
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        } else {
+            response = await Stock.findOne({
+                attributes: [
+                    'id',  'stockCode', 'stockName',
+                    'description', 'category', 'stockBrand', 'stockColor',
+                    'purchaseDate', 'purchaseFrom', 'cost',
+                    'assignedTo', 'staffId',
+                    'department', 'giver', 'dateGiven',
+                    'status', 'image', 'url',
+                    'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
+                    'assignerAction', 'assignerLocation', 'assignerIp',
+
+                ],
+                where: {
+                    [Op.and]: [{ id: stock.id }, { userId: req.userId }]
+                },
+                include: [{
+                    model: User,
+                    attributes: ['name', 'email']
+                }]
+            });
+        }
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: "No Stock Found" });
+    }
+}
+// Get stock by ID end here
+
+
+
+
+
+
+
+
+
+
+
+
 // Get All Stock  not in use Start Here
 export const getStockNotInUse = async (req, res) => {
     try {
@@ -234,13 +291,13 @@ export const getStockNotInUse = async (req, res) => {
         if (req.role === "user" && req.role !== "admin", "director", "manager") {
             response = await Stock.findAll({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id', 'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                     'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -271,13 +328,13 @@ export const getStockNotInUse = async (req, res) => {
         else {
             response = await Stock.findAll({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id','stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                    'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -305,7 +362,7 @@ export const getStockId = async (req, res) => {
     try {
         const stock = await Stock.findOne({
             where: {
-                stockUId: req.params.id
+                id: req.params.id
             }
         });
 
@@ -315,13 +372,13 @@ export const getStockId = async (req, res) => {
             response = await Stock.findOne({
                 attributes: [
                     'id',
-                    'stockUId', 'stockCode', 'stockName',
+                     'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
 
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                    'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -337,12 +394,12 @@ export const getStockId = async (req, res) => {
         } else {
             response = await Stock.findOne({
                 attributes: [
-                    'id', 'stockUId', 'stockCode', 'stockName',
+                    'id',  'stockCode', 'stockName',
                     'description', 'category', 'stockBrand', 'stockColor',
                     'purchaseDate', 'purchaseFrom', 'cost',
                     'assignedTo', 'staffId',
                     'department', 'giver', 'dateGiven',
-                    'name', 'status', 'image', 'url',
+                    'status', 'image', 'url',
                     'recoderAction', 'recoderLocation', 'recoderIp', 'stockRecoder',
                     'assignerAction', 'assignerLocation', 'assignerIp',
 
@@ -386,7 +443,7 @@ export const saveStock = (req, res) => {
     const recoderLocation = req.body.recoderLocation
     const recoderIp = req.body.recoderIp;
     const stockRecoder = req.body.stockRecoder;
-    // const name = req.body.title;
+
     const file = req.files.file;
     const fileSize = file.data.length;
     const ext = path.extname(file.name);
@@ -421,7 +478,7 @@ export const saveStock = (req, res) => {
                 recoderLocation: recoderLocation,
                 recoderIp: recoderIp,
                 stockRecoder: stockRecoder,
-                // name: name,
+                
                 status: status,
                 image: fileName,
                 url: url,
@@ -445,7 +502,7 @@ export const updateStock = async (req, res) => {
     try {
         const stock = await Stock.findOne({
             where: {
-                stockUId: req.params.id
+                id: req.params.id
             }
         });
         if (!stock) return res.status(404).json({ msg: "Data not found" });
@@ -494,7 +551,7 @@ export const deleteStock = async (req, res) => {
     try {
         const stock = await Stock.findOne({
             where: {
-                stockUId: req.params.id
+                id: req.params.id
             }
         });
         if (!stock) return res.status(404).json({ msg: "Data not found" });
@@ -527,7 +584,7 @@ export const deleteStock = async (req, res) => {
             });
 
         } else {
-            if (req.userId !== stock.stockUID) return res.status(403).json({ msg: "Access forbidden" });
+            if (req.userId !== stock.id) return res.status(403).json({ msg: "Access forbidden" });
             await Stock.destroy({
                 where: {
                     [Op.and]: [{ id: stock.id }, { userId: req.userId }]

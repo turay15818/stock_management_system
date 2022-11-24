@@ -104,7 +104,7 @@ const FormAddUser = () => {
                 <label className="label">Email</label>
                 <div className="control">
                   <input
-                    type="text"
+                    type="email"
                     className="input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

@@ -7,6 +7,7 @@ import {
     getAllStock,
     saveStock,
     updateStock,
+    getStockInUseId,
     deleteStock,
     // upload
 } from "../controllers/Stock.js";
@@ -20,7 +21,8 @@ router.get('/allStock', verifyUser, adminOnly, getAllStock);
 router.get('/stockInUse', verifyUser, adminOnly, getStockInUse);
 router.get('/stockNotInUse', verifyUser, adminOnly, getStockNotInUse);
 router.get('/stock/:id', verifyUser, adminOnly, getStockId);
-router.post('/stock', verifyUser, adminOnly, saveStock);
+router.get('/stock/:id', verifyUser, adminOnly, getStockId);
+router.get('/stockInUse/:id', verifyUser, adminOnly, getStockInUseId);
 router.patch('/stock/:id', verifyUser, adminOnly, updateStock);
 router.delete('/stock/:id', verifyUser, adminOnly, deleteStock);
 

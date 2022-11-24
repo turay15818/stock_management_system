@@ -4,6 +4,15 @@ import db from "../config/Database.js";
 const { DataTypes } = Sequelize;
 
 const Users = db.define('users', {
+    id: {
+        type: DataTypes.BIGINT,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+        validate: {
+            notEmpty: true
+        }
+    },
     uid: {
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
@@ -19,6 +28,14 @@ const Users = db.define('users', {
         validate: {
             notEmpty: true,
             len: [3, 100]
+        }
+    },
+    staffid: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+
         }
     },
 
@@ -172,12 +189,19 @@ const Users = db.define('users', {
 
     verifytoken: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
-            notEmpty: true,
+            notEmpty: false,
         }
     },
-    
+    token: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            notEmpty: false,
+        }
+    },
+
     passwordResetExpireTime: {
         type: DataTypes.DATE
     }

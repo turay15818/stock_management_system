@@ -18,11 +18,7 @@ const StockInList = () => {
         setStock(response.data);
     };
 
-    // const deleteStock = async (stockUId) => {
-    //     await axios.delete(`http://localhost:5000/stock/${stockUId}`);
-    //     getStock();
-    // };
-
+ 
     return (
         <div>
 
@@ -52,22 +48,16 @@ const StockInList = () => {
                                 <th >Stock Code</th>
                                 <th >Stock Name</th>
                                 <th >Category</th>
-                                {/* <th >Purchase Date</th> */}
                                 <th >Purchase From</th>
-
                                 <th >Cost</th>
-                                {/* <th >Quantity</th> */}
                                 <th >Status</th>
-                                {/* <th >{user && user.name}</th> */}
-                                {/* <th style={{ border: "solid 2px", boxShadow: "0px 0px 10px #000000" }}>Manager Action</th>
-            <th style={{ border: "solid 2px", boxShadow: "0px 0px 10px #000000", }}>Director Action</th> */}
                                 <th>Attached</th>
                             </tr>
                         </thead>
                         <tbody >
 
                             {stock.map((stock, index) => (
-                                <tr key={stock.uId} >
+                                <tr key={stock.id} >
                                     <td className="shadow-inner">{index + 1}</td>
                                     <td>{stock.stockCode}</td>
                                     <td>{stock.stockName}</td>
@@ -76,30 +66,17 @@ const StockInList = () => {
                                     <td>{stock.purchaseFrom}</td>
                                     <td>{stock.cost}</td>
                                     <td>{stock.status}</td>
-                                    {/* <td>{stock.quantity}</td> */}
-                                    {/* <td>{user && user.name}</td> */}
-                                    {/* <td>{stock.email}</td> */}
-                                    {/* <td style={{ backgroundColor: 'orange', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.managerApproved}</td>
-              <td style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '21px', }}>{request.directorApproved}</td> */}
-
+                             
                                     <td>
                                         <Link
-                                            to={`/stock/edit/${stock.stockUId}`}
+                                            to={`/stock/edit/${stock.id}`}
                                             className="button is-small is-info"
                                             style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '10px', }}
                                         >
-                                            Assigned To
+                                            Assigned To User
                                         </Link>
                                     </td>
-                                    {/* <td>
-                                        <Link
-                                            to={`/viewSingleStock/:id${stock.stockUId}`}
-                                            className="button is-small is-info"
-                                            style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '10px', }}
-                                        >
-                                            View
-                                        </Link>
-                                    </td> */}
+                                  
                                 </tr>
                             ))}
                         </tbody>

@@ -51,14 +51,6 @@ const StockInUseList = () => {
                                 <th >No</th>
                                 <th >Stock Code</th>
                                 <th >Stock Name</th>
-                                {/* <th >Description</th>
-                                <th >Category</th>
-                                <th >Color</th>
-                                <th >Brand</th> */}
-                                {/* <th >Purchase Date</th>
-                                <th >Purchase From</th> */}
-                                {/* <th >Cost</th>
-                                <th >Status</th> */}
                                 <th>Attached To</th>
                                 <th>Staff ID</th>
                                 <th>Department</th>
@@ -75,14 +67,6 @@ const StockInUseList = () => {
                                     <td className="shadow-inner">{index + 1}</td>
                                     <td>{stock.stockCode}</td>
                                     <td>{stock.stockName}</td>
-                                    {/* <td>{stock.description}</td>
-                                    <td>{stock.category}</td>
-                                    <td>{stock.stockColor}</td>
-                                    <td>{stock.stockBrand}</td>
-                                    <td>{stock.purchaseDate}</td>
-                                    <td>{stock.purchaseFrom}</td>
-                                    <td>{stock.cost}</td>
-                                    <td>{stock.status}</td> */}
                                     <td>{stock.assignedTo}</td>
                                     <td>{stock.staffId}</td>
                                     <td>{stock.department}</td>
@@ -94,7 +78,7 @@ const StockInUseList = () => {
 
                                     <td>
                                         <Link
-                                            to={`/stock/get/${stock.stockUId}`}
+                                            to={`/stock/get/${stock.id}`}
                                             className="button is-small is-info"
                                             style={{ backgroundColor: 'black', color: 'White', fontWeight: 500, fontSize: '10px', }}
                                         >

@@ -1,5 +1,5 @@
 import express from "express";
-// import jwt from "jsonwebtoken"
+import flash from'express-flash';
 import cors from "cors";
 import session from "express-session";
 import dotenv from "dotenv";
@@ -15,11 +15,26 @@ import AuthRoute from "./routes/AuthRoute.js";
 import ListRoute from "./routes/ListRoute.js";
 import LoginIpAddressRoute from "./routes/LoginIpAddressRoute.js"
 import multer from "multer";
+import UsersReset from "./controllers/UsersReset.js"
+import BulkStockUpload from './BulkStockUpload.js'
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import UsersBulkUpload from "./controllers/UsersBulkUpload.js";
+
+// import BulkStockRoute from './routes/BulkStockRoute.js'
+
+
+
+
+
+
+
+
 dotenv.config();
 const app = express();
 app.use(express.urlencoded({ extended: true }))
 const sessionStore = SequelizeStore(session.Store);
-
+app.use(logger('dev'));
 const store = new sessionStore({
     db: db
 });
@@ -28,13 +43,13 @@ const store = new sessionStore({
 //     await db.sync();
 // })();
 
+app.use(flash());
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     secret: process.env.SESS_SECRET,
-    secret: process.env.JWT_SECRET,
     resave: false,
     saveUninitialized: true,
     store: store,
@@ -48,10 +63,26 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
-app.use(express.json());
-app.use(UserRoute);
-app.use(RequestRoute);
 
+
+
+
+
+
+
+
+
+
+
+
+
+app.use(express.json());
+// app.use(BulkStockRoute);
+app.use(UsersBulkUpload);
+app.use(BulkStockUpload);
+app.use(UserRoute);
+app.use(UsersReset);
+app.use(RequestRoute);
 app.use(StockInRoute);
 app.use(AuthRoute);
 app.use(FileUpload());

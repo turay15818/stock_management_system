@@ -54,11 +54,11 @@ const Sidebar = () => {
     <div>
       <aside className="menu pl-2 has-shadow" style={sidebad}>
         <p className="menu-label" style={sidebaar}>General</p>
-        {/* <li>
-                  <NavLink to={"/randomQuoteGenerator"} style={stylee}>
+        <li>
+                  <NavLink to={"/bulkUploadView"} style={stylee}>
                     <IoPricetag style={{ fontSize: "30px" }} /> Chart
                   </NavLink>
-                </li> */}
+                </li>
         <div>
           {/* Admin/Super Admin Role Start here*/}
           {user && user.role === "admin" && (

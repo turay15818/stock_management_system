@@ -16,8 +16,8 @@ const Userlist = () => {
 
   };
 
-  const deleteUser = async (userId) => {
-    await axios.delete(`http://localhost:5000/users/${userId}`);
+  const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:5000/users/${id}`);
     getUsers();
 
   };
@@ -47,7 +47,7 @@ const Userlist = () => {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user.uid}>
+            <tr key={user.id}>
               <td>{index + 1}</td>
               <td>{user.staffid}</td>
               <td>{user.name}</td>
@@ -58,13 +58,13 @@ const Userlist = () => {
               <td>{user.createdAt}</td>
               <td>
                 <Link
-                  to={`/users/edit/${user.uid}`}
+                  to={`/users/edit/${user.id}`}
                   className="button is-small is-info"
                 >
                   Edit
                 </Link>
                 <button
-                  onClick={() => deleteUser(user.uid)}
+                  onClick={() => deleteUser(user.id)}
                   className="button is-small is-danger"
                 >
                   Delete

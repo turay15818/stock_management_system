@@ -63,8 +63,12 @@ import AdminChart from "./pages/inventory/AdminChart";
 
 import EmailLink from "./components/EmailLink";
 import PasswordLink from "./components/PasswordLink";
+import ResetPassword from "./components/ResetPassword";
 
 
+
+
+import BulkUploadView from "./components/bulkUpload/BulkUploadView";
 
 
 
@@ -78,9 +82,11 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Login />} />
-          <Route path="emailLink" element={<EmailLink />} />
-          <Route path="passwordLink" element={<PasswordLink />} />
-          <Route path="verify" element={<Verify />} />
+          <Route path="/emailLink" element={<EmailLink />} />
+          <Route path="/emailLink" element={<EmailLink />} />
+          <Route path="/bulkUploadView" element={<BulkUploadView />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/resetPassword/:token" element={<ResetPassword />} />
 
 
 
@@ -89,7 +95,7 @@ function App() {
 
 
 
-          <Route path="adminChart" element={<AdminChart />} />
+          <Route path="/adminChart" element={<AdminChart />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/users/add" element={<AddUser />} />

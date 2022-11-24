@@ -5,4 +5,10 @@ const db = new Sequelize('inventory', 'root', '!Love2code', {
     dialect: "mysql"
 });
 
+
+
+ 
+ 
+
+
 export default db;

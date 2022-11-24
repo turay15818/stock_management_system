@@ -7,6 +7,16 @@ const { DataTypes } = Sequelize;
 
 const Stock = db.define('stock', {
 
+    id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        validate: {
+            notEmpty: true
+        }
+    },
+
     stockUId: {
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
@@ -155,14 +165,7 @@ const Stock = db.define('stock', {
         }
     },
 
-    name: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        validate: {
-            notEmpty: false,
 
-        }
-    },
 
     image: {
         type: DataTypes.STRING,
