@@ -1,8 +1,7 @@
 {
-  "name": "backend",
+  "name": "test",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll"
@@ -59,6 +58,7 @@
     "@types/multer": "^1.4.7",
     "@types/nodemailer": "^6.4.6",
     "jest": "^29.3.1",
-    "mocha": "^10.1.0"
+    "mocha": "^10.1.0",
+    "supertest": "^6.3.1"
   }
 }

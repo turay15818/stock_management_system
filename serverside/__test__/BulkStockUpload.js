@@ -1,13 +1,13 @@
-import express from 'express';
-import multer from 'multer';
-import mysql from 'mysql';
-import fs from 'fs';
-import bodyparser from 'body-parser';
-import path from 'path';
-import csv from 'fast-csv';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const express = require ('express');
+const multer = require ('multer');
+const mysql = require ('mysql');
+const fs = require ('fs');
+const bodyparser = require ('body-parser');
+const path = require ('path');
+const csv = require ('fast-csv');
+// const { fileURLToPath } = require ('url');
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 const app = express()
 app.use(express.static('./public'))
@@ -47,7 +47,7 @@ var upload = multer({
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
-export const BulkStockUpload = app.post('/stockBulkUpload', upload.single('stockBulkUpload'), (req, res) => {
+ const BulkStockUpload = app.post('/stockBulkUpload', upload.single('stockBulkUpload'), (req, res) => {
   csvToDb(`${__dirname}/uploads/${req.file.filename}`)
   res.json({
     msg: 'File successfully inserted!',
@@ -75,4 +75,4 @@ function csvToDb(csvUrl) {
   stream.pipe(csvFileStream)
 }
 
-export default BulkStockUpload;
+module.exports = BulkStockUpload;

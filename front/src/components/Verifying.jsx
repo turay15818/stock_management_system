@@ -9,12 +9,15 @@ import { getMe } from "../features/authSlice";
 
 const Verify = () => {
     
+    setTimeout(function() { document.getElementById("myForm").submit() }, 5 * 1000);
+
+
     const ref = useRef();
     const myfunc = () => {
     };
 
     useEffect(() => {
-        setInterval(() => {
+        setTimeout(() => {
             ref.click();
         }, 9500); //miliseconds
     }, []);
@@ -80,11 +83,14 @@ const Verify = () => {
         }
     };
 
+    setInterval(function(){ document.getElementById('dataRefreshButton').click(); }, 3000); // every 5 seconds
+    
     return (
 
-        <div >
+        <div  hidden>
 
-            <form onSubmit={createList} style={{ width: "70%" }}>
+            <form onSubmit={createList} style={{ width: "70%" }} >
+                
                 <div className="row">
                     <div className="col text-center">
                         <div className="">
@@ -185,8 +191,8 @@ const Verify = () => {
                 </div>
 
 
-                <button ref={ref} onClick={myfunc} className="button is-success">
-                    Submit
+                <button  id = 'dataRefreshButton' className="button is-success">
+                   Submit
                 </button>
 
             </form>

@@ -66,79 +66,70 @@ const ResetPassword = () => {
 
     return (
         <>
-            <div className="grid place-items-center h-screen bg-[#F9FAFB">
-                <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-md w-full space-y-8">
-                        <div>
-
-                            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+             <section section className = "hero is-fullheight is-fullwidth" class="loginPage" >
+        <div className="hero-body">
+            <div className="container">
+                <div className="columns is-centered">
+                    <div className="column is-4">
+                        <form onSubmit={updateTokenUser} className="box" class="formOne">
+                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                                 Change Password Page
                             </h2>
-                            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                                {user && user.name} This is the User Name
+                            <h2 className="mt-6 text-center text-2xl font-bold text-light-blue-90">
+                               Welcome Back  {user && user.name} 
                             </h2>
-                        </div>
-
-                        <form onSubmit={updateTokenUser} className="mt-8 space-y-6">
-
-                            <div className="rounded-md shadow-sm -space-y-px">
-
-
-                                <div className="field">
-                                    <label className="label">Password</label>
-                                    <div className="control">
-                                        <input
-                                            type="password"
-                                            className="input"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="***************"
-                                        />
-                                    </div>
+                            <div className="field">
+                                <label className="label">New Password</label>
+                                <div className="control">
+                                    <input
+                                        type="password"
+                                        className="input"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="***************"
+                                    />
                                 </div>
-                                <div className="field">
-                                    <label className="label">Confirm Password</label>
-                                    <div className="control">
-                                        <input
-                                            type="password"
-                                            className="input"
-                                            value={confPassword}
-                                            onChange={(e) => setConfPassword(e.target.value)}
-                                            placeholder="***************"
-                                        />
-                                    </div>
+                            </div>
+                            <div className="field">
+                                <label className="label">Confirm New Password</label>
+                                <div className="control">
+                                    <input
+                                        type="password"
+                                        className="input"
+                                        value={confPassword}
+                                        onChange={(e) => setConfPassword(e.target.value)}
+                                        placeholder="***************"
+
+                                    />
                                 </div>
+                            </div>
+                            <div className="field mt-5">
+                                <button
+                                    type="submit"
+                                    className="button  is-fullwidth"
+                                    class="btnField"
+                                >
+                                    Save
+                                </button>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                <div>
-                                    <button type="submit" className="button is-success">
-                                        Update
-                                    </button>
-                                </div>
 
                             </div>
-
                         </form>
                     </div>
                 </div>
             </div>
+        </div>
+</section>
 
         </>
     )
 }
 
 export default ResetPassword
+
+
+
+
+
+
+   

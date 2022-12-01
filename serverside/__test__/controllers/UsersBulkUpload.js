@@ -1,13 +1,13 @@
-import express from 'express';
-import multer from 'multer';
-import mysql from 'mysql';
-import fs from 'fs';
-import bodyparser from 'body-parser';
-import path from 'path';
-import csv from 'fast-csv';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const  express = require ('express');
+const  multer = require ('multer');
+const  mysql = require ('mysql');
+const  fs = require ('fs');
+const  bodyparser = require ('body-parser');
+const  path = require ('path');
+const  csv = require ('fast-csv');
+const  { fileURLToPath } = require ('url');
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 const app = express()
 app.use(express.static('./public'))
@@ -47,11 +47,13 @@ var upload = multer({
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
-export const BulkStockUpload = app.post('/stockBulkUpload', upload.single('stockBulkUpload'), (req, res) => {
+
+
+ const UsersBulkUpload = app.post('/api/bulkstockupload', upload.single('bulkstockupload'), (req, res) => {
   csvToDb(`${__dirname}/uploads/${req.file.filename}`)
   res.json({
     msg: 'File successfully inserted!',
-    filename: req.file,
+    file: req.file,
   })
 })
 function csvToDb(csvUrl) {
@@ -64,15 +66,19 @@ function csvToDb(csvUrl) {
     })
     .on('end', function () {
       collectionCsv.shift()
-     
-          let query = 'INSERT INTO stock (stockCode, stockName, description, category, stockBrand, stockColor, purchaseDate, purchaseFrom, cost, url) VALUES ?'
+      database.connect((error) => {
+        if (error) {
+          console.error(error)
+        } else {
+          let query = 'INSERT INTO stock (stockUId, stockCode, stockName, description, category, stockBrand, stockColor, purchaseDate, purchaseFrom, cost, assignedTo, staffId, department, giver, dateGiven, status, stockRecoder, recoderIp, recoderLocation,  recoderAction, assignerIp, assignerLocation, assignerAction, image, url) VALUES ?'
           database.query(query, [collectionCsv], (error, res) => {
             console.log(error || res)
           })
-      
+        }
+      })
       fs.unlinkSync(csvUrl)
     })
   stream.pipe(csvFileStream)
 }
 
-export default BulkStockUpload;
+module.exports = UsersBulkUpload;

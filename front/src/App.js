@@ -9,12 +9,12 @@ import AddRequest from "./pages/AddRequest";
 import EditRequest from "./pages/EditRequest";
 import UserDashboard from "./pages/userDashboard/UserDashboard";
 import UserRequest from "./pages/userDashboard/UserRequest";
-import Verify from "./components/Verify";
+import Verifying from "./components/Verifying";
 import DirectorRequestRejectAll from "./pages/directorDashboard/DirectorRequestRejectAll";
 import DirectorPendingRequest from "./pages/directorDashboard/DirectorPendingRequest";
 import DirectorAppRequest from "./pages/directorDashboard/DirectorAppRequest";
 
-
+// import ChartItems from "./components/ChartItems";
 
 import ManagerRequest from "./pages/managerDashboard/ManagerRequest";
 import ManagerRequestPending from "./pages/userDashboard/ManagerRequestPending";
@@ -85,12 +85,12 @@ function App() {
           <Route path="/emailLink" element={<EmailLink />} />
           <Route path="/emailLink" element={<EmailLink />} />
           <Route path="/bulkUploadView" element={<BulkUploadView />} />
-          <Route path="/verify" element={<Verify />} />
+          <Route path="/verify" element={<Verifying />} />
           <Route path="/resetPassword/:token" element={<ResetPassword />} />
 
 
 
-
+          {/* <Route path="/charts" element={<ChartItems />} /> */}
 
 
 

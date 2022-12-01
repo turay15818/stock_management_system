@@ -1,4 +1,4 @@
-import mysql from 'mysql';
+import  mysql from 'mysql';
 
 var connection=mysql.createConnection({
     host:'localhost',
@@ -7,12 +7,12 @@ var connection=mysql.createConnection({
     database:'inventory'
   });
   
-  // connection.connect(function(error){
-  //   if(!!error){
-  //     console.log(error);
-  //   }else{
-  //     console.log('Connected!:)');
-  //   }
-  // }); 
+  connection.connect(function(error){
+    if(error){
+      console.log('not connected');
+    }else{
+      console.log('Connected!:)');
+    }
+  }); 
 
-  export default connection;
+ export default connection;

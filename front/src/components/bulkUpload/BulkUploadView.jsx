@@ -1,32 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import moment from 'moment';
-
 
 
 const FormAddUser = () => {
-  const { user } = useSelector((state) => state.auth);
-  const currentDate = moment().format('DD-MM-YYYY')
-  const date = new Date();
-  const current_time = date.getHours() + ":" + " " + date.getMinutes();
-  const today = current_time + "  " + currentDate;
-  const userAdded = "User Added"
-
-  const URL = "https://ip.nf./me.json";
-  const [ipInfo, setIpInfo] = useState({ ip: "" });
-  useEffect(() => {
-      fetch(URL, { method: "get" })
-          .then((response) => response.json())
-          .then((data) => {
-              setIpInfo({ ...data });
-          })
-  }, []);
-
-
-
-
 
   const [stockBulkUpload, setStockBulkUpload] = useState("");
  
@@ -38,7 +15,10 @@ const FormAddUser = () => {
     try {
       await axios.post("http://localhost:5000/stockBulkUpload", {
         stockBulkUpload: stockBulkUpload,
-       
+        headers: {
+            // Multer only parses "multipart/form-data" requests
+            'Content-Type': 'multipart/form-data',
+          },
       });
     
       navigate("/users");
@@ -55,7 +35,7 @@ const FormAddUser = () => {
       <div className="card is-shadowless">
         <div className="card-content">
           <div className="content">
-            <form onSubmit={saveUser} method="POST" encType='multipart/form-data'>
+            <form onSubmit={saveUser} method="POST" encType='multipart/form-data' action="./uploads">
               <p className="has-text-centered">{msg}</p>
               
               
@@ -66,9 +46,11 @@ const FormAddUser = () => {
                   <input
                   required
                     type="file"
+                    accept='csv'
                     className="input"
                     value={stockBulkUpload}
-                    onChange={(e) => setStockBulkUpload(e.target.value)}
+                    onChange={(e) => {setStockBulkUpload(e.current.files[0])}}
+                    
                     placeholder="Name"
                   />
                 </div>
@@ -89,6 +71,19 @@ const FormAddUser = () => {
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
   );
 };
 

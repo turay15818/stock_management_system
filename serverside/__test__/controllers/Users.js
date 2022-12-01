@@ -1,21 +1,6 @@
-import User from "../models/UserModel.js";
-import Request from "../models/RequestModel.js";
-import argon2 from "argon2";
-import bcrypt from 'bcrypt';
-import jwt from "jsonwebtoken";
-import nodemailer from 'nodemailer';
-import express from 'express';
-import multer from 'multer';
-import mysql from 'mysql';
-import fs from 'fs';
-import path from 'path';
-import csv from 'fast-csv';
-import bodyParser from "body-parser";
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-
+const User = require ("../models/UserModel");
+const argon2 = require ("argon2");
+const express = require ('express');
 const app = express()
 app.use(express.static('./public'))
 // app.use(bodyparser.json())
@@ -26,16 +11,7 @@ app.use(express.static('./public'))
 // )
 
 
-
-
-
-
-
-
-
-
-
-export const getUsers = async(req, res) =>{
+ const getUsers = async(req, res) =>{
     try {
         const response = await User.findAll({
             attributes:[ 'id','staffid', 'name','email', 'department', 'staffStatus', 'role', 'creator', 'ipAddress', 'location', 'createdTime', 'actionPerformed', 'updator', 'updatorIpAddress', 'updatorLocation', 'updatedTime', 'updatePerformed'],
@@ -47,7 +23,7 @@ export const getUsers = async(req, res) =>{
     }
 }
 
-export const getUserById = async(req, res) =>{
+ const getUserById = async(req, res) =>{
     try {
         const response = await User.findOne({
             attributes:['id', 'staffid', 'name','email', 'department', 'staffStatus', 'password', 'role', 'creator', 'ipAddress', 'location', 'createdTime', 'actionPerformed','updator', 'updatorIpAddress', 'updatorLocation', 'updatedTime', 'updatePerformed'],
@@ -61,7 +37,7 @@ export const getUserById = async(req, res) =>{
     }
 }
 
-export const createUser = async(req, res) =>{
+ const createUser = async(req, res) =>{
     const {staffid, name, email, department, staffStatus, password, confPassword, role, creator, ipAddress, location, createdTime, actionPerformed} = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
     const hashPassword = await argon2.hash(password);
@@ -90,7 +66,7 @@ export const createUser = async(req, res) =>{
     }
 }
 
-export const updateUser = async(req, res) =>{
+ const updateUser = async(req, res) =>{
     const user = await User.findOne({
         where: {
             id: req.params.id,
@@ -132,7 +108,7 @@ export const updateUser = async(req, res) =>{
 }
 
 
-export const updateTokenUser = async(req, res) =>{
+ const updateTokenUser = async(req, res) =>{
     const user = await User.findOne({
         where: {
             token: req.params.id,
@@ -164,17 +140,7 @@ export const updateTokenUser = async(req, res) =>{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-export const deleteUser = async(req, res) =>{
+ const deleteUser = async(req, res) =>{
     const user = await User.findOne({
         where: {
             id: req.params.id
@@ -188,195 +154,18 @@ export const deleteUser = async(req, res) =>{
                 id: req.params.id
             }
         });
-        if(user) return res.status(200).json({alert: "Are Sure Do you want to delete this user"});
+        if(user) return res.status(200).json({alert: "User Deleted"});
         res.status(200).json({msg: "User Deleted"});
     } catch (error) {
         res.status(400).json({msg: error.message});
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// this is for mailtrap testing user and pass not actual user to security
-// var transport = nodemailer.createTransport({
-//     host: "smtp.mailtrap.io",
-//     port: 2525,
-//     auth: {
-//       user: "0f0aa4dd64bbeb",
-//       pass: "4f57e8f2f97612"
-//     }
-//   });
-
-
-
-// send email link for reset password
-//router.post("/sendpasswordlink"
-// export const sendEmailLink = async (req, res) => {
-//     console.log(req.body)
-
-    
-//     const { email } = req.body;
-
-//     if (!email) {
-//         res.status(401).json({ status: 401, message: "Enter Your Email" })
-//     }
-
-//     try {
-//         const userfind = await User.findOne({
-//             where: {
-//                 email: email
-//             }
-//         });
-
-//         // token generate for reset password
-//         const token = jwt.sign({ id: userfind.id }, process.env.JWT_SECRET, {
-//             expiresIn: "3m"
-//         });
-
-//         const setusertoken = await User.findByIdAndUpdate({ id: userfind.id }, { verifytoken: token }, { new: true });
-
-//         console.log('userToken', setusertoken);
-
-
-//         if (setusertoken) {
-//             const mailOptions = {
-//                 from: "adib@gmail.com",
-//                 to: email,
-//                 subject: "Sending Email For password Reset",
-//                 text: `This Link Valid For 2 MINUTES http://localhost:3000/forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
-//             }
-
-//             transporter.sendMail(mailOptions, (error, info) => {
-//                 if (error) {
-//                     console.log("error", error);
-//                     res.status(401).json({ status: 401, message: "email not send" })
-//                 } else {
-//                     console.log("Email sent", info.response);
-//                     res.status(201).json({ status: 201, message: "Email sent Succsfully" })
-//                 }
-//             })
-
-//         }
-
-//     } catch (error) {
-//         res.status(401).json({ status: 401, message: "invalid user" })
-//     }
-// };
-
-
-// verify user for forgot password time
-// route.get('/forgotpassword/:id/:token')
-// export const forgotPassword = async (req, res) => {
-//     const { id, token } = req.params;
-
-//     try {
-
-//         const validUser = await User.findOne({ _id: id, verifytoken: token });
-
-//         const verifytoken = jwt.verify(token, process.env.JWT_SECRET);
-
-//         console.log(verifytoken);
-
-//         if (validUser && verifytoken._id) {
-//             res.status(201).json({ status: 201, validUser })
-//         } else {
-//             res.status(401).json({ status: 401, message: "user not exist" })
-//         }
-
-//     } catch (error) {
-//         res.status(401).json({ status: 401, error })
-//     }
-// }
-
-
-// change password
-// route.post('/:id/:token')
-
-// export const changePassword = async (req, res) => {
-//     const { id, token } = req.params;
-
-//     const { password } = req.body;
-
-//     try {
-
-//         const validUser = await User.findOne({ _id: id, verifytoken: token });
-
-//         // const verifytoken = jwt.verify(token, process.env.JWT_SECRET);
-
-//         if (validUser) {
-
-//             const newpassword = await bcrypt.hash(password, 12);
-
-//             const setNewPass = await User.findByIdAndUpdate({ _id: id }, { password: newpassword });
-
-//             setNewPass.save();
-
-//             res.status(201).json({ status: 201, setNewPass })
-
-//         } else {
-//             res.status(401).json({ status: 401, message: "user not exist" })
-//         }
-
-
-//     } catch (error) {
-//         res.status(401).json({ status: 401, error })
-//     }
-// }
+module.exports = {
+    getUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    updateTokenUser,
+    deleteUser
+}

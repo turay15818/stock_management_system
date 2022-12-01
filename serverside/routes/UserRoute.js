@@ -1,6 +1,7 @@
 import express from "express";
+import User from '../models/UserModel.js'
 import {
-    getUsers,
+    // getUsers,
     getUserById,
     createUser,
     updateUser,
@@ -15,7 +16,41 @@ import { verifyUser, adminOnly } from "../middleware/AuthUser.js";
 import {  UsersBulkUpload} from '../UserBulkUpload.js'
 const router = express.Router();
 
-router.get('/users', verifyUser, adminOnly, getUsers);
+
+
+
+
+
+const getUsers = async(req, res) =>{
+    try {
+        const response = await User.findAll({
+            attributes:['id','staffid', 'name','email', 'department', 'staffStatus', 'password','role', 'creator', 'ipAddress', 'location', 'createdTime', 'actionPerformed', 'updator', 'updatorIpAddress', 'updatorLocation', 'updatedTime', 'updatePerformed'],
+        });
+
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({msg: error.message});
+    }
+}
+
+
+router.get('/users', verifyUser, adminOnly, getUsers, function(req, res, next){{
+    res.json('users')
+}});
+
+
+
+
+
+
+
+
+
+
+
+
+
+// router.get('/users', verifyUser, adminOnly, getUsers);
 router.get('/users/:id', verifyUser, adminOnly, getUserById);
 router.post('/users', verifyUser, adminOnly, createUser);
 router.post('/usersBulkUpload', UsersBulkUpload);
@@ -34,7 +69,32 @@ router.delete('/users/:id', verifyUser, adminOnly, deleteUser);
 // router.post('/changepassword/:id/:token', changePassword);
 
 
-// router.get('/users',  getUsers);
+router.get('/users',  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // router.get('/users/:id',   getUserById);
 // router.post('/users',  createUser);
 // router.patch('/users/:id',   updateUser);

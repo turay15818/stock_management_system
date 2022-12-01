@@ -1,16 +1,24 @@
-import User from "../models/UserModel.js";
-// import multer from "multer";
-import path from "path"
-import fs from "fs";
-import Stock from "../models/StockModel.js"
+const express = require ('express');
+const  Stock = require ("../models/StockModel")
+const  User = require ("../models/UserModel");
+const  path = require ("path")
+const  fs = require ("fs");
+
+
+
+const app = express()
+app.use(express.static('./public'))
+
+
+
 
 // "react-redux": "^8.0.4",
 
 // Get All Stock Start Here
-export const getStock = async (req, res) => {
+ const getStock = async (req, res) => {
     try {
         let response;
-        if (req.role === "user" && req.role !== "admin", "director", "manager") {
+        if (req.role !== "admin", "director", "manager", "user") {
             response = await Stock.findAll({
                 attributes: [
                     'id', 'stockCode', 'stockName',
@@ -29,7 +37,7 @@ export const getStock = async (req, res) => {
                     status: "Not in Use",
 
                     // managerApproved: 'Approved',
-                    userId: req.userId,
+                    // userId: req.userId,
 
                 },
 
@@ -74,10 +82,10 @@ export const getStock = async (req, res) => {
 
 
 // Get All Stock Start Here
-export const getAllStock = async (req, res) => {
+ const getAllStock = async (req, res) => {
     try {
         let response;
-        if (req.role === "user" && req.role !== "admin", "director", "manager") {
+        if (req.role !== "admin", "director", "manager", "user") {
             response = await Stock.findAll({
                 attributes: [
                     'id', 'stockCode', 'stockName',
@@ -123,10 +131,10 @@ export const getAllStock = async (req, res) => {
 
 
                 ],
-                where: [{
-                    userId: req.userId,
+                // where: [{
+                //     userId: req.userId,
 
-                }],
+                // }],
                 include: [{
                     model: User,
                     attributes: ['name', 'email']
@@ -144,10 +152,10 @@ export const getAllStock = async (req, res) => {
 
 
 // Get All Stock  in use Start Here
-export const getStockInUse = async (req, res) => {
+ const getStockInUse = async (req, res) => {
     try {
         let response;
-        if (req.role === "admin", "director", "manager" && req.role !== "user") {
+        if (req.role !== "admin", "director", "manager", "user") {
             response = await Stock.findAll({
                 attributes: [
                     'id', 'stockCode', 'stockName',
@@ -166,7 +174,7 @@ export const getStockInUse = async (req, res) => {
 
                 where: {
                     status: "In Use",
-                    userId: req.userId,
+                    // userId: req.userId,
                 },
 
 
@@ -191,10 +199,10 @@ export const getStockInUse = async (req, res) => {
 
 
                 ],
-                where: [{
-                    userId: req.userId,
+                // where: [{
+                //     userId: req.userId,
 
-                }],
+                // }],
                 include: [{
                     model: User,
                     attributes: ['name', 'email']
@@ -211,11 +219,11 @@ export const getStockInUse = async (req, res) => {
 
 
 // Get stock by Id start here
-export const getStockInUseId = async (req, res) => {
+ const getStockInUseId = async (req, res) => {
     try {
         const stock = await Stock.findOne({
             where: {
-                id: req.params.id
+                // id: req.params.id
             }
         });
 
@@ -273,19 +281,8 @@ export const getStockInUseId = async (req, res) => {
 }
 // Get stock by ID end here
 
-
-
-
-
-
-
-
-
-
-
-
 // Get All Stock  not in use Start Here
-export const getStockNotInUse = async (req, res) => {
+ const getStockNotInUse = async (req, res) => {
     try {
         let response;
         if (req.role === "user" && req.role !== "admin", "director", "manager") {
@@ -308,11 +305,11 @@ export const getStockNotInUse = async (req, res) => {
                 where: {
                     status: "Not in Use",
                     // managerApproved: 'Approved',
-                    userId: req.userId,
+                    // userId: req.userId,
 
 
 
-                    userId: req.userId
+                    // userId: req.userId
 
 
 
@@ -358,12 +355,12 @@ export const getStockNotInUse = async (req, res) => {
 // Get All stock not in use end here
 
 // Get stock by Id start here
-export const getStockId = async (req, res) => {
+ const getStockId = async (req, res) => {
     try {
         const stock = await Stock.findOne({
-            where: {
-                id: req.params.id
-            }
+            // where: {
+            //     id: req.params.id
+            // }
         });
 
         if (!stock) return res.status(404).json({ msg: "Data not found" });
@@ -421,7 +418,7 @@ export const getStockId = async (req, res) => {
 // Get stock by ID end here
 
 // Save/create stock start here
-export const saveStock = (req, res) => {
+ const saveStock = (req, res) => {
     if (req.files === null) return res.status(400).json({ msg: "No File Uploaded" });
     const stockUId = req.body.stockUId;
     const stockCode = req.body.stockCode;
@@ -495,14 +492,11 @@ export const saveStock = (req, res) => {
 }
 //save create stock end here
 
-
-
-
-export const updateStock = async (req, res) => {
+ const updateStock = async (req, res) => {
     try {
         const stock = await Stock.findOne({
             where: {
-                id: req.params.id
+                // id: req.params.id
             }
         });
         if (!stock) return res.status(404).json({ msg: "Data not found" });
@@ -528,30 +522,12 @@ export const updateStock = async (req, res) => {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // delete stock start here
-export const deleteStock = async (req, res) => {
+ const deleteStock = async (req, res) => {
     try {
         const stock = await Stock.findOne({
             where: {
-                id: req.params.id
+                // id: req.params.id
             }
         });
         if (!stock) return res.status(404).json({ msg: "Data not found" });
@@ -602,171 +578,9 @@ export const deleteStock = async (req, res) => {
 // delete stock end here
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export const Stock = async (req, res) => {
-//     const { stockCode, stockImage, stockName, category, stockBrand, stockColor, purchaseDate, purchaseFrom, cost, quantity, status } = req.body;
-//     try {
-//         await StockIn.create({
-
-//             stockCode: stockCode,
-//             stockImage: stockImage,
-//             // stockImage: req.file.path,
-//             stockName: stockName,
-//             category: category,
-//             stockBrand: stockBrand,
-//             stockColor: stockColor,
-//             purchaseDate: purchaseDate,
-//             purchaseFrom: purchaseFrom,
-//             cost: cost,
-//             quantity: quantity,
-//             status: status,
-
-//             userId: req.userId
-//         });
-//         res.status(201).json({ msg: "Stock Recorded Successfully" });
-//     } catch (error) {
-//         res.status(500).json({ msg: error.message });
-//     }
-// }
-
-
-
-// export const createStockIn = async (req, res) => {
-
-//     let info = {
-//         // image: req.file.path,
-//         // title: req.body.title,
-//         // price: req.body.price,
-//         stockCode: req.body.stockCode,
-//         stockImage: req.body.stockImage,
-//         stockName: req.body.stockName,
-//         category: req.body.category,
-//         stockColor: req.body.stockColor,
-//         stockBrand: req.body.stockBrand,
-//         purchaseDate: req.body.purchaseDate,
-//         purchaseFrom: req.body.purchaseFrom,
-//         cost: req.body.cost,
-//         quantity: req.body.quantity,
-//         status: req.body.status,
-//         userId: req.userId
-//     }
-//     console.log(info);
-//     const stockIn = await StockIn.create(info)
-//     res.status(200).send(stockIn)
-
-//     console.log(stockIn)
-
-// }
-
-
-
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'Images')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, Date.now() + path.extname(file.originalname))
-//     }
-// })
-
-// export const upload = multer({
-//     storage: storage,
-//     limits: { fileSize: '8000000' },
-//     fileFilter: (req, file, cb) => {
-//         const fileTypes = /jpeg|jpg|png|gif/
-//         const mimeType = fileTypes.test(file.mimetype)
-//         const extname = fileTypes.test(path.extname(file.originalname))
-
-//         if (mimeType && extname) {
-//             return cb(null, true)
-//         }
-//         cb('Give proper files formate to upload')
-//     }
-// }).single('stockImage')
+module.exports = { 
+    getStock, getAllStock,
+    getStockInUse, getStockInUseId, 
+    getStockNotInUse, getStockId, 
+    updateStock, deleteStock
+}

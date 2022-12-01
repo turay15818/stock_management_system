@@ -56,9 +56,14 @@ const Sidebar = () => {
         <p className="menu-label" style={sidebaar}>General</p>
         <li>
                   <NavLink to={"/bulkUploadView"} style={stylee}>
-                    <IoPricetag style={{ fontSize: "30px" }} /> Chart
+                    <IoPricetag style={{ fontSize: "30px" }} /> Bulk Stock Upload
                   </NavLink>
                 </li>
+        {/* <li>
+                  <NavLink to={"/charts"} style={stylee}>
+                    <IoPricetag style={{ fontSize: "30px" }} /> Charts
+                  </NavLink>
+                </li> */}
         <div>
           {/* Admin/Super Admin Role Start here*/}
           {user && user.role === "admin" && (

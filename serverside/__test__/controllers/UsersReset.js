@@ -1,9 +1,9 @@
-import express from 'express';
-var router = express.Router();
-import connection from '../config/connection.js';
-import nodemailer from 'nodemailer';
-import bcrypt from 'bcrypt';
-import randtoken from 'rand-token';
+const express = require ('express');
+const router =  express.Router();
+const connection = require ('../config/connection');
+const nodemailer = require ('nodemailer');
+const bcrypt = require ('bcrypt');
+const randtoken = require ('rand-token');
 
 //send email
 function sendEmail(email, token) {
@@ -49,6 +49,7 @@ function sendEmail(email, token) {
 }
 
 router.post('/resetPasswordEmail', function (req, res, next) {
+    
     var email = req.body.email;
     // console.log(sendEmail(email, fullUrl));
     connection.query('SELECT * FROM users WHERE email ="' + email + '"', function (err, result) {
@@ -127,38 +128,4 @@ router.post('/update-password', function (req, res, next) {
 
 
 
-// export const updateTokenUser = async(req, res) =>{
-//     const user = await User.findOne({
-//         where: {
-//             token: req.body.id
-//         }
-//     });
-//     const { password} = req.body;
-//     let hashPassword;
-//     if(password === "" || password === null){
-//         hashPassword = user.password
-//     }else{
-//         hashPassword = await argon2.hash(password);
-//     }
-//     // if(password !== confPassword) return res.status(400).json({msg: "Password and Confirm Password do not match"});
-//     try {
-//         await User.update({
-            
-//             password: hashPassword,
-//         },{
-//             where:{
-//                 token:user.token,
-//             }
-//         });
-//         res.status(200).json({msg: "User Updated"});
-//     } catch (error) {
-//         res.status(400).json({msg: error.message});
-//     }
-// }
-
-
-
-
-
-
-export default router;
+module.exports = router;
